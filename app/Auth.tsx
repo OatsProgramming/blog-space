@@ -1,9 +1,9 @@
 'use client'
 
-import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { auth, googleProvider } from "./(config)/firebase-config"
+import { auth, googleProvider } from "./config/firebase-config"
 
 type userInfo =  {
     email: string,
@@ -20,7 +20,9 @@ export default function Auth(){
     const router = useRouter()
 
     useEffect(() => {
-        if (signedIn) router.push(`/${auth.currentUser?.email}`)
+        if (signedIn) {
+            router.push(`/${auth.currentUser?.email}`)
+        }
         else router.push('/')
     }, [signedIn])
 
@@ -45,6 +47,44 @@ export default function Auth(){
         setSignedIn(false)
     }
 
+    async function postComments(){
+        const res = await fetch('http://localhost:3000/api/comments', {
+            method: 'POST',
+            body: JSON.stringify({id: '123'})
+        })
+        if (!res.ok){
+            const errorResponse = await res.json()
+            console.log(errorResponse)
+        } else {
+            const result = await res.json()
+            console.log(result)
+        }
+    }
+
+    async function getUser(userId: string){
+        try {
+            const res = await fetch(`http://localhost:3000/api/users?userId=${userId}`, {
+              method: 'POST',
+              body: JSON.stringify({
+                id: 'asd'
+              })
+            });
+
+            if (!res.ok) {
+              // handle the error here
+              const errorResponse = await res.json();
+              console.log(errorResponse);
+            } else {
+              const result = await res.json();
+              console.log(result);
+            }
+
+          } catch (err) {
+            // handle network errors
+            console.error(err);
+          }
+    }
+    
 
     return (
         <>
@@ -67,6 +107,8 @@ export default function Auth(){
                                     <input type='password' placeholder="password" onChange={(e) => setSignInInfo({...signInInfo, password: e.target.value})}/>
                                     <button onClick={signIn}>Sign In</button>
                                 </div>
+                                <button onClick={postComments}>Comments</button>
+                                <button onClick={() => getUser('any')}>Users</button>
                                 <button onClick={() => setCreateAccount(true)}>Create An Account</button>
                                 <button onClick={() => signInPop(googleProvider)}>Sign In With Google</button>
                             </div>
