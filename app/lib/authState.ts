@@ -14,8 +14,13 @@ export const useAuth: UseBoundStore<StoreApi<useAuthMethodsObj>> = create((set, 
         else if (!get().createInfo.email) return new Error('Seems that you forgot to add your email...')
         else if (!get().createInfo.password) return new Error('Seems that you forgot to enter a password...')
         // Send request if successful
+       try {
         await createUserWithEmailAndPassword(auth, get().createInfo.email, get().createInfo.password );
-        set({ signedIn: true, createAccount: false });
+        set({ signedIn: true, createAccount: false, createInfo: {} as UserInfo });
+       } catch (err) {
+        const error = err as Error
+        return new Error('It seems there was issue with creating an account. Please try again later.', {cause: error.cause})
+       }
     },
     signIn: async () => {
         // Error handling if any missing info
@@ -23,16 +28,30 @@ export const useAuth: UseBoundStore<StoreApi<useAuthMethodsObj>> = create((set, 
         else if (!get().signInInfo.email) return new Error('Seems that you forgot to add your email...')
         else if (!get().signInInfo.password) return new Error('Seems that you forgot to enter your password...')   
         // Send request if successful     
-        await signInWithEmailAndPassword(auth, get().signInInfo.email, get().signInInfo.password);
-        set({ signedIn: true });
+        try {
+            await signInWithEmailAndPassword(auth, get().signInInfo.email, get().signInInfo.password);
+            set({ signedIn: true, signInInfo: {} as UserInfo });
+        } catch (err) {
+            const error = err as Error 
+            return new Error('Incorrect email / password', {cause: error.cause})
+        }
     },
     signInPop: async () => {
-        const result = await signInWithPopup(auth, googleProvider);
-        if (result instanceof Error) return result
-        set({ signedIn: true });
+        try {
+            await signInWithPopup(auth, googleProvider);
+            set({ signedIn: true });
+        } catch (err) {
+            const error = err as Error
+            return new Error('Failed to sign in', {cause: error.cause})
+        }
     },
     logOut: async () => {
-        await signOut(auth);
-        set({ signedIn: false });
+        try {
+            await signOut(auth);
+            set({ signedIn: false });
+        } catch (err) {
+            const error = err as Error
+            return new Error('Failed to log out', {cause: error.cause})
+        }
     },
 }))
