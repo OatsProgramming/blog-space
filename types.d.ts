@@ -3,9 +3,9 @@ type useAuthMethodsObj = {
     signedIn: boolean,
     createInfo: UserInfo,
     signInInfo: UserInfo,
-    registerAccount: () => void,
-    signIn: () => void,
-    signInPop: () => void,
+    registerAccount: () => void | Promise<Error>,
+    signIn: () => void | Promise<Error>,
+    signInPop: () => void | Promise<Error>,
     logOut: () => void,
 }
 
