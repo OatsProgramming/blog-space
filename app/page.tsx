@@ -1,12 +1,11 @@
-import { Inter } from 'next/font/google'
 import styles from './page.module.css'
+import SignInPageAnimation from './lib/components/SignInPageAnimation'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+export default function SignIn() {
   return (
-    <main className={styles.main}>
-      <h1>Hello world</h1>
+    <main>
+      <SignInPageAnimation>
+      </SignInPageAnimation>
     </main>
   )
 }
