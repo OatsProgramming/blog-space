@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function CreateAccount() {
-  const { registerAccount, signInPop } = useAuth()
+  const { registerAccount, signInPop, signIn } = useAuth()
   const notify = (message: string) => {
     return toast.error(message, {
       position: "bottom-right",
@@ -27,8 +27,8 @@ export default function CreateAccount() {
 
   async function registerHandler(e: React.MouseEvent<HTMLButtonElement>){
     e.preventDefault()
-    const result = await registerAccount()
-    if (result instanceof Error) notify(result.message)
+    const resultOne = await registerAccount()
+    if (resultOne instanceof Error) notify(resultOne.message)
   }
 
   return (

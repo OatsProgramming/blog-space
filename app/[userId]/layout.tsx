@@ -8,10 +8,6 @@ export async function generateMetadata({params : {userId}} : Params){
     })
 }
 
-async function getData(userId: string){
-    return
-}
-
 export default function NavigationBar({
     children,
     params : { userId }
@@ -21,7 +17,7 @@ export default function NavigationBar({
         userId: string
     }
   }) {
-
+    
     return (
         <>
             <Link href={`/${userId}/main`}>Main</Link>

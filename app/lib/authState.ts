@@ -14,13 +14,15 @@ export const useAuth: UseBoundStore<StoreApi<useAuthMethodsObj>> = create((set, 
         else if (!get().createInfo.email) return new Error('Seems that you forgot to add your email...')
         else if (!get().createInfo.password) return new Error('Seems that you forgot to enter a password...')
         // Send request if successful
-       try {
-        await createUserWithEmailAndPassword(auth, get().createInfo.email, get().createInfo.password );
-        set({ signedIn: true, createAccount: false, createInfo: {} as UserInfo });
-       } catch (err) {
-        const error = err as Error
-        return new Error('It seems there was issue with creating an account. Please try again later.', {cause: error.cause})
-       }
+        try {
+            await createUserWithEmailAndPassword(auth, get().createInfo.email, get().createInfo.password );
+            set({ signInInfo: get().createInfo, createInfo: {} as UserInfo })
+            // The SDK doesn't automatically sign in users; get().signIn()
+            await get().signIn()
+        } catch (err) {
+            const error = err as Error
+            return new Error('It seems there was issue with creating an account. Please try again later.', {cause: error.cause})
+        }
     },
     signIn: async () => {
         // Error handling if any missing info
@@ -30,7 +32,7 @@ export const useAuth: UseBoundStore<StoreApi<useAuthMethodsObj>> = create((set, 
         // Send request if successful     
         try {
             await signInWithEmailAndPassword(auth, get().signInInfo.email, get().signInInfo.password);
-            set({ signedIn: true, signInInfo: {} as UserInfo });
+            set({ signedIn: true, createAccount: false, signInInfo: {} as UserInfo });
         } catch (err) {
             const error = err as Error 
             return new Error('Incorrect email / password', {cause: error.cause})
