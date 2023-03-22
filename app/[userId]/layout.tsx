@@ -8,7 +8,7 @@ export async function generateMetadata({params : {userId}} : Params){
     })
 }
 
-export default function NavigationBar({
+export default function NaviBar({
     children,
     params : { userId }
   }: {

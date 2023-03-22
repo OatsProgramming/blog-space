@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithP
 import { auth, googleProvider } from "../config/firebase-config"
 
 // Practically a context provider
-export const useAuth: UseBoundStore<StoreApi<useAuthMethodsObj>> = create((set, get: () => any) => ({
+export const useAuth: UseBoundStore<StoreApi<AuthState>> = create((set, get: () => any) => ({
     createAccount: false,
     signedIn: false,
     createInfo: {} as UserInfo,

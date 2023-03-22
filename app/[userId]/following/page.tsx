@@ -1,7 +1,9 @@
-import React from 'react'
+export default function page({params: {userId}}: Params) {
 
-export default function page() {
   return (
-    <div>following</div>
+    <div>
+      following
+    </div>
+
   )
 }

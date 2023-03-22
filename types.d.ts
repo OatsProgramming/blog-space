@@ -1,4 +1,4 @@
-type useAuthMethodsObj = {
+type AuthState = {
     createAccount: boolean,
     signedIn: boolean,
     createInfo: UserInfo,
@@ -17,6 +17,8 @@ type CommentObj = {
 }
 
 type HTTP = 'GET' | 'POST' | 'PATCH' | 'DELETE'
+
+type Navi = 'explore' | 'following' | 'main'
 
 type Params = {
    params: {
@@ -47,6 +49,14 @@ type UserObj = {
     id: string,
     userEmail: string,
     subscribedTo: string[]
+}
+
+type UserState = {
+    userInfo: UserObj,
+    userPosts: PostObj[],
+    updateUserInfo: (userId: string) => void | Promise<Error>,
+    createUserInfo: (userId: string, userEmail: string) => void,
+    updateUserPosts: (userId: string) => void
 }
 
 interface UserReqObj extends UserObj {
