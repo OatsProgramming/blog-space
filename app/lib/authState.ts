@@ -21,7 +21,11 @@ export const useAuth: UseBoundStore<StoreApi<AuthState>> = create((set, get: () 
             await get().signIn()
         } catch (err) {
             const error = err as Error
+            if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
+                return new Error(`${get().createInfo.email} is already registered. Please sign in instead.`)
+            }
             return new Error('It seems there was issue with creating an account. Please try again later.', {cause: error.cause})
+
         }
     },
     signIn: async () => {

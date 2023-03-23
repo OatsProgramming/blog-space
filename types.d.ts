@@ -26,6 +26,8 @@ type Params = {
    } 
 }
 
+type PostsMap = Map<string, PostObj[]>
+
 type PostObj = {
     title: string,
     body: string,
@@ -56,7 +58,9 @@ type UserState = {
     userPosts: PostObj[],
     updateUserInfo: (userId: string) => void | Promise<Error>,
     createUserInfo: (userId: string, userEmail: string) => void,
-    updateUserPosts: (userId: string) => void
+    updateUserPosts: (userId: string) => void,
+    filterPosts: (posts: PostObj[], subscribedTo: string[]) => PostObj[],
+    resetPostsMap: () => void
 }
 
 interface UserReqObj extends UserObj {

@@ -1,11 +1,11 @@
 import { UseBoundStore, StoreApi, create } from "zustand"
-import { NotFound } from "../api/requestStatus"
-import { auth } from "../config/firebase-config"
 import { url } from "./tempURL"
 
+
+
 export const getUserData: UseBoundStore<StoreApi<UserState>> = create((set, get: () => any) => ({
-    userInfo: {},
-    userPosts: [],
+    userInfo: {} as UserObj,
+    userPosts: [] as PostObj[],
     updateUserInfo: async (userId: string) => {
         const res = await fetch(`${url}/api/users?userId=${userId}`)
         if (!res.ok) {
@@ -49,6 +49,28 @@ export const getUserData: UseBoundStore<StoreApi<UserState>> = create((set, get:
             const result = await res.json() as PostObj[]
             set({userPosts: [...get().userPosts, ...result]})
         }
-    }
+    },
+    filterPosts: (posts: PostObj[], subscribedTo: string[]) => {
+        // Organize posts by userId w/ hashmap
+        const postsMap: PostsMap = new Map()
+        for (let post of posts){
+            if (postsMap.has(post.userId)){
+                postsMap.get(post.userId)?.push(post)
+            } else {
+                postsMap.set(post.userId, [post])
+            }
+        }
+
+        // Then filter posts w/ userIds in 'subscribedTo'
+        const subscribedPosts = []
+        for (let userId of subscribedTo){
+            if (postsMap.has(userId)){
+                subscribedPosts.push(postsMap.get(userId))
+            }
+        }
+
+        return subscribedPosts
+    },
+    resetPostsMap: () => postsMap.clear()
 }))
 
