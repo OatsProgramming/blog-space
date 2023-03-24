@@ -1,6 +1,6 @@
 import { create, StoreApi, UseBoundStore } from 'zustand'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
-import { auth, googleProvider } from "../config/firebase-config"
+import { auth, googleProvider } from "../../config/firebase-config"
 
 // Practically a context provider
 export const useAuth: UseBoundStore<StoreApi<AuthState>> = create((set, get: () => any) => ({

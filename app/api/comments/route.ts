@@ -56,7 +56,8 @@ export async function PATCH(request: Request){
         const commentDoc = doc(db, 'comments', comment.id!)
         // Only update body ( all other properties: off limits )
         await updateDoc(commentDoc, {
-            body: comment.body
+            body: comment.body,
+            dateMS: comment.dateMS
         })
     } catch (err) {
         // On network error
@@ -91,19 +92,21 @@ async function ValidateRequest(request: Request, HTTP: HTTP){
         switch (HTTP) {
             // Check if its missing any required properties (for each method)
             case 'POST': {
-                if (!comment.body || !comment.postId || !comment.userEmail){
+                if (!comment.body || !comment.postId || !comment.userEmail || !comment.dateMS){
                     throw new Error(`\nInvalid 'comment' request body:
                         body?               ${comment.body ? 'OK' : 'MISSING'}
                         postId?             ${comment.postId ? 'OK' : 'MISSING'}
                         userEmail?          ${comment.userEmail ? 'OK' : 'MISSING'}
+                        dateMS?             ${comment.dateMS ? 'OK' : 'MISSING'}
                     `)
                 }
                 break;
             }
             case 'PATCH': {
-                if (!comment.body) {
+                if (!comment.body || !comment.dateMS) {
                     throw new Error(`\nInvalid 'comment' request body:
                         body?               ${comment.body ? 'OK' : 'MISSING'}
+                        dateMS?             ${comment.dateMS ? 'OK' : 'MISSING'}
                     `)
                 }
                 break;

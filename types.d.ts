@@ -1,3 +1,7 @@
+// Best to not convert Timestamp objects and Date objects back and fourth
+// Timestamp: nanoseconds
+// Date: milliseconds
+
 type AuthState = {
     createAccount: boolean,
     signedIn: boolean,
@@ -10,6 +14,7 @@ type AuthState = {
 }
 
 type CommentObj = {
+    dateMS: number,
     body: string,
     userEmail: string,
     postId: string,
@@ -26,14 +31,20 @@ type Params = {
    } 
 }
 
-type PostsMap = Map<string, PostObj[]>
+type PostMap = Map<string, PostObj[]>
 
 type PostObj = {
+    dateMS: number,
     title: string,
     body: string,
     userId: string,
     id?: string,
 }
+
+type QuickParam = { 
+    dateMS: number, 
+    [key: string] : any
+}[]
 
 type Status = {
     status: number,
@@ -59,8 +70,6 @@ type UserState = {
     updateUserInfo: (userId: string) => void | Promise<Error>,
     createUserInfo: (userId: string, userEmail: string) => void,
     updateUserPosts: (userId: string) => void,
-    filterPosts: (posts: PostObj[], subscribedTo: string[]) => PostObj[],
-    resetPostsMap: () => void
 }
 
 interface UserReqObj extends UserObj {

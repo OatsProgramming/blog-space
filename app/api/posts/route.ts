@@ -89,11 +89,12 @@ async function ValidateRequest(request: Request, HTTP: HTTP){
         switch (HTTP){
             // Check if its missing any required properties (for each method)
             case 'POST': {
-                if (!post.body || !post.title || !post.userId){
+                if (!post.body || !post.title || !post.userId || !post.dateMS){
                     throw new Error(`\nInvalid 'post' request body:
                         body?               ${post.body ? 'OK' : 'MISSING'}
                         title?              ${post.title ? 'OK' : 'MISSING'}
                         userId?             ${post.userId ? 'OK' : 'MISSING'}
+                        dateMS?             ${post.dateMS ? 'OK' : 'MISSING'}
                     `)
                 }
                 break;

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useAuth } from '../authState'
+import { useAuth } from '../../stateManagement/authState'
 import { motion } from 'framer-motion'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

@@ -3,7 +3,7 @@
 import { auth } from "@/app/config/firebase-config"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import { useAuth } from "../authState"
+import { useAuth } from "../../stateManagement/authState"
 import CreateAccount from "./CreateAccount"
 import Login from "./Login"
 import NewHere from "./NewHere"

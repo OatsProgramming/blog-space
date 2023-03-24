@@ -1,5 +1,6 @@
 import { UseBoundStore, StoreApi, create } from "zustand"
-import { url } from "./tempURL"
+import quickSortByTime from "../quickSort"
+import { url } from "../tempURL"
 
 
 
@@ -50,27 +51,5 @@ export const getUserData: UseBoundStore<StoreApi<UserState>> = create((set, get:
             set({userPosts: [...get().userPosts, ...result]})
         }
     },
-    filterPosts: (posts: PostObj[], subscribedTo: string[]) => {
-        // Organize posts by userId w/ hashmap
-        const postsMap: PostsMap = new Map()
-        for (let post of posts){
-            if (postsMap.has(post.userId)){
-                postsMap.get(post.userId)?.push(post)
-            } else {
-                postsMap.set(post.userId, [post])
-            }
-        }
-
-        // Then filter posts w/ userIds in 'subscribedTo'
-        const subscribedPosts = []
-        for (let userId of subscribedTo){
-            if (postsMap.has(userId)){
-                subscribedPosts.push(postsMap.get(userId))
-            }
-        }
-
-        return subscribedPosts
-    },
-    resetPostsMap: () => postsMap.clear()
+    getUser: () => get().userInfo
 }))
-

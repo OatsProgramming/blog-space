@@ -1,6 +1,6 @@
 'use client'
 
-import { useAuth } from "../authState"
+import { useAuth } from "../../stateManagement/authState"
 import { motion } from 'framer-motion'
 
 export default function NewHere(){

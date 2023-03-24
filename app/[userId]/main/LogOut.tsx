@@ -1,6 +1,6 @@
 'use client'
 
-import { useAuth } from '@/app/lib/authState'
+import { useAuth } from '@/app/lib/stateManagement/authState'
 import { useRouter } from 'next/navigation'
 
 // Temporary component

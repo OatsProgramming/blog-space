@@ -1,13 +1,13 @@
 'use client'
 import { auth } from '@/app/config/firebase-config'
 import { useEffect } from 'react'
-import { getUserData } from '../getUserData'
+import { getUserData } from '../../stateManagement/getUserData'
 
 
 // USE AS JSX ELEMENT; DONT CONVERT TO A FUNCTION
 // ( will create auth.currentUser && RSC issues!!!  )
 // Update: auth.currentUser only works properly on client side, not server
-export default function ValidUser({userId, navi} : {userId: string, navi?: Navi}) {
+export default function ValidUser({userId} : {userId: string}) {
 
     const { userInfo, userPosts, updateUserInfo, createUserInfo, updateUserPosts } = getUserData()
 
@@ -30,20 +30,5 @@ export default function ValidUser({userId, navi} : {userId: string, navi?: Navi}
     // console.log(userInfo)
     // console.log(userPosts)
   return <></>
-}
-
-function findNavi(navi: Navi){
-    switch(navi){
-        case 'explore':{
-
-            break;
-        }
-        case 'following':{
-            break;
-        }
-        case 'main':{
-            break;
-        }
-    }
 }
 

@@ -1,4 +1,4 @@
-import SignInPageAnimation from './lib/components/SignInPageAnimation'
+import SignInPageAnimation from './lib/components/home/SignInPageAnimation'
 
 export default function SignIn() {
   return (
