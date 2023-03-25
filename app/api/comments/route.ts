@@ -1,7 +1,6 @@
 import { db } from "@/app/config/firebase-config";
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
-import { NextResponse } from "next/server";
-import { badRequest, creationSuccess, failedResponse, fetchFail, NotFound, responseSuccess } from "../requestStatus";
+import { badRequest, creationSuccess, failedResponse, fetchFail, NotFound, notFoundRequest, responseSuccess } from "../requestStatus";
 
 // Reference the 'comments' collection 
 const collectionRef = collection(db, 'comments')
@@ -17,11 +16,8 @@ export async function GET(request: Request){
     try {
          // Get comments for that post
         documentData = await getDocs(q)
-        if (documentData.empty) throw new NotFound('Query returned empty')
     } catch (err) {
         const error = err as Error
-        // On client error
-        if (error instanceof NotFound) return failedResponse(error, badRequest)
         // On server error
         return failedResponse(error, fetchFail)
     }

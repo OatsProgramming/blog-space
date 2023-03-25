@@ -9,12 +9,16 @@ import { getUserData } from '../../stateManagement/getUserData'
 // Update: auth.currentUser only works properly on client side, not server
 export default function ValidUser({userId} : {userId: string}) {
 
-    const { userInfo, userPosts, updateUserInfo, createUserInfo, updateUserPosts } = getUserData()
+    const { updateUserInfo, createUserInfo, updateUserPosts } = getUserData()
 
     useEffect(() => {
+        // Issue: when refreshing, auth.currentUser goes null
+        // Note to self: 
+        // - 'signedIn' as dependency doesnt work
+        // - 'auth.currentUser' as dependency would cause errors
         if (!auth.currentUser) {
             throw new Error('Not signed in')
-        } else if (auth.currentUser.uid !== userId) {
+        } else if (auth.currentUser?.uid !== userId) {
             throw new Error('Invalid user')
         } 
         
@@ -25,10 +29,8 @@ export default function ValidUser({userId} : {userId: string}) {
             updateUserPosts(userId)
         })();
         
-    }, [auth.currentUser])
+    }, [])
 
-    // console.log(userInfo)
-    // console.log(userPosts)
   return <></>
 }
 

@@ -1,8 +1,5 @@
 import { UseBoundStore, StoreApi, create } from "zustand"
-import quickSortByTime from "../quickSort"
 import { url } from "../tempURL"
-
-
 
 export const getUserData: UseBoundStore<StoreApi<UserState>> = create((set, get: () => any) => ({
     userInfo: {} as UserObj,
@@ -51,5 +48,4 @@ export const getUserData: UseBoundStore<StoreApi<UserState>> = create((set, get:
             set({userPosts: [...get().userPosts, ...result]})
         }
     },
-    getUser: () => get().userInfo
 }))

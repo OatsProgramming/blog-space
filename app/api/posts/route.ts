@@ -1,5 +1,5 @@
 import { db } from "@/app/config/firebase-config";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { badRequest, creationSuccess, failedResponse, fetchFail, NotFound, notFoundRequest, responseSuccess } from "../requestStatus";
 
 // Reference the 'posts' collection 
@@ -9,26 +9,60 @@ export async function GET(request: Request){
     // Parse the query
     const { searchParams } = new URL(request.url)
     const userId = searchParams.get('userId')
-    if (!userId) return failedResponse(new Error('User ID not given'), badRequest)
-    const q = query(collectionRef, where('userId', '==', userId))
-    let documentData;
-    try {
-         // Get posts for that user
-        documentData = await getDocs(q)
-        if (documentData.empty) throw new NotFound('Query returned empty')
-    } catch (err) {
-        const error = err as Error
-        // On client error
-        if (error instanceof NotFound) return failedResponse(error, notFoundRequest)
-        // On network error
-        return failedResponse(error, fetchFail)
+    const postId = searchParams.get('postId')
+
+    // Find out if its possible to minimize the amount of code here
+
+    // For multiple posts
+    if (userId){
+        const q = query(collectionRef, where('userId', '==', userId))
+        let documentData;
+        try {
+             // Get posts for that user
+            documentData = await getDocs(q)
+            if (documentData.empty) throw new NotFound('Query returned empty for posts')
+        } catch (err) {
+            // On client error
+            if (err instanceof NotFound) return failedResponse(err, notFoundRequest)
+            const error = err as Error
+            // On network error
+            return failedResponse(error, fetchFail)
+        }
+        // Dont forget .docs to access all documents
+        const posts = documentData.docs.map(post => ({
+            ...post.data(),
+            id: post.id
+        }))
+        return new Response(JSON.stringify(posts), responseSuccess)
+
+    // For a specific post
+    } else if (postId) {
+        // Don't use 'where' query for documentId; just 'doc' path
+        const postRef = doc(collectionRef, postId)
+        let postData
+        try {
+            // console.log(postRef.path)
+            // console.log(postId)
+            postData = await getDoc(postRef)
+            // console.log(postData.data())
+            if (!postData.exists()) throw new NotFound('Post not found')
+        } catch (err) {
+            if (err instanceof NotFound) return failedResponse(err, notFoundRequest)
+            const error = err as Error
+            return failedResponse(error, fetchFail)
+        }
+
+        const post = {
+            ...postData.data(),
+            id: postData.id
+        }
+
+        return new Response(JSON.stringify(post), responseSuccess)
+
     }
-    // Dont forget .docs to access all documents
-    const posts = documentData.docs.map(post => ({
-        ...post.data(),
-        id: post.id
-    }))
-    return new Response(JSON.stringify(posts), responseSuccess)
+
+    else return failedResponse(new Error('User ID / Post ID not given'), badRequest)
+    
 }
 
 export async function POST(request: Request){
@@ -89,11 +123,12 @@ async function ValidateRequest(request: Request, HTTP: HTTP){
         switch (HTTP){
             // Check if its missing any required properties (for each method)
             case 'POST': {
-                if (!post.body || !post.title || !post.userId || !post.dateMS){
+                if (!post.body || !post.title || !post.userId || !post.dateMS || !post.userEmail){
                     throw new Error(`\nInvalid 'post' request body:
                         body?               ${post.body ? 'OK' : 'MISSING'}
                         title?              ${post.title ? 'OK' : 'MISSING'}
                         userId?             ${post.userId ? 'OK' : 'MISSING'}
+                        userEmail?          ${post.userEmail ? 'OK' : 'MISSING'}
                         dateMS?             ${post.dateMS ? 'OK' : 'MISSING'}
                     `)
                 }

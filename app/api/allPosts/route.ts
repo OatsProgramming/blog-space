@@ -23,7 +23,5 @@ export async function GET(request: Request){
         id: doc.id
     })) as PostObj[]
 
-    console.log(allPosts)
-
     return new Response(JSON.stringify(allPosts), responseSuccess)
 }

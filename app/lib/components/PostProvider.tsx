@@ -4,10 +4,10 @@ import { Context, createContext, useContext } from "react"
 import { getUserData } from "../stateManagement/getUserData"
 import { filterPosts } from "../organizeData"
 
-const PostContext: Context<{ sortedPosts: PostObj[]; filteredPost: PostMap; }>  =
+const PostContext: Context<{ sortedPosts: PostObj[]; filteredPost: PostObj[]; }>  =
     createContext({} as {
         sortedPosts: PostObj[];
-        filteredPost: PostMap;
+        filteredPost: PostObj[];
     })
 
 export default function PostProvider({children, posts} : {

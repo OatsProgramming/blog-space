@@ -31,13 +31,12 @@ type Params = {
    } 
 }
 
-type PostMap = Map<string, PostObj[]>
-
 type PostObj = {
     dateMS: number,
     title: string,
     body: string,
     userId: string,
+    userEmail: string,
     id?: string,
 }
 
