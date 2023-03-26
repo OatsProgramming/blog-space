@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { auth } from './config/firebase-config';
+import { useAuth } from './lib/stateManagement/authState';
 
 export default function Error({
   error,
@@ -15,6 +17,14 @@ export default function Error({
   }, [error]);
 
   const router = useRouter()
+  const { logOut } = useAuth()
+
+  function handleClick(){
+    if (auth.currentUser){
+      logOut()
+    }
+    router.push('/')
+  }
 
   return (
     <div>
@@ -27,9 +37,9 @@ export default function Error({
         Try again?
       </button>
       <button
-        onClick={() => router.push('/')}
+        onClick={handleClick}
       >
-            Home?
+            Return to sign in?
       </button>
     </div>
   );

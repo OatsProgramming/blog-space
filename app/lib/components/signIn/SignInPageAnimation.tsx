@@ -17,7 +17,7 @@ export default function SignInPageAnimation({children}: {
     
     useEffect(() => {
       if (signedIn && auth.currentUser){
-        router.push(`/${auth.currentUser.uid}/main`)
+        router.push(`/${auth.currentUser.uid}/home`)
       }
     }, [signedIn])
 

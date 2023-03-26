@@ -1,5 +1,6 @@
 import PostComponent from "@/app/lib/components/userId/Post"
 import { url } from "../../lib/tempURL"
+import AddComment from "./AddComment"
 import CommentComponent from "./Comment"
 
 // Having issues with caching; set to 'no-store' for now
@@ -9,7 +10,6 @@ async function getPost(postId: string){
     })
     if (!res.ok) {
         const err = await res.json() as Error
-        console.log(err)
         throw new Error(err.message, {cause: err.cause})
     }
     return res.json()
@@ -28,7 +28,8 @@ async function getComments(postId: string){
     return res.json()
 }
 
-export default async function PostPage({params: {postId}}: Params) {
+export default async function PostPage({params: {userId, postId}}: Params) {
+    // console.log(postId)
     const res1 = getPost(postId)
     const res2 = getComments(postId)
 
@@ -42,10 +43,11 @@ export default async function PostPage({params: {postId}}: Params) {
         <div>
             {comments.length > 1 ? 
             comments.map(comment => (
-                <CommentComponent comment={comment} />
+                <CommentComponent key={comment.id} comment={comment} userId={userId} />
             )) : (
                 <i>Be the first one to comment!</i>
             )}
+              <AddComment postId={postId} />
         </div>
     </div>
   )

@@ -99,10 +99,11 @@ async function ValidateRequest(request: Request, HTTP: HTTP){
                 break;
             }
             case 'PATCH': {
-                if (!comment.body || !comment.dateMS) {
+                if (!comment.body || !comment.id || !comment.dateMS) {
                     throw new Error(`\nInvalid 'comment' request body:
                         body?               ${comment.body ? 'OK' : 'MISSING'}
                         dateMS?             ${comment.dateMS ? 'OK' : 'MISSING'}
+                        id?                 ${comment.id ? 'OK' : 'MISSING'}
                     `)
                 }
                 break;
