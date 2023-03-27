@@ -1,7 +1,7 @@
 'use client'
 
 import { auth } from "@/app/config/firebase-config"
-import { use, useState } from "react"
+import { useState } from "react"
 import { modComment } from "./Comment"
 
 export default function AddComment({postId} : {postId: string}) {
@@ -17,9 +17,10 @@ export default function AddComment({postId} : {postId: string}) {
                 body: newComment,
                 postId: postId,
                 userEmail: auth.currentUser?.email,
-                
+                dateMS: Date.now()
             }
         )
+        setNewComment('')
         setIsCreating(false)
     }
 

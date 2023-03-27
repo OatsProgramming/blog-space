@@ -135,12 +135,14 @@ async function ValidateRequest(request: Request, HTTP: HTTP){
                 break;
             }
             case 'PATCH' : {
-                if (!post.body || !post.title){
+                if (!post.body || !post.title || !post.id){
                     throw new Error(`\nInvalid 'post' request body:
                         body?               ${post.body ? 'OK' : 'MISSING'}
                         title?              ${post.title ? 'OK' : 'MISSING'}
+                        id?                 ${post.id ? 'OK' : 'MISSING'}
                     `)
                 }
+                break;
             }
             case 'DELETE' : {
                 if (!post.id){
@@ -148,6 +150,7 @@ async function ValidateRequest(request: Request, HTTP: HTTP){
                         id?               ${post.id ? 'OK' : 'MISSING'}
                     `)
                 }
+                break;
             }
             default : {
                 throw new Error('Unknown HTTP method')

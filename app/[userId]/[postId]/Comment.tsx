@@ -13,8 +13,8 @@ export async function modComment(postId: string, method: HTTP, content: {}) {
         body: JSON.stringify(content)
     })
     if (!res.ok) {
-        const err = await res.json() as Error
-        throw new Error(err.message, {cause: err.cause})
+        const err = await res.json()
+        throw new Error(err)
     }
     return res.json()
 }
@@ -30,9 +30,8 @@ export default function CommentComponent({ comment, userId } : {
     const [newContent, setNewContent] = useState('')
 
     async function handleEdit() {
-        if (newContent === '') return
-        else if (isEditing) {
-            const result = modComment(
+        if (isEditing && newContent !== '') {
+            const result = await modComment(
                 comment.postId,
                 'PATCH',
                 {
@@ -41,12 +40,13 @@ export default function CommentComponent({ comment, userId } : {
                     id: comment.id,
                 }
             )
-        }
+            setNewContent('')
+        } 
         setIsEditing(!isEditing)
     }
 
     async function handleDelete() {
-        const result = modComment(
+        const result = await modComment(
             comment.postId,
             'DELETE',
             {
@@ -73,7 +73,10 @@ export default function CommentComponent({ comment, userId } : {
             )}
             {userId == auth.currentUser?.uid && (
                 <span>
-                    <button onClick={handleEdit}>
+                    <button onClick={() => {
+                        
+                        handleEdit()
+                    }}>
                         {isEditing ? (
                             // Save Icon
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor">

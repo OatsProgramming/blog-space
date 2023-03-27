@@ -38,10 +38,10 @@ export default async function PostPage({params: {userId, postId}}: Params) {
   return (
     <div>
         <div>
-            <PostComponent post={post} />
+            <PostComponent userId={userId} post={post} />
         </div>
         <div>
-            {comments.length > 1 ? 
+            {comments.length > 0 ? 
             comments.map(comment => (
                 <CommentComponent key={comment.id} comment={comment} userId={userId} />
             )) : (

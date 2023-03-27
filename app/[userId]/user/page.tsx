@@ -1,6 +1,5 @@
 import PostComponent from "@/app/lib/components/userId/Post";
 import { url } from "@/app/lib/tempURL";
-import Link from "next/link";
 import LogOut from "./LogOut";
 
 async function getUserPosts(userId: string) {
@@ -20,9 +19,7 @@ export default async function UserPage({params: {userId}} : Params) {
     <div>
         Main 
         {userPosts.map(post => (
-          <Link key={post.id} href={`/${userId}/${post.id}`}>
-            <PostComponent post={post} />
-          </Link>
+            <PostComponent post={post} userId={userId} />
         ))}
         {/* Temporary */}
         <LogOut />
