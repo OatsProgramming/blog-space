@@ -2,7 +2,7 @@ import { db } from "@/app/config/firebase-config";
 import { deleteDoc, doc, getDoc, getDocFromServer, setDoc, updateDoc } from "firebase/firestore";
 import { badRequest, fetchFail, responseSuccess, failedResponse, NotFound, notFoundRequest, creationSuccess } from "../requestStatus";
 
-// 
+
 export async function GET(request: Request){
     // Parse the query
     const { searchParams } = new URL(request.url)

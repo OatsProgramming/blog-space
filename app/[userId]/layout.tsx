@@ -2,6 +2,7 @@ import Link from "next/link";
 import ValidUser from "../components/signIn/ValidUser";
 import { url } from "../lib/tempURL";
 import AddPost from "../components/posting/AddPost";
+import RefreshPage from "../components/RefreshPage";
 
 export async function generateMetadata({ params: { userId } }: Params) {
   const res = await fetch(`${url}/api/users?userId=${userId}`)
@@ -27,6 +28,7 @@ export default async function NaviBar({
 
   return (
     <>
+      <RefreshPage userId={userId}>
       <nav>
         <Link href={`/${userId}/user`}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor">
@@ -51,6 +53,7 @@ export default async function NaviBar({
         {children}
       </AddPost>
       <ValidUser userId={userId} />
+      </RefreshPage>
     </>
   );
 }

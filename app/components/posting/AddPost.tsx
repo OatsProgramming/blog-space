@@ -12,7 +12,6 @@ export default function AddPost({ children }: {
     const [isCreating, setIsCreating] = useState(false)
     const [content, setContent] = useState<PostObj>({} as PostObj)
     const [isPending, startTransition] = useTransition()
-    const [isFetching, setIsFetching] = useState(false)
 
     // Submitting post obj
     async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {

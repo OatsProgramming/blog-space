@@ -1,20 +1,9 @@
 import PostComponent from "@/app/components/posting/Post"
 import { getUserPosts, getAllPosts } from "@/app/lib/CRUD-ops/postCRUD"
+import { getSubscribedList } from "@/app/lib/CRUD-ops/subscribeCRUD"
 import { organizeData } from "@/app/lib/organizeData"
 import quickSortByTime from "@/app/lib/quickSort"
-import { url } from "@/app/lib/tempURL"
 
-
-async function getUserInfo(userId: string): Promise<UserObj> {
-    const res = await fetch(`${url}/api/users?userId=${userId}`, {
-        cache: 'no-store'
-    })
-    if (!res.ok) {
-        const err = await res.json() as Error
-        throw new Error(err.message, { cause: err.cause })
-    }
-    return res.json()
-}
 
 export default async function PostsByCategory({ category, userId }: {
     category: 'explore' | 'home' | 'user',
@@ -22,12 +11,12 @@ export default async function PostsByCategory({ category, userId }: {
 }) {
     
     const postsPromise = getAllPosts(userId)
-    const userPromise = getUserInfo(userId)
+    const subscribedToPromise = getSubscribedList(userId)
     const userPostsPromise = getUserPosts(userId)
 
-    const [posts, user, userPosts] = await Promise.all([postsPromise, userPromise, userPostsPromise])
+    const [posts, subscribedTo, userPosts] = await Promise.all([postsPromise, subscribedToPromise, userPostsPromise])
 
-    const { subscribedPosts, explorePosts } = organizeData(posts, user.subscribedTo)
+    const { subscribedPosts, explorePosts } = organizeData(posts, subscribedTo)
     const userPostsSorted = quickSortByTime(userPosts) as PostObj[]
 
     switch (category) {

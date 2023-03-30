@@ -2,7 +2,6 @@
 
 import { mutateSubscribeList } from "@/app/lib/CRUD-ops/subscribeCRUD"
 import { url } from "@/app/lib/tempURL"
-import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import useSWR from 'swr'
 
@@ -13,38 +12,51 @@ export default function FollowBtn({ children, userId, otherUserId }: {
     userId: string,
     otherUserId: string,
 }) {
-    const { data: subscribedTo, error } = useSWR(`${url}/api/subscriptions?userId=${userId}`, fetcher)
+    const { data: subscribedTo, error, mutate } = useSWR(`${url}/api/subscriptions?userId=${userId}`, fetcher)
     const [isFollowing, setIsFollowing] = useState(false)
-    const router = useRouter()
+    
     console.log(subscribedTo)
 
+    let content = (
+        <>
+            <button onClick={handleClick}>
+                {isFollowing ? 'Unfollow' : 'follow'}
+            </button>
+            {children}
+        </>
+    )
+    
     useEffect(() => {
-        if (subscribedTo.includes(otherUserId)) setIsFollowing(true)
-        else setIsFollowing(false)
+        if (!subscribedTo) {
+            content = (<div>Loading...</div>)
+        } else if (error) {
+            throw new Error('Failed to fetch subscription list')
+        } else if (subscribedTo.includes(otherUserId)) {
+            console.log(isFollowing)
+            setIsFollowing(true)
+        } else {
+            console.log(isFollowing)
+            setIsFollowing(false)
+        }
     }, [subscribedTo])
 
-    console.log(isFollowing)
 
     function handleClick() {
         let PATCHMethod: UserReqObj['PATCHMethod'] = isFollowing ? 'delete' : 'add'
         console.log(PATCHMethod)
         mutateSubscribeList(
-            'PATCH',
             {
                 id: userId,
                 otherUserId,
                 PATCHMethod
             }
         )
-        router.refresh()
+        mutate(subscribedTo!.filter((id: string) => id !== otherUserId))
     }
 
     return (
         <>
-            <button onClick={handleClick}>
-                {isFollowing ? 'Unfollow' : 'follow'}
-            </button>
-            {children}
+            {content}
         </>
     )
 }

@@ -4,9 +4,12 @@ import { motion } from "framer-motion"
 import { useAuth } from "../../lib/stateManagement/authState"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { createUser, getUser } from "@/app/lib/CRUD-ops/userCRUD";
+import { auth } from "@/app/config/firebase-config";
+import { url } from "@/app/lib/tempURL";
 
 export default function CreateAccount() {
-  const { registerAccount, signInPop } = useAuth()
+  const { registerAccount, signInPop, createInfo } = useAuth()
   const notify = (message: string) => {
     return toast.error(message, {
       position: "bottom-right",
@@ -22,13 +25,33 @@ export default function CreateAccount() {
 
   async function popUpHandler() {
     const result = await signInPop()
-    if (result instanceof Error) notify(result.message)
+    if (result instanceof Error) {
+      return notify(result.message)
+    } else {
+      // Only interested if it exists
+      const res = await fetch(`${url}/api/users?userId=${auth.currentUser?.uid}`)
+      if (!res.ok) {
+        createUser({
+          id: auth.currentUser?.uid!,
+          userEmail: auth.currentUser?.email!,
+          subscribedTo: []
+        })
+      }
+    }
   }
 
   async function registerHandler(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
     const resultOne = await registerAccount()
-    if (resultOne instanceof Error) notify(resultOne.message)
+    if (resultOne instanceof Error) {
+      return notify(resultOne.message)
+    } else {
+      createUser({
+        id: auth.currentUser?.uid!,
+        userEmail: createInfo.email,
+        subscribedTo: []
+      })
+    }
   }
 
   return (
