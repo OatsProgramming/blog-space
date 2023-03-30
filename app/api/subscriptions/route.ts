@@ -12,6 +12,8 @@ export async function GET(request: Request){
         // If client error
         if (!user.exists()) throw new NotFound(`User ID: ${userId} does not exist`)
         const subscribedTo = user.data().subscribedTo
+        return new Response(JSON.stringify(subscribedTo))
+        
     } catch (err) {
         const error = err as Error
         // Client error

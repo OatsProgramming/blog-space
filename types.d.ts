@@ -71,8 +71,9 @@ type UserState = {
     updateUserPosts: (userId: string) => void,
 }
 
-interface UserReqObj extends UserObj {
-    otherUserId?: string,
-    PATCHMethod?: 'add' | 'delete'
+interface UserReqObj {
+    id: string,
+    otherUserId: string,
+    PATCHMethod: 'add' | 'delete'
 }
 

@@ -1,9 +1,9 @@
 'use client'
 
 import { auth } from "@/app/config/firebase-config"
+import { mutateComment } from "@/app/lib/CRUD-ops/commentCRUD"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
-import { modComment } from "./Comment"
 
 export default function AddComment({ postId }: { postId: string }) {
     const router = useRouter()
@@ -13,7 +13,7 @@ export default function AddComment({ postId }: { postId: string }) {
 
     async function handleClick() {
         if (newComment.trim() === '') return
-        const result = await modComment(
+        const result = await mutateComment(
             postId,
             'POST',
             {
