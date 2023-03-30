@@ -1,14 +1,12 @@
-import { Suspense } from "react";
-import ShowPosts from "@/app/lib/components/userId/ShowPosts";
+import PostsByCategory from "@/app/components/posting/ByCategory";
 
-export default async function Following({ params: { userId } }: Params) {
+export default async function Home({ params: { userId } }: Params) {
+
+  const postsElement = await PostsByCategory({ category: 'home', userId })
 
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ShowPosts category='explore' userId={userId} />
-      </Suspense>
+      {postsElement}
     </div>
-
   )
 }

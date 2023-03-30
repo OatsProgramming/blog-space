@@ -1,8 +1,7 @@
 import Link from "next/link";
-import ValidUser from "../lib/components/signIn/ValidUser";
+import ValidUser from "../components/signIn/ValidUser";
 import { url } from "../lib/tempURL";
-import PostProvider from "../lib/components/PostProvider";
-import AddPost from "./AddPost";
+import AddPost from "../components/posting/AddPost";
 
 export async function generateMetadata({ params: { userId } }: Params) {
   const res = await fetch(`${url}/api/users?userId=${userId}`)
@@ -16,18 +15,6 @@ export async function generateMetadata({ params: { userId } }: Params) {
   })
 }
 
-// Having issues with caching; set to 'no-store' for now
-async function getData(userId: string) {
-  const res = await fetch(`${url}/api/allPosts?userId=${userId}`, {
-    cache: 'no-store'
-  })
-  if (!res.ok) {
-    const err = await res.json() as Error
-    throw new Error(err.message, { cause: err.cause })
-  }
-  return res.json()
-}
-
 export default async function NaviBar({
   children,
   params: { userId }
@@ -37,8 +24,6 @@ export default async function NaviBar({
     userId: string
   }
 }) {
-
-  const posts = await getData(userId)
 
   return (
     <>
@@ -62,11 +47,9 @@ export default async function NaviBar({
           </svg>
         </Link>
       </nav>
-      <PostProvider posts={posts}>
-        <AddPost>
-          {children}
-        </AddPost>
-      </PostProvider>
+      <AddPost>
+        {children}
+      </AddPost>
       <ValidUser userId={userId} />
     </>
   );

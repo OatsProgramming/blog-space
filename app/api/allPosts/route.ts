@@ -1,5 +1,6 @@
 import { db } from "@/app/config/firebase-config";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { NextResponse } from "next/server";
 import { badRequest, failedResponse, fetchFail, responseSuccess } from "../requestStatus";
 
 const collectionRef = collection(db, 'posts')

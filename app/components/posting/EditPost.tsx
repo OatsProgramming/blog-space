@@ -1,52 +1,54 @@
 'use client'
 
-import { useState } from "react"
-import { url } from "../../tempURL"
-
-async function modPost(method: HTTP, content: {}) {
-    const res = await fetch(`${url}/api/posts`, {
-        method: method,
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(content)
-    })
-    if (!res.ok) {
-        console.log(await res.json())
-    }
-}
+import { mutatePost } from "@/app/lib/CRUD-ops/postCRUD"
+import { useRouter } from "next/navigation"
+import { useState, useTransition } from "react"
 
 export default function EditPost({ children, currentUser, post }: {
     children: React.ReactNode,
     currentUser: boolean,
     post: PostObj
 }) {
-    console.log(currentUser)
+    const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
     const [newContent, setNewContent] = useState<PostObj>({} as PostObj)
+    const [isPending, startTransition] = useTransition()
+    const [isFetching, setIsFetching] = useState(false)
+
+    // For inline styling
+    const isMutating = isPending || isFetching
 
     function handleEdit() {
         if (isEditing && newContent.title && newContent.body) {
-            const result = modPost(
-
+            setIsFetching(true)
+            mutatePost(
                 "PATCH",
                 {
                     ...newContent,
                     id: post.id
                 }
             )
+            setIsFetching(false)
             setNewContent({} as PostObj)
         }
         setIsEditing(!isEditing)
+        startTransition(() => {
+            router.refresh()
+        })
     }
 
-    function handleDelete() {
-        const result = modPost(
+    async function handleDelete() {
+        setIsFetching(true)
+        await mutatePost(
             "DELETE",
             {
                 id: post.id
             }
         )
+        setIsFetching(false)
+        startTransition(() => {
+            router.refresh()
+        })
     }
 
 
@@ -62,10 +64,10 @@ export default function EditPost({ children, currentUser, post }: {
             ) : (
                 <>
                     {children}
-                </> 
+                </>
             )}
             {currentUser && (
-                <span>
+                <span style={{opacity: isMutating ? 0 : 1}}>
                     <button onClick={handleEdit}>
                         {isEditing ? (
                             // Save Icon

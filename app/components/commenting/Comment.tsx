@@ -1,37 +1,22 @@
 'use client'
 
 import { auth } from "@/app/config/firebase-config"
-import { url } from "@/app/lib/tempURL"
+import { mutateComment } from "@/app/lib/CRUD-ops/commentCRUD"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
-
-export async function modComment(postId: string, method: HTTP, content: {}) {
-    const res = await fetch(`${url}/api/comments?postId=${postId}`, {
-        method: method,
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(content)
-    })
-    if (!res.ok) {
-        const err = await res.json()
-        throw new Error(err)
-    }
-    return res.json()
-}
-
-
 
 export default function CommentComponent({ comment, userId } : {
     comment: CommentObj,
     userId: string
 }) {
 
+    const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
     const [newContent, setNewContent] = useState('')
 
     async function handleEdit() {
         if (isEditing && newContent !== '') {
-            const result = await modComment(
+            mutateComment(
                 comment.postId,
                 'PATCH',
                 {
@@ -43,16 +28,18 @@ export default function CommentComponent({ comment, userId } : {
             setNewContent('')
         } 
         setIsEditing(!isEditing)
+        router.refresh()
     }
 
     async function handleDelete() {
-        const result = await modComment(
+        mutateComment(
             comment.postId,
             'DELETE',
             {
                 id: comment.id
             }
         )
+        router.refresh()
     }
 
     return (

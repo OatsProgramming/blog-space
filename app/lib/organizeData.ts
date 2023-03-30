@@ -1,8 +1,8 @@
 import quickSortByTime from "./quickSort"
 
-export function filterPosts(posts: PostObj[], subscribedTo: string[]): {
-    sortedPosts: PostObj[],
-    filteredPost: PostObj[]
+export function organizeData(posts: PostObj[], subscribedTo: string[]): {
+    explorePosts: PostObj[]
+    subscribedPosts: PostObj[],
 }{
     const sortedPosts = quickSortByTime(posts) as PostObj[]
 
@@ -20,7 +20,7 @@ export function filterPosts(posts: PostObj[], subscribedTo: string[]): {
 
     // Returning as an object for more ease of use
     return ({
-        sortedPosts: sortedPosts,
-        filteredPost: filteredPosts
+        explorePosts: sortedPosts,
+        subscribedPosts: filteredPosts
     })
 }

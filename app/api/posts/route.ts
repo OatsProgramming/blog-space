@@ -23,7 +23,7 @@ export async function GET(request: Request){
             if (documentData.empty) throw new NotFound('Query returned empty for posts')
         } catch (err) {
             // On client error
-            if (err instanceof NotFound) return failedResponse(err, notFoundRequest)
+            if (err instanceof NotFound) return new Response(JSON.stringify([]), responseSuccess)
             const error = err as Error
             // On network error
             return failedResponse(error, fetchFail)

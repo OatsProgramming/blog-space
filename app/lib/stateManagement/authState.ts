@@ -2,7 +2,7 @@ import { create, StoreApi, UseBoundStore } from 'zustand'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
 import { auth, googleProvider } from "../../config/firebase-config"
 
-// Practically a context provider
+// Global state manager
 export const useAuth: UseBoundStore<StoreApi<AuthState>> = create((set, get: () => any) => ({
     createAccount: false,
     signedIn: false,

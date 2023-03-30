@@ -1,4 +1,4 @@
-// Currently: descending order
+// Currently: descending order ( youngest to oldest creation )
 export default function quickSortByTime(
     arr: QuickParam
 ) : QuickParam {

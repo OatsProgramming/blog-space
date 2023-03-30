@@ -1,4 +1,3 @@
-import { auth } from "@/app/config/firebase-config"
 import Link from "next/link"
 import EditPost from "./EditPost"
 
