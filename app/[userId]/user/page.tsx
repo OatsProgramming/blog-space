@@ -6,7 +6,7 @@ export default async function UserPage({ params: { userId } }: Params) {
   const postsElement = await PostsByCategory({ category: 'user', userId })
   return (
     <div>
-      Main
+      <div></div>
       {postsElement}
       {/* Temporary */}
       <LogOut />

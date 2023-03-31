@@ -14,20 +14,23 @@ export default function PostComponent({ post, userId, inComment } : {
                 <Link href={`/${userId}/${post.id}`} className="postCard">
                     <div>
                         <h1>{post.title}</h1>
-                        <p>{post.body}</p>
+                        <p>{`${post.body.slice(0, 50) }...`}</p>
                         <i>{post.userEmail}</i><br />
                         <i>{new Date(post.dateMS).toLocaleDateString()}</i>
                     </div>
                 </Link>
             ) : (
-                <FollowBtn userId={userId} otherUserId={post.userId}>
+                <>
+                    {post.userId !== userId && (
+                        <FollowBtn userId={userId} otherUserId={post.userId} />
+                    )}
                     <div className="postCard">
                         <h1>{post.title}</h1>
                         <p>{post.body}</p>
                         <i>{post.userEmail}</i><br />
                         <i>{new Date(post.dateMS).toLocaleDateString()}</i>
                     </div>
-                </FollowBtn>
+                </>
             )}
         </EditPost>
     )

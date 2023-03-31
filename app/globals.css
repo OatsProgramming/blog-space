@@ -327,18 +327,13 @@ nav {
   height: 2em;
   vertical-align: middle;
 }
-
-.navBarItem:hover .refresh {
-  transition: transform 0.3s ease-in-out;
-  transform: rotate(360deg);
-}
 /* NavBar - END */
 
 /* PostCard - START */
 .postCard {
   padding: 1rem;
   margin: 1rem;
-  width: 12rem;
+  width: 15rem;
   border: 1px solid;
   border-radius: 1.5rem;
   box-shadow: 0px 2px 5px;

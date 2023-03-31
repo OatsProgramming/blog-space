@@ -41,8 +41,9 @@ export default function AddPost() {
                     <div className="card">
                         <form>
                             <input onChange={(e) => setContent({ ...content, title: e.target.value.trim() })} />
-                            <textarea onChange={(e) => setContent({ ...content, body: e.target.value.trim() })}
-                                cols={90} rows={30} minLength={10} maxLength={1000}
+                            <textarea onChange={(e) => setContent({ ...content, body: e.target.value})}
+                                cols={90} rows={30} minLength={10} maxLength={3000}
+                                style={{ whiteSpace: 'pre-wrap'}}
                             />
                             <div className="flexContainer">
                                 <button onClick={handleClick}>

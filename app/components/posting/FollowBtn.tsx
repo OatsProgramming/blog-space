@@ -7,8 +7,7 @@ import useSWR from 'swr'
 
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
-export default function FollowBtn({ children, userId, otherUserId }: {
-    children: React.ReactNode,
+export default function FollowBtn({ userId, otherUserId }: {
     userId: string,
     otherUserId: string,
 }) {
@@ -18,12 +17,9 @@ export default function FollowBtn({ children, userId, otherUserId }: {
     console.log(subscribedTo)
 
     let content = (
-        <>
-            <button onClick={handleClick}>
-                {isFollowing ? 'Unfollow' : 'follow'}
-            </button>
-            {children}
-        </>
+        <button onClick={handleClick}>
+            {isFollowing ? 'Unfollow' : 'follow'}
+        </button>
     )
     
     useEffect(() => {
