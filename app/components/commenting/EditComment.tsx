@@ -5,10 +5,9 @@ import { mutateComment } from "@/app/lib/CRUD-ops/commentCRUD"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
-export default function EditComment({ children, comment, userId }: {
+export default function EditComment({ children, comment }: {
     children: React.ReactNode,
     comment: CommentObj,
-    userId: string
 }) {
 
     const router = useRouter()
@@ -44,7 +43,7 @@ export default function EditComment({ children, comment, userId }: {
     }
 
     return (
-        <div>
+        <div className="comment">
             {isEditing ? (
                 <>
                     <textarea
@@ -57,7 +56,7 @@ export default function EditComment({ children, comment, userId }: {
                     {children}
                 </>
             )}
-            {userId == auth.currentUser?.uid && (
+            {comment.userEmail == auth.currentUser?.email && (
                 <span>
                     <button onClick={() => {
 

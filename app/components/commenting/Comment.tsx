@@ -3,9 +3,13 @@ export default function CommentComponent({ comment }: {
 }) {
     return (
         <>
-            <p>{comment.body}</p>
-            <i>{comment.userEmail}</i>
-            <i>{comment.dateMS}</i>
+            <div className="commentBody">
+                <p>{comment.body}</p>
+            </div>
+            <div className="commentMeta">
+                <i>{comment.userEmail}</i>
+                <i>{new Date(comment.dateMS).toLocaleDateString()}</i>
+            </div>
         </>
     )
 }

@@ -11,9 +11,9 @@ export default function AddComment({ postId }: { postId: string }) {
     const [isCreating, setIsCreating] = useState(false)
     const [isPending, startTransition] = useTransition();
 
-    async function handleClick() {
+    function handleClick() {
         if (newComment.trim() === '') return
-        const result = await mutateComment(
+        mutateComment(
             postId,
             'POST',
             {
@@ -31,7 +31,7 @@ export default function AddComment({ postId }: { postId: string }) {
     }
 
     return (
-        <>
+        <div>
             {isCreating && (
                 <>
                     <textarea name="comment"
@@ -63,6 +63,6 @@ export default function AddComment({ postId }: { postId: string }) {
                     </svg>
                 )}
             </button>
-        </>
+        </div>
     )
 }

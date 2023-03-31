@@ -11,21 +11,21 @@ export default function PostComponent({ post, userId, inComment } : {
     return (
         <EditPost post={post} currentUser={post.userId === userId}>
             {!inComment ? (
-                <Link href={`/${userId}/${post.id}`}>
+                <Link href={`/${userId}/${post.id}`} className="postCard">
                     <div>
                         <h1>{post.title}</h1>
                         <p>{post.body}</p>
-                        <i>Created By: {post.userEmail}</i><br />
-                        <i>Created At: {post.dateMS}</i>
+                        <i>{post.userEmail}</i><br />
+                        <i>{new Date(post.dateMS).toLocaleDateString()}</i>
                     </div>
                 </Link>
             ) : (
                 <FollowBtn userId={userId} otherUserId={post.userId}>
-                    <div>
+                    <div className="postCard">
                         <h1>{post.title}</h1>
                         <p>{post.body}</p>
-                        <i>Created By: {post.userEmail}</i><br />
-                        <i>Created At: {post.dateMS}</i>
+                        <i>{post.userEmail}</i><br />
+                        <i>{new Date(post.dateMS).toLocaleDateString()}</i>
                     </div>
                 </FollowBtn>
             )}

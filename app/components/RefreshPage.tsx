@@ -1,17 +1,14 @@
 'use client'
 
 import { useRouter } from "next/navigation";
+import { MdOutlineRefresh } from 'react-icons/md'
 
-export default function RefreshPage({ children, userId }: {
-    children: React.ReactNode,
-    userId: string
-}) {
+export default function RefreshPage() {
     const router = useRouter()
 
     return (
-        <>
-            <button onClick={router.refresh}>Refresh</button>  
-            {children}
-        </>
+        <div onClick={router.refresh} className="navBarItem">
+            <MdOutlineRefresh className="icon refresh"/>
+        </div>
     )
 }

@@ -22,29 +22,29 @@ export default async function PostsByCategory({ category, userId }: {
     switch (category) {
         case 'explore': {
             return (
-                <>
+                <div className="flexContainer">
                     {explorePosts.map(post => (
                         <PostComponent key={post.id} post={post} userId={userId} />
                     ))}
-                </>
+                </div>
             )
         }
         case 'home': {
             return (
-                <>
+                <div className="flexContainer">
                     {subscribedPosts.map(post => (
                         <PostComponent key={post.id} post={post} userId={userId} />
                     ))}
-                </>
+                </div>
             )
         }
         case 'user': {
             return (
-                <>
+                <div className="flexContainer">
                     {userPostsSorted.map(post => (
                         <PostComponent key={post.id} post={post} userId={userId} />
                     ))}
-                </>
+                </div>
             )
         }
         default: {

@@ -19,7 +19,7 @@ export default async function PostPage({ params: { userId, postId } }: Params) {
             <div>
                 {comments.length > 0 ?
                     comments.map(comment => (
-                        <EditComment key={comment.id} comment={comment} userId={userId}>
+                        <EditComment key={comment.id} comment={comment} >
                             <CommentComponent comment={comment} />
                         </EditComment>
                     )) : (

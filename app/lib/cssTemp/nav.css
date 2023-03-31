@@ -1,0 +1,21 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.navBarItem {
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33.33%;
+}
+
+.icon {
+    width: 2em;
+    height: 2em;
+    vertical-align: middle;
+}

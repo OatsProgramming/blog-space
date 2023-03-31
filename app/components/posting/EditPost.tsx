@@ -37,9 +37,9 @@ export default function EditPost({ children, currentUser, post }: {
         })
     }
 
-    async function handleDelete() {
+    function handleDelete() {
         setIsFetching(true)
-        await mutatePost(
+        mutatePost(
             "DELETE",
             {
                 id: post.id
