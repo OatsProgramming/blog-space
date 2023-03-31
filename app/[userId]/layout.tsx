@@ -5,8 +5,9 @@ import AddPost from "../components/posting/AddPost";
 import { BiUserCircle } from 'react-icons/bi'
 import { AiFillHome } from 'react-icons/ai'
 import { FaRegCompass } from 'react-icons/fa'
-import MotionRefreshPage from "../components/RefreshPage";
-import { rotate } from "../lib/animation/rotate";
+// import MotionRefreshPage from "../components/RefreshPage";
+// import { rotate } from "../lib/animation/rotate";
+import RefreshPage from "../components/RefreshPage";
 
 export async function generateMetadata({ params: { userId } }: Params) {
   const res = await fetch(`${url}/api/users?userId=${userId}`)
@@ -43,7 +44,7 @@ export default async function NaviBar({
         <Link href={`/${userId}/user`} className="navBarItem">
           <BiUserCircle className="icon" />
         </Link>
-        <MotionRefreshPage whileTap={rotate}/>
+        <RefreshPage/>
       </nav>
         {children}
       <ValidUser userId={userId} />

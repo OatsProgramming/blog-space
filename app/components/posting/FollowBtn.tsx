@@ -14,8 +14,6 @@ export default function FollowBtn({ userId, otherUserId }: {
     const { data: subscribedTo, error, mutate } = useSWR(`${url}/api/subscriptions?userId=${userId}`, fetcher)
     const [isFollowing, setIsFollowing] = useState(false)
     
-    console.log(subscribedTo)
-
     let content = (
         <button onClick={handleClick}>
             {isFollowing ? 'Unfollow' : 'follow'}

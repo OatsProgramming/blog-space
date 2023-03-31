@@ -1,12 +1,20 @@
-import Link from "next/link"
+import dynamic from "next/dynamic"
+// import Link from "next/link"
 import EditPost from "./EditPost"
-import FollowBtn from "./FollowBtn"
+// import FollowBtn from "./FollowBtn"
 
 export default function PostComponent({ post, userId, inComment } : {
     post: PostObj,
     userId: string,
     inComment?: boolean
 }) {
+    const FollowBtn = dynamic(() => 
+        import("./FollowBtn")
+    )
+
+    const Link = dynamic(() => 
+        import("next/link")
+    )
 
     return (
         <EditPost post={post} currentUser={post.userId === userId}>
