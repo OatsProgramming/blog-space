@@ -3,10 +3,20 @@
 import React from 'react'
 import { useAuth } from '../../lib/stateManagement/authState'
 // import { motion } from 'framer-motion'
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import dynamic from 'next/dynamic';
 
 export default function Login() {
+
+  const ToastContainer = dynamic(() =>
+    import('react-toastify').then((mod) => mod.ToastContainer)
+  )
+
+  // @ts-ignore
+  const toast = dynamic(() =>
+    import('react-toastify').then((mod) => mod.toast)
+  ) as any
 
   const { signIn, signInPop } = useAuth()
   const notify = (message: string) => {
@@ -54,6 +64,7 @@ export default function Login() {
           <button onClick={signInHandler}>Sign In</button>
         </form>
         <ToastContainer
+          // @ts-ignore
           position="bottom-right"
           autoClose={3000}
           limit={3}
