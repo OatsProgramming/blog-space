@@ -1,6 +1,10 @@
 import { db } from "@/app/config/firebase-config";
-import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "@firebase/firestore/lite";
 import { badRequest, failedResponse, fetchFail, NotFound, responseSuccess } from "../requestStatus";
+
+// export const config = {
+//     runtime: 'edge',
+// }
 
 export async function GET(request: Request){
     const { searchParams } = new URL(request.url)

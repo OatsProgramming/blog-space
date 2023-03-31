@@ -1,6 +1,10 @@
 import { db } from "@/app/config/firebase-config";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
-import { badRequest, creationSuccess, failedResponse, fetchFail, NotFound, notFoundRequest, responseSuccess } from "../requestStatus";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "@firebase/firestore/lite";
+import { badRequest, creationSuccess, failedResponse, fetchFail, responseSuccess } from "../requestStatus";
+
+// export const config = {
+//     runtime: 'edge',
+// }
 
 // Reference the 'comments' collection 
 const collectionRef = collection(db, 'comments')

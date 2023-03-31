@@ -1,7 +1,10 @@
 import { db } from "@/app/config/firebase-config";
-import { deleteDoc, doc, getDoc, getDocFromServer, setDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "@firebase/firestore/lite";
 import { badRequest, fetchFail, responseSuccess, failedResponse, NotFound, notFoundRequest, creationSuccess } from "../requestStatus";
 
+// export const config = {
+//     runtime: 'edge',
+// }
 
 export async function GET(request: Request){
     // Parse the query
@@ -13,7 +16,7 @@ export async function GET(request: Request){
     try {
         const userDocRef = doc(db, 'users', userId!)
         // Get specified user
-        documentData = await getDocFromServer(userDocRef)
+        documentData = await getDoc(userDocRef)
         if (!documentData.exists()) throw new NotFound('User not found')
     } catch (err) {
         const error = err as Error

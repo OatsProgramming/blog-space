@@ -1,6 +1,10 @@
 import { db } from "@/app/config/firebase-config";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "@firebase/firestore/lite";
 import { badRequest, creationSuccess, failedResponse, fetchFail, NotFound, notFoundRequest, responseSuccess } from "../requestStatus";
+
+// export const config = {
+//     runtime: 'edge',
+// }
 
 // Reference the 'posts' collection 
 const collectionRef = collection(db, 'posts')
