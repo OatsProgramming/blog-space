@@ -1,11 +1,11 @@
 'use client'
 
 import { useAuth } from "../../lib/stateManagement/authState"
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 
 export default function NewHere() {
   return (
-    <motion.div className='signInPage40' layout='preserve-aspect' layoutId='switch'>
+    <div className='signInPage40' >
       <h1>New here?</h1>
       <p>Sign up and have a space to blog in BlogSpace!</p>
       <button onClick={() => useAuth.setState(() => ({
@@ -13,6 +13,6 @@ export default function NewHere() {
       }))}>
         SIGN UP
       </button>
-    </motion.div>
+    </div>
   )
 }

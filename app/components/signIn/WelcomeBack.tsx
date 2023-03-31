@@ -1,12 +1,11 @@
 'use client'
 
-import React from 'react'
 import { useAuth } from '../../lib/stateManagement/authState'
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 
 export default function WelcomeBack() {
   return (
-    <motion.div className='signInPage40' layout='preserve-aspect' layoutId='switch'>
+    <div className='signInPage40'>
       <h1>Welcome Back!</h1>
       <p>Already have a BlogSpace? Sign in here!</p>
       <button
@@ -14,6 +13,6 @@ export default function WelcomeBack() {
       >
         SIGN IN
       </button>
-    </motion.div>
+    </div>
   )
 }

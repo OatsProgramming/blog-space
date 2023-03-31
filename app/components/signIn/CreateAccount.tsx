@@ -1,15 +1,26 @@
 'use client'
 
-import { motion } from "framer-motion"
+// import { motion } from "framer-motion"
 import { useAuth } from "../../lib/stateManagement/authState"
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createUser, getUser } from "@/app/lib/CRUD-ops/userCRUD";
 import { auth } from "@/app/config/firebase-config";
 import { url } from "@/app/lib/tempURL";
+import dynamic from "next/dynamic";
 
 export default function CreateAccount() {
   const { registerAccount, signInPop, createInfo } = useAuth()
+
+  const ToastContainer = dynamic(() =>
+    import('react-toastify').then((mod) => mod.ToastContainer)
+  )
+
+  // @ts-ignore
+  const toast = dynamic(() =>
+    import('react-toastify').then((mod) => mod.toast)
+  ) as any
+
   const notify = (message: string) => {
     return toast.error(message, {
       position: "bottom-right",
@@ -55,7 +66,7 @@ export default function CreateAccount() {
   }
 
   return (
-    <motion.div className='signInPage60' layout='preserve-aspect' layoutId='inputSwitch'>
+    <div className='signInPage60'>
       <h1>Create Account</h1>
       <div>
         {/* Google logo */}
@@ -73,6 +84,7 @@ export default function CreateAccount() {
         <button onClick={registerHandler}>SIGN UP</button>
       </form>
       <ToastContainer
+        // @ts-ignore
         position="bottom-right"
         autoClose={3000}
         limit={3}
@@ -85,6 +97,6 @@ export default function CreateAccount() {
         pauseOnHover
         theme="dark"
       />
-    </motion.div>
+    </div>
   )
 }

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useAuth } from '../../lib/stateManagement/authState'
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,7 +35,7 @@ export default function Login() {
 
   return (
     <>
-      <motion.div className='signInPage60' layout='preserve-aspect' layoutId='inputSwitch'>
+      <div className='signInPage60'>
         <h1>Sign into Your Account</h1>
         <p>Sign in using social networks</p>
         <div className='logo'>
@@ -66,7 +66,7 @@ export default function Login() {
           pauseOnHover
           theme="dark"
         />
-      </motion.div>
+      </div>
     </>
   )
 }
