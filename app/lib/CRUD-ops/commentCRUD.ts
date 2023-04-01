@@ -18,7 +18,7 @@ export async function mutateComment(postId: string, method: HTTP, content: {}) {
 // Multiple
 export async function getComments(postId: string): Promise<CommentObj[]> {
     const res = await fetch(`${url}/api/comments?postId=${postId}`, {
-        cache: 'no-store'
+        next: {revalidate: 0}
     })
     if (!res.ok) {
         const err = await res.json() as Error

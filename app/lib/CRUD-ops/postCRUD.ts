@@ -17,7 +17,7 @@ export async function mutatePost(method: HTTP, content: {}): Promise<void> {
 
 export async function getPost(postId: string) {
     const res = await fetch(`${url}/api/posts?postId=${postId}`, {
-        cache: 'no-store',
+        next: { revalidate: 0 }
     })
     if (!res.ok) {
         const err = await res.json() as Error
@@ -44,7 +44,7 @@ export async function getUserPosts(userId: string): Promise<PostObj[]> {
 
 export async function getAllPosts(userId: string): Promise<PostObj[]> {
     const res = await fetch(`${url}/api/allPosts?userId=${userId}`, {
-        cache: 'no-store',
+        next: {revalidate: 0}
     })
     if (!res.ok) {
         const err = await res.json() as Error

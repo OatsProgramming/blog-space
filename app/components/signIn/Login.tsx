@@ -8,7 +8,6 @@ import dynamic from 'next/dynamic';
 
 export default function Login() {
 
-  // Send errors as toasts
   const ToastContainer = dynamic(() =>
     import('react-toastify').then((mod) => mod.ToastContainer)
   )
@@ -62,6 +61,7 @@ export default function Login() {
           <label htmlFor="password" className="formLabelPassword">Password</label>
           <button onClick={signInHandler}>Sign In</button>
         </form>
+      </m.div>
         <ToastContainer
           // @ts-ignore
           position="bottom-right"
@@ -76,7 +76,6 @@ export default function Login() {
           pauseOnHover
           theme="dark"
         />
-      </m.div>
     </LazyMotion>
   )
 }

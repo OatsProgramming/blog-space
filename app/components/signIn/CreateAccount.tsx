@@ -83,6 +83,7 @@ export default function CreateAccount() {
           <label htmlFor="password" className="formLabelPassword">Password</label>
           <button onClick={registerHandler}>SIGN UP</button>
         </form>
+      </m.div>
         <ToastContainer
           // @ts-ignore
           position="bottom-right"
@@ -97,7 +98,6 @@ export default function CreateAccount() {
           pauseOnHover
           theme="dark"
         />
-      </m.div>
     </LazyMotion>
   )
 }
