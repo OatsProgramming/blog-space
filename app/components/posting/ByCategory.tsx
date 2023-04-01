@@ -1,23 +1,26 @@
 import PostComponent from "@/app/components/posting/Post"
-import { getUserPosts, getAllPosts } from "@/app/lib/CRUD-ops/postCRUD"
-import { getSubscribedList } from "@/app/lib/CRUD-ops/subscribeCRUD"
-import { organizeData } from "@/app/lib/organizeData"
-import quickSortByTime from "@/app/lib/quickSort"
+// import { getUserPosts, getAllPosts } from "@/app/lib/CRUD-ops/postCRUD"
+// import { getSubscribedList } from "@/app/lib/CRUD-ops/subscribeCRUD"
+// import { organizeData } from "@/app/lib/organizeData"
+// import quickSortByTime from "@/app/lib/quickSort"
 
+import { subPosts, explorePosts, userPosts } from "@/toyData/postData"
 
 export default async function PostsByCategory({ category, userId }: {
     category: 'explore' | 'home' | 'user',
     userId: string
 }) {
     
-    const postsPromise = getAllPosts(userId)
-    const subscribedToPromise = getSubscribedList(userId)
-    const userPostsPromise = getUserPosts(userId)
+    // const postsPromise = getAllPosts(userId)
+    // const subscribedToPromise = getSubscribedList(userId)
+    // const userPostsPromise = getUserPosts(userId)
 
-    const [posts, subscribedTo, userPosts] = await Promise.all([postsPromise, subscribedToPromise, userPostsPromise])
+    // const [posts, subscribedTo, userPosts] = await Promise.all([postsPromise, subscribedToPromise, userPostsPromise])
 
-    const { subscribedPosts, explorePosts } = organizeData(posts, subscribedTo)
-    const userPostsSorted = quickSortByTime(userPosts) as PostObj[]
+    // const { subscribedPosts, explorePosts } = organizeData(posts, subscribedTo)
+    // const userPostsSorted = quickSortByTime(userPosts) as PostObj[]
+
+    // console.log("Hello")
 
     switch (category) {
         case 'explore': {
@@ -32,7 +35,7 @@ export default async function PostsByCategory({ category, userId }: {
         case 'home': {
             return (
                 <div className="flexContainer">
-                    {subscribedPosts.map(post => (
+                    {subPosts.map(post => (
                         <PostComponent key={post.id} post={post} userId={userId} />
                     ))}
                 </div>
@@ -41,7 +44,7 @@ export default async function PostsByCategory({ category, userId }: {
         case 'user': {
             return (
                 <div className="flexContainer">
-                    {userPostsSorted.map(post => (
+                    {userPosts.map(post => (
                         <PostComponent key={post.id} post={post} userId={userId} />
                     ))}
                 </div>

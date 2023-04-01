@@ -7,7 +7,9 @@ import { AiFillHome } from 'react-icons/ai'
 import { FaRegCompass } from 'react-icons/fa'
 import dynamic from "next/dynamic";
 
-export async function generateMetadata({ params: { userId } }: Params) {
+import { userId } from "@/toyData/userData";
+
+export async function generateMetadata(/* { params: { userId } }: Params */) {
   const res = await fetch(`${url}/api/users?userId=${userId}`)
   if (!res.ok) {
     console.log(res)
@@ -49,7 +51,7 @@ export default async function NaviBar({
         <RefreshPage />
       </nav>
         {children}
-      <ValidUser userId={userId} />
+      {/* <ValidUser userId={userId} /> */}
     </>
   );
 }
