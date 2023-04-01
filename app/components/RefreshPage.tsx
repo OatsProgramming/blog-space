@@ -2,21 +2,22 @@
 
 // import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-// import { ForwardedRef, forwardRef } from "react";
 import { MdOutlineRefresh } from 'react-icons/md'
+import { LazyMotion, m } from "framer-motion";
+import { rotate } from "../lib/animation/rotate";
 
 export default function RefreshPage() {
     const router = useRouter()
 
+    const loadFeatures = () => import('../lib/animation/features').then((mod) => mod.domAnimation)
+
     return (
-        <div onClick={router.refresh} className="navBarItem">
-            <div>
-                <MdOutlineRefresh className="icon" />
+        <LazyMotion features={loadFeatures} strict>
+            <div onClick={router.refresh} className="navBarItem">
+                <m.div whileTap={rotate}>
+                    <MdOutlineRefresh className="icon" />
+                </m.div>
             </div>
-        </div>
+        </LazyMotion>
     )
 }
-
-// const MotionRefreshPage = motion(RefreshPage, { forwardMotionProps: true })
-
-// export default MotionRefreshPage

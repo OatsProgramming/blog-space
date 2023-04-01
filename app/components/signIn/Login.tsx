@@ -3,12 +3,14 @@
 import React from 'react'
 import { useAuth } from '../../lib/stateManagement/authState'
 // import { motion } from 'framer-motion'
+import { LazyMotion, m } from "framer-motion"
 // import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import dynamic from 'next/dynamic';
 
 export default function Login() {
 
+  // Send errors as toasts
   const ToastContainer = dynamic(() =>
     import('react-toastify').then((mod) => mod.ToastContainer)
   )
@@ -17,6 +19,9 @@ export default function Login() {
   const toast = dynamic(() =>
     import('react-toastify').then((mod) => mod.toast)
   ) as any
+
+  // Lazy load animation
+  const loadFeatures = () => import('../../lib/animation/features').then((mod) => mod.domMax)
 
   const { signIn, signInPop } = useAuth()
   const notify = (message: string) => {
@@ -44,8 +49,8 @@ export default function Login() {
   }
 
   return (
-    <>
-      <div className='signInPage60'>
+    <LazyMotion features={loadFeatures}>
+      <m.div className='signInPage60' layout='preserve-aspect' layoutId='inputSwitch'>
         <h1>Sign into Your Account</h1>
         <p>Sign in using social networks</p>
         <div className='logo'>
@@ -77,8 +82,8 @@ export default function Login() {
           pauseOnHover
           theme="dark"
         />
-      </div>
-    </>
+      </m.div>
+    </LazyMotion>
   )
 }
 
