@@ -10,7 +10,7 @@ export default function Login() {
 
   const ToastContainer = dynamic(() =>
     import('react-toastify').then((mod) => mod.ToastContainer)
-  )
+  ) as React.ForwardRefExoticComponent<any>
 
   // Lazy load animation
   const loadFeatures = () => import('../../lib/animation/features').then((mod) => mod.domMax)
@@ -55,27 +55,34 @@ export default function Login() {
 
         or with your email
         <form className='signInPageForm'>
-          <input required className="formInput" type='email' placeholder="email" onChange={(e) => useAuth.setState((state) => ({ signInInfo: { ...state.signInInfo, email: e.target.value } }))} />
-          <label htmlFor='email' className='formLabelEmail'>Email</label>
-          <input required className='formInput' type='password' placeholder="password" onChange={(e) => useAuth.setState((state) => ({ signInInfo: { ...state.signInInfo, password: e.target.value } }))} />
-          <label htmlFor="password" className="formLabelPassword">Password</label>
+          <div className="textField">
+            <input type="email" id="email" name='email' placeholder=" "
+              onChange={(e) => useAuth.setState((state) => ({ signInInfo: { ...state.signInInfo, email: e.target.value } }))}
+            />
+            <label htmlFor="email">Email</label>
+          </div>
+          <div className="textField">
+            <input type="password" id="password" name='password' placeholder=" "
+              onChange={(e) => useAuth.setState((state) => ({ signInInfo: { ...state.signInInfo, password: e.target.value } }))}
+            />
+            <label htmlFor="password">Password</label>
+          </div>
           <button onClick={signInHandler}>Sign In</button>
         </form>
       </m.div>
-        <ToastContainer
-          // @ts-ignore
-          position="bottom-right"
-          autoClose={3000}
-          limit={3}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        limit={3}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </LazyMotion>
   )
 }

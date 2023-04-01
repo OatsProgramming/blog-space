@@ -23,7 +23,7 @@
     --background-end-rgb: 0, 0, 0;
 
     --formElements-blur-color: hsla(0, 0%, 29%, 0.88);
-    --label-focus-color: hsl(176, 69%, 61%);
+    --label-focus-color: hsl(215, 22%, 46%);
     --input-focus-color: linear-gradient(90deg, hsl(147, 79%, 65%) 0%, hsl(181, 77%, 60%) 83%);
 
     --button-inactive-borderColor: hsl(0, 0%, 10%);
@@ -101,78 +101,60 @@ button:active {
 /* button - END */
 
 /* form elements - START */
+.textField {
+  position: relative;
+  margin-bottom: 16px;
+}
 
-/* Default positions */
-.formLabelEmail,
-.formLabelPassword{
-  position: absolute;
-  display: block;
-  top: 19%;
-  left: 10%;
-  transition: 0.2s;
+.textField label {
   font-size: 1rem;
-  color: var(--formElements-blur-color);
-}
-
-/* Default position - labelPassword */
-.formLabelPassword{
-  top: 49%;
-}
-
-.formInput{
-  outline: 0;
-  border: 0;
-  border-bottom: 2px solid var(--formElements-blur-color);
-  background-color: transparent;
-  margin: 10px 0;
-  padding: 20px 0;
-  width: 100%
-}
-
-.formInput::placeholder{
-  color: transparent;
-}
-
-.formInput:focus{
-  padding-bottom: 6px;  
-  font-weight: 700;
-  border-width: 3px;
-  border-image: var(--input-focus-color);
-  border-image-slice: 1;
-}
-
-/* Move label to top when input has value */
-.formInput:focus + .formLabelPassword,
-.formInput:valid + .formLabelPassword,
-.formInput:not(:placeholder-shown) + .formLabelPassword,
-.formInput:focus + .formLabelEmail,
-.formInput:valid + .formLabelEmail,
-.formInput:not(:placeholder-shown) + .formLabelEmail {
+  font-weight: 400;
+  line-height: 1;
+  padding: 4px 12px;
   position: absolute;
-  display: block;
-  top: 10%;
-  left: 8%;
-  transition: 0.2s;
-  font-size: 0.8rem;
+  top: 50%;
+  left: 0px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.textField input {
+  font-size: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  padding: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+}
+
+.textField input:hover {
+  border-color: white;
+}
+
+.textField input:focus {
+  outline: none;
+}
+
+.textField input:focus+label,
+.textField input:not(:placeholder-shown)+label {
+  transform: translate(-10%, -225%) scale(0.75);
   color: var(--label-focus-color);
-  font-weight:700; 
+  padding: 0 4px;
 }
 
-.formInput:focus + .formLabelPassword,
-.formInput:valid + .formLabelPassword,
-.formInput:not(:placeholder-shown) + .formLabelPassword{
-  top: 40%;
+/* Set up error styles */
+.textField.error input {
+  border-color: #f44336;
 }
 
-/* Move label back to default position if input is empty */
-.formInput:not(:valid):not(:focus):placeholder-shown + .formLabelEmail,
-.formInput:not(:valid):not(:focus):placeholder-shown + .formLabelPassword {
-  top: 19%;
-  font-size: 1rem;
+.textField.error input:hover {
+  border-color: #d32f2f;
 }
 
-.formInput:not(:valid):not(:focus):placeholder-shown + .formLabelPassword {
-  top: 49%;
+.textField.error input:focus {
+  border-color: #f44336;
 }
 /* form elements- END */
 
@@ -187,7 +169,7 @@ button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 16px;
 }
 

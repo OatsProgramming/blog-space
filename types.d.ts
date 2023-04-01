@@ -55,6 +55,7 @@ type Status = {
 type UserInfo =  {
     email: string,
     password: string,
+    userName?: string,
 }
 
 type UserObj = {

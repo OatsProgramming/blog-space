@@ -1,5 +1,5 @@
 import { create, StoreApi, UseBoundStore } from 'zustand'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth"
 import { auth, googleProvider } from "../../config/firebase-config"
 
 // Global state manager
@@ -15,10 +15,11 @@ export const useAuth: UseBoundStore<StoreApi<AuthState>> = create((set, get: () 
         else if (!get().createInfo.password) return new Error('Seems that you forgot to enter a password...')
         // Send request if successful
         try {
-            await createUserWithEmailAndPassword(auth, get().createInfo.email, get().createInfo.password );
+            await createUserWithEmailAndPassword(auth, get().createInfo.email, get().createInfo.password)
+            await updateProfile(auth.currentUser!, { displayName: get().createInfo.userName })
             set({ signInInfo: get().createInfo, createInfo: {} as UserInfo })
             // The SDK doesn't automatically sign in users; get().signIn()
-            await get().signIn()
+            get().signIn()
         } catch (err) {
             const error = err as Error
             if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
