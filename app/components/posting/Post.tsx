@@ -1,7 +1,5 @@
 import dynamic from "next/dynamic"
-// import Link from "next/link"
 import EditPost from "./EditPost"
-// import FollowBtn from "./FollowBtn"
 
 export default function PostComponent({ post, userId, inComment } : {
     post: PostObj,

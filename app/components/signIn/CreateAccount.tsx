@@ -1,11 +1,9 @@
 'use client'
 
-// import { motion } from "framer-motion"
 import { LazyMotion, m } from "framer-motion"
 import { useAuth } from "../../lib/stateManagement/authState"
-// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { createUser, getUser } from "@/app/lib/CRUD-ops/userCRUD";
+import { createUser } from "@/app/lib/CRUD-ops/userCRUD";
 import { auth } from "@/app/config/firebase-config";
 import { url } from "@/app/lib/tempURL";
 import dynamic from "next/dynamic";
@@ -18,15 +16,11 @@ export default function CreateAccount() {
     import('react-toastify').then((mod) => mod.ToastContainer)
   )
 
-  // @ts-ignore
-  const toast = dynamic(() =>
-    import('react-toastify').then((mod) => mod.toast)
-  ) as any
-
   // Lazy load animation
   const loadFeatures = () => import('../../lib/animation/features').then((mod) => mod.domMax)
 
-  const notify = (message: string) => {
+  const notify = async (message: string) => {
+    const toast = await import('react-toastify').then((mod) => mod.toast)
     return toast.error(message, {
       position: "bottom-right",
       autoClose: 3000,

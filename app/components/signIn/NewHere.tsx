@@ -1,7 +1,6 @@
 'use client'
 
 import { useAuth } from "../../lib/stateManagement/authState"
-// import { motion } from 'framer-motion'
 import { LazyMotion, m } from "framer-motion"
 
 export default function NewHere() {

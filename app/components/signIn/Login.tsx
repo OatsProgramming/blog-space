@@ -2,9 +2,7 @@
 
 import React from 'react'
 import { useAuth } from '../../lib/stateManagement/authState'
-// import { motion } from 'framer-motion'
 import { LazyMotion, m } from "framer-motion"
-// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import dynamic from 'next/dynamic';
 
@@ -15,16 +13,12 @@ export default function Login() {
     import('react-toastify').then((mod) => mod.ToastContainer)
   )
 
-  // @ts-ignore
-  const toast = dynamic(() =>
-    import('react-toastify').then((mod) => mod.toast)
-  ) as any
-
   // Lazy load animation
   const loadFeatures = () => import('../../lib/animation/features').then((mod) => mod.domMax)
 
   const { signIn, signInPop } = useAuth()
-  const notify = (message: string) => {
+  const notify = async (message: string) => {
+    const toast = await import('react-toastify').then((mod) => mod.toast)
     return toast.error(message, {
       position: "bottom-right",
       autoClose: 3000,
