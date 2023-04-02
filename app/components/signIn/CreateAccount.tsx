@@ -13,14 +13,14 @@ export default function CreateAccount() {
 
   // For error messages
   const ToastContainer = dynamic(() =>
-    import('react-toastify').then((mod) => mod.ToastContainer)
+    import('../../lib/toast/ToastContainer').then((mod) => mod.default)
   ) as React.ForwardRefExoticComponent<any>
 
   // Lazy load animation
   const loadFeatures = () => import('../../lib/animation/domMax').then((mod) => mod.default)
 
   const notify = async (message: string) => {
-    const toast = await import('react-toastify').then((mod) => mod.toast)
+    const toast = await import('../../lib/toast/toastNotification').then((mod) => mod.default)
     return toast.error(message, {
       position: "bottom-right",
       autoClose: 3000,

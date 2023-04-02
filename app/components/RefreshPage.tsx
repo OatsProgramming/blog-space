@@ -4,7 +4,7 @@
 import { useRouter } from "next/navigation";
 import { MdOutlineRefresh } from 'react-icons/md'
 import { LazyMotion, m } from "framer-motion";
-import { rotate } from "../lib/animation/rotate";
+import rotate from "../lib/animation/rotate";
 
 export default function RefreshPage() {
     const router = useRouter()

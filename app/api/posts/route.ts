@@ -24,7 +24,6 @@ export async function GET(request: Request){
         try {
              // Get posts for that user
             documentData = await getDocs(q)
-            if (documentData.empty) throw new NotFound('Query returned empty for posts')
         } catch (err) {
             // On client error
             if (err instanceof NotFound) return new Response(JSON.stringify([]), responseSuccess)
@@ -32,11 +31,16 @@ export async function GET(request: Request){
             // On network error
             return failedResponse(error, fetchFail)
         }
+        let posts;
         // Dont forget .docs to access all documents
-        const posts = documentData.docs.map(post => ({
-            ...post.data(),
-            id: post.id
-        }))
+        if (documentData.empty) {
+            posts = [] as PostObj[]
+        } else {
+            posts = documentData.docs.map(post => ({
+                ...post.data(),
+                id: post.id
+            })) as PostObj[]
+        }
         return new Response(JSON.stringify(posts), responseSuccess)
 
     // For a specific post

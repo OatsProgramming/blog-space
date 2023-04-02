@@ -1,4 +1,4 @@
-const comments = [
+export const comments = [
     {
         userEmail: 'jackoatmeals@gmail.com',
         postId: 'oA80STGBwg8jgM8csmY9',

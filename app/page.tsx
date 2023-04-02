@@ -1,10 +1,11 @@
-import SignInPageAnimation from './components/signIn/SignInPageAnimation'
+// import SignInPageAnimation from './components/signIn/SignInPageAnimation'
+import ModalWindow from './components/modal/StaticModal'
+import { userPosts } from '@/toyData/postData'
 
 export default function SignIn() {
   return (
     <main>
-      <SignInPageAnimation>
-      </SignInPageAnimation>
+      <ModalWindow posts={userPosts}/>
     </main>
   )
 }

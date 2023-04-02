@@ -2,7 +2,7 @@ import Link from "next/link";
 import ValidUser from "../components/signIn/ValidUser";
 import { url } from "../lib/tempURL";
 import AddPost from "../components/posting/AddPost";
-import { BiUserCircle } from 'react-icons/bi'
+import  { BiUserCircle }  from 'react-icons/bi'
 import { AiFillHome } from 'react-icons/ai'
 import { FaRegCompass } from 'react-icons/fa'
 import dynamic from "next/dynamic";

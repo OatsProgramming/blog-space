@@ -26,10 +26,15 @@ export async function GET(request: Request){
         return failedResponse(error, fetchFail)
     }
     // Dont forget .docs to access all documents
-    const comments = documentData.docs.map(comment => ({
-        ...comment.data(),
-        id: comment.id
-    }))
+    let comments;
+    if (documentData.empty) {
+        comments = [] as CommentObj[]
+    } else {
+        comments = documentData.docs.map(comment => ({
+            ...comment.data(),
+            id: comment.id
+        })) as CommentObj[]
+    }
     return new Response(JSON.stringify(comments), responseSuccess)
 }
 
