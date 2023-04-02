@@ -1,10 +1,10 @@
-'use client'
-
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
-export default function StaticModal({ posts }: {
-    posts: PostObj[]
+export default function StaticModal({ posts, userId, changePost }: {
+    posts: PostObj[],
+    userId: string,
+    changePost: (index: number) => void
 }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -23,7 +23,7 @@ export default function StaticModal({ posts }: {
     return (
         <div>
             <button onClick={handleOpen}>Open Modal</button>
-            {isOpen && (<DynamicModal posts={posts} onCancel={handleClose} />)}
+            {isOpen && (<DynamicModal posts={posts} userId={userId} onCancel={handleClose} changePost={changePost} />)}
         </div>
     );
 }

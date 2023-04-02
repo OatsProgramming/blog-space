@@ -1,19 +1,20 @@
-'use client'
-
 import { auth } from "@/app/config/firebase-config"
 import { mutateComment } from "@/app/lib/CRUD-ops/commentCRUD"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
+import { KeyedMutator } from "swr/_internal"
 
-export default function AddComment({ postId }: { postId: string }) {
-    const router = useRouter()
+export default function AddComment({ postId, mutate, comments }: { 
+    postId: string,
+    mutate: KeyedMutator<CommentObj[]>,
+    comments: CommentObj[],
+ }) {
     const [newComment, setNewComment] = useState('')
     const [isCreating, setIsCreating] = useState(false)
-    const [isPending, startTransition] = useTransition();
 
-    function handleClick() {
+    async function handleClick() {
         if (newComment.trim() === '') return
-        mutateComment(
+        await mutateComment(
             postId,
             'POST',
             {
@@ -23,11 +24,16 @@ export default function AddComment({ postId }: { postId: string }) {
                 dateMS: Date.now()
             }
         )
+        mutate([...comments, {
+            // Temp id ( shouldnt affect anything )
+            id: crypto.randomUUID(),
+            body: newComment,
+            postId: postId,
+            userEmail: auth.currentUser?.email!,
+            dateMS: Date.now()
+        }])
         setNewComment('')
         setIsCreating(false)
-        startTransition(() => {
-            router.refresh()
-        })
     }
 
     return (

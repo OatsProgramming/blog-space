@@ -1,22 +1,22 @@
-'use client'
-
 import { auth } from "@/app/config/firebase-config"
 import { mutateComment } from "@/app/lib/CRUD-ops/commentCRUD"
-import { useRouter } from "next/navigation"
+import { comments } from "@/toyData/commentData"
 import { useState } from "react"
+import { KeyedMutator } from "swr/_internal"
 
-export default function EditComment({ children, comment }: {
+export default function EditComment({ children, comment, mutate }: {
     children: React.ReactNode,
     comment: CommentObj,
+    mutate: KeyedMutator<CommentObj[]>,
+    comments: CommentObj[],
 }) {
 
-    const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
     const [newContent, setNewContent] = useState('')
 
     async function handleEdit() {
         if (isEditing && newContent !== '') {
-            mutateComment(
+            await mutateComment(
                 comment.postId,
                 'PATCH',
                 {
@@ -26,20 +26,24 @@ export default function EditComment({ children, comment }: {
                 }
             )
             setNewContent('')
+            mutate([...comments, {
+                ...comment,
+                body: newContent,
+                dateMS: Date.now(),
+            }])
         }
         setIsEditing(!isEditing)
-        router.refresh()
     }
 
     async function handleDelete() {
-        mutateComment(
+        await mutateComment(
             comment.postId,
             'DELETE',
             {
                 id: comment.id
             }
         )
-        router.refresh()
+        mutate(comments.filter(c => c.id !== comment.id))
     }
 
     return (

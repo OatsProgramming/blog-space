@@ -4,18 +4,19 @@ import { useEffect, useState } from "react"
 import CommentsSection from "../commenting/CommentSection"
 import PostComponent from "@/app/components/posting/Post"
 import slideShow from "@/app/lib/animation/slider"
-
-const swipeThreshold = 10_000
-function calculateSwipePower(offset: number, velocity: number) {
-    return Math.abs(offset) * velocity
-}
+import StaticModal from "../modal/StaticModal"
 
 export default function Slider({ posts, userId }: {
     posts: PostObj[],
-    userId: string
+    userId: string,
 }) {
     const [postId, setPostId] = useState(posts[0].id!)
     const [[page, direction], setPage] = useState([0, 0])
+
+    const swipeThreshold = 10_000
+    function calculateSwipePower(offset: number, velocity: number) {
+        return Math.abs(offset) * velocity
+    }
 
     // This will help create an infinite swipe gallery 
     // by returning values only within min and max values
@@ -31,8 +32,18 @@ export default function Slider({ posts, userId }: {
         setPage([page + newDirection, newDirection])
     }
 
+    function handleClick(index: number) {
+        let newDirection: number;
+        if (index > postIndex) newDirection = -1
+        else if (index < postIndex) newDirection = 1
+        else newDirection = 0
+
+        setPage([index, newDirection])
+    }
+
     return (
         <LazyMotion features={loadFeatures} strict>
+            <StaticModal posts={posts} userId={userId} changePost={handleClick} />
             <AnimatePresence custom={direction} initial={false}>
                 <m.div
                     className="flexContainer"
@@ -59,9 +70,6 @@ export default function Slider({ posts, userId }: {
                         }
                     }}
                 >
-                    {/* Perhaps put the modal menu here
-                        Then you can just have it setState when clicking on a component
-                    */}
                     <div>
                         <PostComponent post={posts[postIndex]} userId={userId} inComment />
                     </div>

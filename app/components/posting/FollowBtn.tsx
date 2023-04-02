@@ -1,5 +1,3 @@
-'use client'
-
 import { mutateSubscribeList } from "@/app/lib/CRUD-ops/subscribeCRUD"
 import { url } from "@/app/lib/tempURL"
 import { useEffect, useState } from "react"
@@ -11,7 +9,7 @@ export default function FollowBtn({ userId, otherUserId }: {
     userId: string,
     otherUserId: string,
 }) {
-    const { data: subscribedTo, error, mutate } = useSWR(`${url}/api/subscriptions?userId=${userId}`, fetcher)
+    const { data: subscribedTo, error, isLoading, mutate } = useSWR(`${url}/api/subscriptions?userId=${userId}`, fetcher)
     const [isFollowing, setIsFollowing] = useState(false)
     
     let content = (
@@ -21,32 +19,30 @@ export default function FollowBtn({ userId, otherUserId }: {
     )
     
     useEffect(() => {
-        if (!subscribedTo) {
+        if (isLoading) {
             content = (<div>Loading...</div>)
         } else if (error) {
             throw new Error('Failed to fetch subscription list')
         } else if (subscribedTo.includes(otherUserId)) {
-            console.log(isFollowing)
             setIsFollowing(true)
         } else {
-            console.log(isFollowing)
             setIsFollowing(false)
         }
     }, [subscribedTo])
 
 
-    function handleClick() {
+    async function handleClick() {
         let PATCHMethod: UserReqObj['PATCHMethod'] = isFollowing ? 'delete' : 'add'
-        console.log(PATCHMethod)
-        mutateSubscribeList(
+        await mutateSubscribeList(
             {
                 id: userId,
                 otherUserId,
                 PATCHMethod
             }
         )
-        mutate(subscribedTo!.filter((id: string) => id !== otherUserId))
+         mutate(subscribedTo!.filter((id: string) => id !== otherUserId))
     }
+
 
     return (
         <>

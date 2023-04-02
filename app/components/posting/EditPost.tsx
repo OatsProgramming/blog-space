@@ -7,7 +7,7 @@ import { useState, useTransition } from "react"
 export default function EditPost({ children, currentUser, post }: {
     children: React.ReactNode,
     currentUser: boolean,
-    post: PostObj
+    post: PostObj,
 }) {
     const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
