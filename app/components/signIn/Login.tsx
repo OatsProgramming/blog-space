@@ -13,7 +13,7 @@ export default function Login() {
   ) as React.ForwardRefExoticComponent<any>
 
   // Lazy load animation
-  const loadFeatures = () => import('../../lib/animation/features').then((mod) => mod.domMax)
+  const loadFeatures = () => import('../../lib/animation/domMax').then((mod) => mod.default)
 
   const { signIn, signInPop } = useAuth()
   const notify = async (message: string) => {

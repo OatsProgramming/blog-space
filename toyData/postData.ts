@@ -1,4 +1,4 @@
-export const subPosts = [
+const subPosts = [
   {
     body: 'asflkj',
     userId: 'S1cEl3qYvAtg5hFa6Isx',
@@ -25,7 +25,7 @@ export const subPosts = [
   
 ]
 
-export const userPosts = [
+const userPosts = [
     {
         title: 'Flippity flop there goes my hippity hop my tea goes out the window oh no',
         body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut nisi nec justo viverra suscipit eu eget mi. Proin et eleifend lacus. Nulla et semper ipsum, in aliquet ex. Vestibulum eu erat id purus venenatis accumsan. Praesent eleifend nulla ac velit mollis suscipit. Vivamus tincidunt ex quis turpis tincidunt, et elementum lectus placerat. Vestibulum eget ipsum laoreet, sollicitudin mi nec, fringilla mauris. Suspendisse fringilla ipsum eget mauris rutrum posuere. Integer porttitor tristique tincidunt.\n' +
@@ -160,7 +160,7 @@ export const userPosts = [
     },
 ]
 
-export const explorePosts = [
+const explorePosts = [
     {
         dateMS: 1680246405344,
         userEmail: 'a@gmail.com',

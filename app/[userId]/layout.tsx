@@ -7,9 +7,12 @@ import { AiFillHome } from 'react-icons/ai'
 import { FaRegCompass } from 'react-icons/fa'
 import dynamic from "next/dynamic";
 
-import { userId } from "@/toyData/userData";
+// import { userId } from "@/toyData/userData";
+import { PostProvider } from "../components/posting/PostProvider";
+import { getAllPosts, getUserPosts } from "../lib/CRUD-ops/postCRUD";
+import { getSubscribedList } from "../lib/CRUD-ops/subscribeCRUD";
 
-export async function generateMetadata(/* { params: { userId } }: Params */) {
+export async function generateMetadata({ params: { userId } }: Params) {
   const res = await fetch(`${url}/api/users?userId=${userId}`)
   if (!res.ok) {
     console.log(res)
@@ -31,6 +34,11 @@ export default async function NaviBar({
   }
 }) {
   
+  const allPostsPromise = getAllPosts(userId)
+  const subscribedToPromise = getSubscribedList(userId)
+  const userPostsPromise = getUserPosts(userId)
+  const [allPosts, subscribedTo, userPosts] = await Promise.all([allPostsPromise, subscribedToPromise, userPostsPromise])
+
   const RefreshPage = dynamic(() => 
     import('../components/RefreshPage')
   )
@@ -50,8 +58,10 @@ export default async function NaviBar({
         </Link>
         <RefreshPage />
       </nav>
+      <PostProvider allPosts={allPosts} subscribedTo={subscribedTo} userPosts={userPosts}>
         {children}
-      {/* <ValidUser userId={userId} /> */}
+      </PostProvider>
+      <ValidUser userId={userId} />
     </>
   );
 }

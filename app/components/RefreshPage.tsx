@@ -9,7 +9,7 @@ import { rotate } from "../lib/animation/rotate";
 export default function RefreshPage() {
     const router = useRouter()
 
-    const loadFeatures = () => import('../lib/animation/features').then((mod) => mod.domAnimation)
+    const loadFeatures = () => import('../lib/animation/domAnimation').then((mod) => mod.default)
 
     return (
         <LazyMotion features={loadFeatures} strict>

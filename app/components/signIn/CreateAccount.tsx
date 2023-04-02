@@ -7,7 +7,7 @@ import { createUser } from "@/app/lib/CRUD-ops/userCRUD";
 import { auth } from "@/app/config/firebase-config";
 import { url } from "@/app/lib/tempURL";
 import dynamic from "next/dynamic";
- 
+
 export default function CreateAccount() {
   const { registerAccount, signInPop, createInfo } = useAuth()
 
@@ -17,7 +17,7 @@ export default function CreateAccount() {
   ) as React.ForwardRefExoticComponent<any>
 
   // Lazy load animation
-  const loadFeatures = () => import('../../lib/animation/features').then((mod) => mod.domMax)
+  const loadFeatures = () => import('../../lib/animation/domMax').then((mod) => mod.default)
 
   const notify = async (message: string) => {
     const toast = await import('react-toastify').then((mod) => mod.toast)

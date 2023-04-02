@@ -6,7 +6,7 @@ import { LazyMotion, m } from "framer-motion"
 export default function NewHere() {
 
   // Lazy load animation
-  const loadFeatures = () => import('../../lib/animation/features').then((mod) => mod.domMax)
+  const loadFeatures = () => import('../../lib/animation/domMax').then((mod) => mod.default)
 
   return (
     <LazyMotion features={loadFeatures} strict>
