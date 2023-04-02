@@ -11,7 +11,7 @@ export default function DynamicModal({ posts, onCancel }: {
                 <div className="modal-body">
                     {posts.map(post => (
                         <div className="flexContainer">
-                            <PostComponent post={post} userId={'12414'} />
+                            <PostComponent post={post} userId={'12414'} inComment/>
                         </div>
                     ))}
                 </div>

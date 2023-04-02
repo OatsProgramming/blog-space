@@ -45,23 +45,24 @@ export default async function NaviBar({
 
   return (
     <>
-      <nav>
-        <Link href={`/${userId}/explore`} className="navBarItem">
-          <FaRegCompass className="icon" />
-        </Link>
-        <Link href={`/${userId}/home`} className="navBarItem">
-          <AiFillHome className="icon" />
-        </Link>
-        <AddPost />
-        <Link href={`/${userId}/user`} className="navBarItem">
-          <BiUserCircle className="icon" />
-        </Link>
-        <RefreshPage />
-      </nav>
-      <PostProvider allPosts={allPosts} subscribedTo={subscribedTo} userPosts={userPosts}>
-        {children}
-      </PostProvider>
-      <ValidUser userId={userId} />
+      <ValidUser userId={userId}>
+        <nav>
+          <Link href={`/${userId}/explore`} className="navBarItem">
+            <FaRegCompass className="icon" />
+          </Link>
+          <Link href={`/${userId}/home`} className="navBarItem">
+            <AiFillHome className="icon" />
+          </Link>
+          <AddPost />
+          <Link href={`/${userId}/user`} className="navBarItem">
+            <BiUserCircle className="icon" />
+          </Link>
+          <RefreshPage />
+        </nav>
+        <PostProvider allPosts={allPosts} subscribedTo={subscribedTo} userPosts={userPosts}>
+          {children}
+        </PostProvider>
+      </ValidUser>
     </>
   );
 }

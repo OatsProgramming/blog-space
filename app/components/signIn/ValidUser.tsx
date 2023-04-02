@@ -1,24 +1,31 @@
 'use client'
 import { auth } from '@/app/config/firebase-config'
+import { useAuth } from '@/app/lib/stateManagement/authState'
+import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect } from 'react'
 
-// USE AS JSX ELEMENT; DONT CONVERT TO A FUNCTION
-// ( will create auth.currentUser && RSC issues!!!  )
-// Update: auth.currentUser only works properly on client side, not server
-export default function ValidUser({ userId }: { userId: string }) {
+export default function ValidUser({ children, userId }: { 
+    children: React.ReactNode, 
+    userId: string
+ }) {
+
+    const { signedIn } = useAuth()
 
     useEffect(() => {
-        // Issue: when refreshing, auth.currentUser goes null
-        // Note to self: 
-        // - 'signedIn' as dependency doesnt work
-        // - 'auth.currentUser' as dependency would cause errors
-        if (!auth.currentUser) {
-            throw new Error('Not signed in')
-        } else if (auth.currentUser?.uid !== userId) {
-            throw new Error('Invalid user')
-        }
+        onAuthStateChanged(auth, (user) => {
+            if (user && auth.currentUser?.uid === userId) useAuth.setState({signedIn: true})
+            else useAuth.setState({signedIn: false})
+        })
     }, [])
 
-    return <></>
+    if (!signedIn) return (
+        <div>Not signed in</div>
+    )
+
+    return (
+        <>
+            {children}
+        </>
+    )
 }
 
