@@ -5,6 +5,7 @@ import { useAuth } from '../../lib/stateManagement/authState'
 import { LazyMotion, m } from "framer-motion"
 import 'react-toastify/dist/ReactToastify.css';
 import dynamic from 'next/dynamic';
+import styles from '@/app/components/css/signIn.module.css'
 
 export default function Login() {
 
@@ -43,7 +44,7 @@ export default function Login() {
 
   return (
     <LazyMotion features={loadFeatures}>
-      <m.div className='signInPage60' layout='preserve-aspect' layoutId='inputSwitch'>
+      <m.div className={styles['pg60']} layout='preserve-aspect' layoutId='inputSwitch'>
         <h1>Sign into Your Account</h1>
         <p>Sign in using social networks</p>
         <div className='logo'>
@@ -54,14 +55,14 @@ export default function Login() {
         </div>
 
         or with your email
-        <form className='signInPageForm'>
-          <div className="textField">
+        <form className={styles['form']}>
+          <div className={styles['textField']}>
             <input type="email" id="email" name='email' placeholder=" "
               onChange={(e) => useAuth.setState((state) => ({ signInInfo: { ...state.signInInfo, email: e.target.value } }))}
             />
             <label htmlFor="email">Email</label>
           </div>
-          <div className="textField">
+          <div className={styles['textField']}>
             <input type="password" id="password" name='password' placeholder=" "
               onChange={(e) => useAuth.setState((state) => ({ signInInfo: { ...state.signInInfo, password: e.target.value } }))}
             />

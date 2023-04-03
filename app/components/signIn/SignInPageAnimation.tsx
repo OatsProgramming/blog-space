@@ -8,6 +8,7 @@ import CreateAccount from "./CreateAccount"
 import Login from "./Login"
 import NewHere from "./NewHere"
 import WelcomeBack from "./WelcomeBack"
+import styles from '@/app/components/css/signIn.module.css'
 
 export default function SignInPageAnimation() {
   const { createAccount, signedIn } = useAuth()
@@ -21,13 +22,13 @@ export default function SignInPageAnimation() {
   return (
     <>
       {createAccount && (
-        <div className='signInPage'>
+        <div className={styles['pg']}>
           <WelcomeBack />     {/* .signInPage40 */}
           <CreateAccount />   {/* .signInPage60 */}
         </div>
       )}
       {!createAccount && (
-        <div className="signInPage">
+        <div className={styles['pg']}>
           <Login />           {/* .signInPage60 */}
           <NewHere />         {/* .signInPage40 */}
         </div>

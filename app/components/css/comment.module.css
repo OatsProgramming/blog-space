@@ -1,21 +1,10 @@
 .comment {
-    color: black;
     display: flex;
     flex-direction: column;
     padding: 16px;
     border-radius: 8px;
-    background-color: white;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 16px;
-}
-
-.comment.light {
-    background-color: white;
-}
-
-.comment.dark {
-    background-color: #161616;
-    color: white;
 }
 
 .commentBody {

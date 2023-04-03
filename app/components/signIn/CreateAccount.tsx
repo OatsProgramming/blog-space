@@ -7,6 +7,7 @@ import { createUser } from "@/app/lib/CRUD-ops/userCRUD";
 import { auth } from "@/app/config/firebase-config";
 import { url } from "@/app/lib/tempURL";
 import dynamic from "next/dynamic";
+import styles from '@/app/components/css/signIn.module.css'
 
 export default function CreateAccount() {
   const { registerAccount, signInPop, createInfo } = useAuth()
@@ -66,7 +67,7 @@ export default function CreateAccount() {
 
   return (
     <LazyMotion features={loadFeatures} strict>
-      <m.div className='signInPage60' layout='preserve-aspect' layoutId='inputSwitch'>
+      <m.div className={styles['pg60']} layout='preserve-aspect' layoutId='inputSwitch'>
         <h1>Create Account</h1>
         <div>
           {/* Google logo */}
@@ -76,20 +77,20 @@ export default function CreateAccount() {
         </div>
         <br />
         or use your email for registration:
-        <form className="signInPageForm">
-          <div className="textField">
+        <form className={styles['form']}>
+          <div className={styles['textField']}>
             <input type="text" id="userName" name='userName' placeholder=" " required
               onChange={(e) => useAuth.setState((state) => ({ createInfo: { ...state.createInfo, userName: e.target.value } }))}
             />
             <label htmlFor="userName">Username</label>
           </div>
-          <div className="textField">
+          <div className={styles['textField']}>
             <input type="email" id="email" name='password' placeholder=" " required
               onChange={(e) => useAuth.setState((state) => ({ createInfo: { ...state.createInfo, email: e.target.value } }))}
             />
             <label htmlFor="email">Email</label>
           </div>
-          <div className="textField">
+          <div className={styles['textField']}>
             <input type="password" id="password" name='password' placeholder=" " required
               onChange={(e) => useAuth.setState((state) => ({ createInfo: { ...state.createInfo, password: e.target.value } }))}
             />

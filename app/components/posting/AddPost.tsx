@@ -7,6 +7,7 @@ import { auth } from "../../config/firebase-config"
 import { TbSend } from 'react-icons/tb'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { MdOutlineCancel } from 'react-icons/md'
+import styles from '@/app/components/css/addPost.module.css'
 
 export default function AddPost() {
     const router = useRouter()
@@ -37,8 +38,8 @@ export default function AddPost() {
     return (
         <div>
             {isCreating && (
-                <div className={`modal ${isCreating ? '' : 'hidden'}`}>
-                    <div className="card">
+                <div className={`${styles['modal']} ${!isCreating && styles['hidden']}`}>
+                    <div className={styles['card']}>
                         <form>
                             <input onChange={(e) => setContent({ ...content, title: e.target.value.trim() })} />
                             <textarea onChange={(e) => setContent({ ...content, body: e.target.value})}

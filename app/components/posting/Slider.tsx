@@ -5,6 +5,7 @@ import CommentsSection from "../commenting/CommentSection"
 import PostComponent from "@/app/components/posting/Post"
 import slideShow from "@/app/lib/animation/slider"
 import StaticModal from "../modal/StaticModal"
+import styles from '@/app/components/css/slider.module.css'
 
 export default function Slider({ posts, userId }: {
     posts: PostObj[],
@@ -34,8 +35,8 @@ export default function Slider({ posts, userId }: {
 
     function handleClick(index: number) {
         let newDirection: number;
-        if (index > postIndex) newDirection = -1
-        else if (index < postIndex) newDirection = 1
+        if (index > postIndex) newDirection = 1
+        else if (index < postIndex) newDirection = -1
         else newDirection = 0
 
         setPage([index, newDirection])
@@ -44,10 +45,10 @@ export default function Slider({ posts, userId }: {
     return (
         <LazyMotion features={loadFeatures} strict>
             <StaticModal posts={posts} userId={userId} changePost={handleClick} />
-            <div className="postingRelative">
+            <div className={styles['relativeContainer']}>
                 <AnimatePresence custom={direction} initial={false}>
                     <m.div    
-                        className="posting"
+                        className={styles['absoluteContainer']}
                         key={page}
                         variants={slideShow}
                         custom={direction}
@@ -63,10 +64,10 @@ export default function Slider({ posts, userId }: {
                             const swipe = calculateSwipePower(offset.x, velocity.x)
                             // Swiped right
                             if (swipe > swipeThreshold) {
-                                paginate(1)
+                                paginate(-1)
                                 // Swiped left
                             } else if (swipe < -swipeThreshold) {
-                                paginate(-1)
+                                paginate(1)
                             }
                         }}
                     >
@@ -79,10 +80,10 @@ export default function Slider({ posts, userId }: {
                     </m.div>
                 </AnimatePresence>
             </div>
-            <div className="next" onClick={() => paginate(1)}>
+            <div className={styles['next']} onClick={() => paginate(1)}>
                 {"‣"}
             </div>
-            <div className="prev" onClick={() => paginate(-1)}>
+            <div className={styles['prev']} onClick={() => paginate(-1)}>
                 {"‣"}
             </div>
         </LazyMotion>

@@ -1,4 +1,4 @@
-nav {
+.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -6,7 +6,7 @@ nav {
     gap: 1rem;
 }
 
-.navBarItem {
+.item {
     border: 1px solid;
     display: flex;
     align-items: center;
@@ -14,8 +14,3 @@ nav {
     width: 33.33%;
 }
 
-.icon {
-    width: 2em;
-    height: 2em;
-    vertical-align: middle;
-}

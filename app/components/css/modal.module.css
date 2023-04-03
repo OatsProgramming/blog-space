@@ -1,0 +1,52 @@
+/* Dialog Modal (posts) - START */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    z-index: 99;
+}
+
+.dialog {
+    width: clamp(450px, 80%, 700px);
+    color: black;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.body {
+    padding: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 0.5rem;
+}
+
+.button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.cancel {
+    background-color: #ccc;
+    margin-right: 10px;
+}
+
+
+.button:hover {
+    opacity: 0.8;
+}
+
+/* Dialog Modal (posts) - END */

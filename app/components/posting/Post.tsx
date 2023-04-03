@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic"
 import EditPost from "./EditPost"
+import styles from '@/app/components/css/post.module.css'
 
 export default function PostComponent({ post, userId, inComment } : {
     post: PostObj,
@@ -13,7 +14,7 @@ export default function PostComponent({ post, userId, inComment } : {
     return (
         <EditPost post={post} currentUser={post.userId === userId}>
             {!inComment ? (
-                <div className="postCard">
+                <div className={styles['postCard']}>
                     <h1>{post.title}</h1>
                     <p>{`${post.body.slice(0, 50) }...`}</p>
                     <i>{post.userEmail}</i><br />
@@ -24,7 +25,7 @@ export default function PostComponent({ post, userId, inComment } : {
                     {post.userId !== userId && (
                         <FollowBtn userId={userId} otherUserId={post.userId} />
                     )}
-                    <div className="post">
+                    <div className={styles['reg']}>
                         <h1>{post.title}</h1>
                         <p style={{ whiteSpace: 'pre-wrap' }}>
                             {post.body}   

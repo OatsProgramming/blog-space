@@ -26,3 +26,7 @@
     transform: translateY(-5px);
     box-shadow: 0px 6px 10px;
 }
+
+.reg {
+    padding: 2rem;
+}

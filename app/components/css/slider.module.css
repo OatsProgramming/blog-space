@@ -1,0 +1,60 @@
+/* Buttons - START */
+.next,
+.prev {
+    top: calc(50% - 20px);
+    position: absolute;
+    background: white;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    z-index: 2;
+    color: black;
+    opacity: 0.3;
+    transition: all 200ms ease;
+}
+
+.next {
+    right: 5px;
+    transform: scale(0.5)
+}
+
+.prev {
+    left: 5px;
+    transform: scale(-0.5);
+}
+
+.next:hover,
+.prev:hover {
+    opacity: 1;
+}
+
+.next:hover {
+    right: 10px;
+    transform: scale(1)
+}
+
+.prev:hover {
+    left: 10px;
+    transform: scale(-1);
+}
+/* Buttons - END */
+
+/* PostSlides - START */
+.relativeContainer {
+    position: relative;
+}
+
+.absoluteContainer {
+    position: absolute;
+    width: 100vw;
+    padding: 1rem;
+    cursor: pointer;
+}
+/* PostSlides - END */

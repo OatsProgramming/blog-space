@@ -3,6 +3,7 @@ import { mutateComment } from "@/app/lib/CRUD-ops/commentCRUD"
 import { comments } from "@/toyData/commentData"
 import { useState } from "react"
 import { KeyedMutator } from "swr/_internal"
+import styles from '@/app/components/css/comment.module.css'
 
 export default function EditComment({ children, comment, mutate }: {
     children: React.ReactNode,
@@ -47,7 +48,7 @@ export default function EditComment({ children, comment, mutate }: {
     }
 
     return (
-        <div className="comment">
+        <div className={styles['comment']}>
             {isEditing ? (
                 <>
                     <textarea
