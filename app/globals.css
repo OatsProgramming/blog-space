@@ -226,6 +226,7 @@ button:active {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  border: 1px solid blue;
 }
 
 .comment {
@@ -474,4 +475,23 @@ nav {
 }
 /* Dialog Modal (posts) - END */
 
+/* Slider Post - START */
+.postingRelative {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.posting {
+  position: absolute;
+  width: 100%;
+  padding: 1rem;
+  /* border: 1px solid red; */
+}
+
+.post {
+  /* border: 1px solid blue; */
+  padding: 2rem;
+}
+/* Slider Post - End */
 

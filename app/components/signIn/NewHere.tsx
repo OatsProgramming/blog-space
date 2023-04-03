@@ -1,5 +1,3 @@
-'use client'
-
 import { useAuth } from "../../lib/stateManagement/authState"
 import { LazyMotion, m } from "framer-motion"
 

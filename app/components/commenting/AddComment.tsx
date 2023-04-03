@@ -1,7 +1,6 @@
 import { auth } from "@/app/config/firebase-config"
 import { mutateComment } from "@/app/lib/CRUD-ops/commentCRUD"
-import { useRouter } from "next/navigation"
-import { useState, useTransition } from "react"
+import { useState } from "react"
 import { KeyedMutator } from "swr/_internal"
 
 export default function AddComment({ postId, mutate, comments }: { 

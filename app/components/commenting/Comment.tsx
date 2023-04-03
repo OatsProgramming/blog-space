@@ -4,7 +4,9 @@ export default function CommentComponent({ comment }: {
     return (
         <>
             <div className="commentBody">
-                <p>{comment.body}</p>
+                <p style={{ whiteSpace: 'pre-wrap' }}>
+                    {comment.body}
+                </p>
             </div>
             <div className="commentMeta">
                 <i>{comment.userEmail}</i>

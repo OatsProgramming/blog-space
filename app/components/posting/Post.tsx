@@ -24,9 +24,11 @@ export default function PostComponent({ post, userId, inComment } : {
                     {post.userId !== userId && (
                         <FollowBtn userId={userId} otherUserId={post.userId} />
                     )}
-                    <div className="postCard">
+                    <div className="post">
                         <h1>{post.title}</h1>
-                        <p>{post.body}</p>
+                        <p style={{ whiteSpace: 'pre-wrap' }}>
+                            {post.body}   
+                        </p>
                         <i>{post.userEmail}</i><br />
                         <i>{new Date(post.dateMS).toLocaleDateString()}</i>
                     </div>

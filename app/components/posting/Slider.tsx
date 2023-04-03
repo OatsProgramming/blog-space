@@ -44,40 +44,41 @@ export default function Slider({ posts, userId }: {
     return (
         <LazyMotion features={loadFeatures} strict>
             <StaticModal posts={posts} userId={userId} changePost={handleClick} />
-            <AnimatePresence custom={direction} initial={false}>
-                <m.div
-                    className="flexContainer"
-                    key={page}
-                    variants={slideShow}
-                    custom={direction}
-                    initial='enter'
-                    animate='center'
-                    exit='exit'
-                    drag='x'
-                    dragConstraints={{
-                        left: 0,
-                        right: 0,
-                    }}
-                    onDragEnd={(e, { offset, velocity }) => {
-                        const swipe = calculateSwipePower(offset.x, velocity.x)
-                        // Swiped right
-                        if (swipe > swipeThreshold) {
-                            paginate(1)
-
-                            // Swiped left
-                        } else if (swipe < -swipeThreshold) {
-                            paginate(-1)
-                        }
-                    }}
-                >
-                    <div>
-                        <PostComponent post={posts[postIndex]} userId={userId} inComment />
-                    </div>
-                    <div>
-                        <CommentsSection postId={postId} />
-                    </div>
-                </m.div>
-            </AnimatePresence>
+            <div className="postingRelative">
+                <AnimatePresence custom={direction} initial={false}>
+                    <m.div
+                        className="posting"
+                        key={page}
+                        variants={slideShow}
+                        custom={direction}
+                        initial='enter'
+                        animate='center'
+                        exit='exit'
+                        drag='x'
+                        dragConstraints={{
+                            left: 0,
+                            right: 0,
+                        }}
+                        onDragEnd={(e, { offset, velocity }) => {
+                            const swipe = calculateSwipePower(offset.x, velocity.x)
+                            // Swiped right
+                            if (swipe > swipeThreshold) {
+                                paginate(1)
+                                // Swiped left
+                            } else if (swipe < -swipeThreshold) {
+                                paginate(-1)
+                            }
+                        }}
+                    >
+                        <div>
+                            <PostComponent post={posts[postIndex]} userId={userId} inComment />
+                        </div>
+                        <div>
+                            <CommentsSection postId={postId} />
+                        </div>
+                    </m.div>
+                </AnimatePresence>
+            </div>
             <div className="next" onClick={() => paginate(1)}>
                 {"‣"}
             </div>
