@@ -46,7 +46,7 @@ export default function Slider({ posts, userId }: {
             <StaticModal posts={posts} userId={userId} changePost={handleClick} />
             <div className="postingRelative">
                 <AnimatePresence custom={direction} initial={false}>
-                    <m.div
+                    <m.div    
                         className="posting"
                         key={page}
                         variants={slideShow}

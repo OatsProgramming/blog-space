@@ -434,6 +434,7 @@ nav {
   display: flex;
   justify-content: center;
   place-items: center;
+  z-index: 99;
 }
 
 .modal-dialog {
@@ -479,14 +480,14 @@ nav {
 .postingRelative {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 100vh;  
 }
 
 .posting {
   position: absolute;
-  width: 100%;
+  width: 100vw;
   padding: 1rem;
-  /* border: 1px solid red; */
+  cursor: pointer;
 }
 
 .post {

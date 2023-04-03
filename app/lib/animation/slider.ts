@@ -12,7 +12,7 @@ const slideShow = {
         transition: {
             duration: 0.25,
         },
-        zIndex: -99,
+        zIndex: 1,
     },
     // If current post swiped to the right
     // Current post must exit to the right
