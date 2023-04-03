@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { MdOutlineRefresh } from 'react-icons/md'
 import { LazyMotion, m } from "framer-motion";
 import rotate from "../lib/animation/rotate";
+import styles from '../components/css/nav.module.css'
 
 export default function RefreshPage() {
     const router = useRouter()
@@ -13,7 +14,7 @@ export default function RefreshPage() {
 
     return (
         <LazyMotion features={loadFeatures} strict>
-            <div onClick={router.refresh} className="navBarItem">
+            <div onClick={router.refresh} className={styles['item']}>
                 <m.div whileTap={rotate}>
                     <MdOutlineRefresh className="icon" />
                 </m.div>

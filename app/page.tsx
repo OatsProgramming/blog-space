@@ -1,5 +1,6 @@
 'use client'
 
+import LoadingCircle from './components/loading/LoadingCircle'
 import LoadingSquare from './components/loading/LoadingSquare'
 import SignInPageAnimation from './components/signIn/SignInPageAnimation'
 // import { explorePosts } from '@/toyData/postData'
@@ -14,7 +15,6 @@ export default function SignIn() {
       {/* <StaticModal userId={'userId'} posts={userPosts}/> */}
       <SignInPageAnimation />
       {/* <Slider posts={explorePosts} userId={userId} /> */}
-      {/* <LoadingSquare /> */}
     </div>
   )
 }

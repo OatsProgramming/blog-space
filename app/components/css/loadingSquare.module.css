@@ -10,7 +10,7 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: #fff;
+    background: hsla(242, 99%, 31%, 0.716);
     animation: lds-grid 1.2s linear infinite;
 }
 
@@ -76,6 +76,12 @@
     }
 
     50% {
-        opacity: 0.5;
+        opacity: 0.25;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .lds-grid div {
+        background-color: hsl(185, 93%, 48%);
     }
 }

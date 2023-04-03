@@ -25,7 +25,7 @@ export async function generateMetadata({ params: { userId } }: Params) {
   })
 }
 
-export default async function NaviBar({
+export default async function Layout({
   children,
   params: { userId }
 }: {

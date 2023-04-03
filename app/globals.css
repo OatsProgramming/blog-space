@@ -119,5 +119,9 @@ button:active {
   height: 2em;
   vertical-align: middle;
 }
+
+i {
+  color:hsl(0, 0%, 53%);
+}
 /* General - END */
 

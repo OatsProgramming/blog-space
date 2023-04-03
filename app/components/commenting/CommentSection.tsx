@@ -5,6 +5,7 @@ import { getComments } from "@/app/lib/CRUD-ops/commentCRUD"
 import quickSortByTime from "@/app/lib/quickSort"
 import { url } from "@/app/lib/tempURL"
 import useSWR from "swr"
+import LoadingCircle from "../loading/LoadingCircle"
 
 export default function CommentsSection({ postId }: {
     postId: string
@@ -12,7 +13,7 @@ export default function CommentsSection({ postId }: {
     const { data: comments, error, isLoading, mutate } = useSWR(`${url}/api/comments?postId=${postId}`, getComments) 
     let commentsSection: JSX.Element;
     if (isLoading) {
-        commentsSection = <div>Loading...</div>
+        commentsSection = <LoadingCircle />
     }
     else if (error) {
         commentsSection = <div>Unable to load comment section</div>
