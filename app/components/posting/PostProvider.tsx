@@ -2,7 +2,7 @@
 
 import { organizeData } from "@/app/lib/organizeData"
 import quickSortByTime from "@/app/lib/quickSort"
-import { createContext, useContext } from "react"
+import { createContext, useContext, useMemo } from "react"
 
 const PostContext = createContext<{
     explorePosts: PostObj[];
@@ -21,8 +21,13 @@ export function PostProvider({
     userPosts: PostObj[],
     children: React.ReactNode
 }) {
-    const sortedPosts = quickSortByTime(allPosts) as PostObj[]
-    const filteredPosts = organizeData(sortedPosts, subscribedTo)
+    const sortedPosts = useMemo(() => (
+        quickSortByTime(allPosts) as PostObj[]
+    ), [allPosts])
+
+    const filteredPosts = useMemo(() => (
+        organizeData(sortedPosts, subscribedTo)
+    ), [sortedPosts, subscribedTo])
 
     return (
         <PostContext.Provider value={{...filteredPosts, userPosts}}>
