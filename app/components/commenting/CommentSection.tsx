@@ -21,6 +21,9 @@ export default function CommentsSection({ postId }: {
         const commentsSorted = quickSortByTime(comments!) as CommentObj[]
         commentsSection = (
             <div>
+                <AddComment postId={postId} mutate={mutate} comments={comments!} />
+                <br />
+                <br />
                 {commentsSorted.length > 0 ?
                     commentsSorted.map(comment => (
                         <EditComment key={comment.id} comment={comment} mutate={mutate} comments={comments!}>
@@ -29,7 +32,6 @@ export default function CommentsSection({ postId }: {
                     )) : (
                         <i>Be the first one to comment!</i>
                     )}
-                <AddComment postId={postId} mutate={mutate} comments={comments!} />
             </div>
         )
     }
