@@ -118,6 +118,8 @@ button:active {
   width: 2em;
   height: 2em;
   vertical-align: middle;
+  cursor: pointer;
+  transition: all 200ms ease-out;
 }
 
 i {

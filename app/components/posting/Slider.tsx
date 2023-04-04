@@ -44,8 +44,8 @@ export default function Slider({ posts, userId }: {
 
     return (
         <LazyMotion features={loadFeatures} strict>
-            <StaticModal posts={posts} userId={userId} changePost={handleClick} />
             <div className={styles['relativeContainer']}>
+            <StaticModal posts={posts} userId={userId} changePost={handleClick} />
                 <AnimatePresence custom={direction} initial={false}>
                     <m.div    
                         className={styles['absoluteContainer']}

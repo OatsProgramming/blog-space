@@ -1,10 +1,12 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { CiMenuKebab } from 'react-icons/ci'
+import styles from 'app/components/css/modal.module.css'
 
 export default function StaticModal({ posts, userId, changePost }: {
     posts: PostObj[],
     userId: string,
-    changePost: (index: number) => void
+    changePost: (index: number) => void,
 }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +24,9 @@ export default function StaticModal({ posts, userId, changePost }: {
 
     return (
         <div>
-            <button onClick={handleOpen}>Open Modal</button>
+            <span onClick={handleOpen}>
+                <CiMenuKebab className={styles['menu']} />
+            </span>
             {isOpen && (<DynamicModal posts={posts} userId={userId} onCancel={handleClose} changePost={changePost} />)}
         </div>
     );

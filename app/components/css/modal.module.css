@@ -1,10 +1,10 @@
 /* Dialog Modal (posts) - START */
 .overlay {
     position: absolute;
-    top: 0;
+    top: 5rem;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    /* background-color: rgba(0, 0, 0, 0.5); */
     display: flex;
     justify-content: center;
     place-items: center;
@@ -12,11 +12,12 @@
 }
 
 .dialog {
-    width: clamp(450px, 80%, 700px);
+    width: clamp(450px, 80%, 1000px);
     color: black;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 100vh hsla(0, 0%, 0%, 0.87);
+    margin-bottom: 5rem;
 }
 
 .body {
@@ -32,7 +33,7 @@
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
-    color: #fff;
+    color: rgb(166, 60, 60);
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -49,4 +50,39 @@
     opacity: 0.8;
 }
 
+.close,
+.menu {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 2rem;
+    right: 1rem;
+    z-index: 98;
+    cursor: pointer;
+    transition: all 200ms ease-out;
+}
+
+.close {
+    top: -3rem;
+    right: 3rem;
+    z-index: 99;
+}
+
+.close:hover,
+.menu:hover {
+    transform: scale(0.9);
+    right: 1.1rem;
+    opacity: 0.75;
+}
+
+.close:hover{
+    right: 3.1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .body {
+        color: hsl(0, 0%, 100%);
+        background-color: hsl(0, 0%, 5%);
+    }
+}
 /* Dialog Modal (posts) - END */

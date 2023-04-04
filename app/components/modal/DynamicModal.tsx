@@ -1,4 +1,5 @@
 import PostComponent from "../posting/Post";
+import { IoIosCloseCircleOutline } from 'react-icons/io'
 import styles from '@/app/components/css/modal.module.css'
 
 export default function DynamicModal({ posts, userId, onCancel, changePost }: {
@@ -25,11 +26,8 @@ export default function DynamicModal({ posts, userId, onCancel, changePost }: {
                             <PostComponent post={post} userId={userId} />
                         </div>
                     ))}
-                </div>
-                <div className={styles['footer']}>
-                    <button className={[styles["button"], styles['cancel']].join(' ')} onClick={onCancel}>
-                        Cancel
-                    </button>
+        
+                        <IoIosCloseCircleOutline className={styles['close']} onClick={onCancel} />
                 </div>
             </div>
         </div>
