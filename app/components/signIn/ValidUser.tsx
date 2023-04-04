@@ -11,6 +11,7 @@ export default function ValidUser({ children, userId }: {
  }) {
 
     const { signedIn } = useAuth()
+    
     const Link = dynamic(() => 
         import('next/link').then((mod) => mod.default)
     )

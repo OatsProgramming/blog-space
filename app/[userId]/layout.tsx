@@ -5,13 +5,14 @@ import AddPost from "../components/posting/AddPost";
 import { BiUserCircle } from 'react-icons/bi'
 import { AiFillHome } from 'react-icons/ai'
 import { FaRegCompass } from 'react-icons/fa'
-import dynamic from "next/dynamic";
 
 // import { userId } from "@/toyData/userData";
 import { PostProvider } from "../components/posting/PostProvider";
 import { getAllPosts, getUserPosts } from "../lib/CRUD-ops/postCRUD";
 import { getSubscribedList } from "../lib/CRUD-ops/subscribeCRUD";
 import styles from '@/app/components/css/nav.module.css'
+import BgImg from "../components/BgImg";
+import RefreshPage from "../components/RefreshPage";
 
 export async function generateMetadata({ params: { userId } }: Params) {
   const res = await fetch(`${url}/api/users?userId=${userId}`)
@@ -40,13 +41,10 @@ export default async function Layout({
   const userPostsPromise = getUserPosts(userId)
   const [allPosts, subscribedTo, userPosts] = await Promise.all([allPostsPromise, subscribedToPromise, userPostsPromise])
 
-  const RefreshPage = dynamic(() =>
-    import('../components/RefreshPage')
-  )
-
   return (
     <>
       <ValidUser userId={userId}>
+        <BgImg />
         <nav className={styles['nav']}>
           <Link href={`/${userId}/explore`} className={styles['item']}>
             <FaRegCompass className="icon" />

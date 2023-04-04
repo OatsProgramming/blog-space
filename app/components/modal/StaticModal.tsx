@@ -27,7 +27,7 @@ export default function StaticModal({ posts, userId, changePost }: {
             <span onClick={handleOpen}>
                 <CiMenuKebab className={styles['menu']} />
             </span>
-            {isOpen && (<DynamicModal posts={posts} userId={userId} onCancel={handleClose} changePost={changePost} />)}
+            {isOpen && (<DynamicModal posts={posts} userId={userId} onClose={handleClose} changePost={changePost} />)}
         </div>
     );
 }
