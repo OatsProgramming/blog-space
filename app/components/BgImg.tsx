@@ -31,6 +31,8 @@ export default function BgImg() {
                 position: 'absolute',
                 zIndex: -99,
                 objectPosition: '0 300px',
+                objectFit: 'fill',
+                width: '100vw',
                 transform: 'scaleY(0.6)',
                 top: '-20rem'
             }}
