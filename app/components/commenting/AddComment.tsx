@@ -49,16 +49,17 @@ export default function AddComment({ postId, mutate, comments }: {
 
     return (
         <div className={styles['mainContainer']}>
-            <div className={styles['textContainer']}>
-                <textarea name="comment"
+            <div className='textFieldContainer'>
+                <textarea 
+                    className='textFieldItem'
                     rows={5} maxLength={400} ref={textRef}
                     autoCapitalize="sentences" autoComplete="on"
-                    placeholder={'Join the discussion...'}
+                    placeholder='Join the discussion...'
                     spellCheck 
                     onChange={(e) => setNewComment(e.target.value.trim())}
                     onFocus={() => setIsCreating(true)}
                     onBlur={() => setIsCreating(false)}
-                    className={styles['textItem']}/>
+                />
             </div>
             <div className={styles['flexContainer']}>
                 <LazyMotion features={loadFeatures} strict>

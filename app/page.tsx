@@ -1,5 +1,5 @@
 'use client'
-import AddComment from './components/commenting/AddComment'
+import AddPost from './components/posting/AddPost'
 import SignInPageAnimation from './components/signIn/SignInPageAnimation'
 
 export default function SignIn() {
@@ -7,6 +7,7 @@ export default function SignIn() {
   return (
     <div>
       <SignInPageAnimation />
+      {/* <AddPost /> */}
     </div>
   )
 }

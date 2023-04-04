@@ -127,5 +127,16 @@ i {
 }
 /* General - END */
 
+.textFieldContainer {
+  border: 2px solid;
+  border-radius: 25px;
+  padding: 1rem;
+}
 
-
+.textFieldItem {
+  resize: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  border: none;
+}
