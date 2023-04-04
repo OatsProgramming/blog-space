@@ -5,32 +5,33 @@
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
-    border: 1px solid green;
 }
 
 .commentBody {
     margin-bottom: 8px;
     width: 100%;
-    border: 1px solid red
 }
 
 .commentBody div {
-    /* border: 1px solid orange; */
     width: 100%;
+    white-space: pre-wrap;
 }
 
 .commentMeta {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     font-size: 0.8rem;
-    border: 1px solid blue;
     width: 50%;
     gap: 1rem;
 }
 
-.commentMeta i {
-    border: 1px solid;
+.clickableContainer {
+    padding-top: 1.5rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
 }
 
 .clickable {

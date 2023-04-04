@@ -11,9 +11,9 @@ import { comments } from "@/toyData/commentData"
 export default function CommentsSection({ postId }: {
     postId: string
 }) {
-    // const { data: comments, error, isLoading, mutate } = useSWR(`${url}/api/comments?postId=${postId}`, getComments)
-    const [isLoading, error] = [false, false]
-    const mutate = () => console.log('hello')
+    const { data: comments, error, isLoading, mutate } = useSWR(`${url}/api/comments?postId=${postId}`, getComments)
+    // const [isLoading, error] = [false, false]
+    // const mutate = () => console.log('hello')
     let commentsSection: JSX.Element;
     if (isLoading) {
         commentsSection = <LoadingCircle />

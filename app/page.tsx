@@ -7,8 +7,8 @@ export default function SignIn() {
 
   return (
     <div>
-      {/* <SignInPageAnimation /> */}
-      <CommentsSection postId='123'/>
+      <SignInPageAnimation />
+      {/* <CommentsSection postId='123'/> */}
     </div>
   )
 }

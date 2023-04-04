@@ -69,15 +69,8 @@ export default function EditComment({ children, comment, mutate }: {
                 </>
             )}
             {/* Change back to auth.currentUser?.uid later */}
-            {comment.userEmail == "jackoatmeals@gmail.com" && (
-                <div style={{
-                    paddingTop: '1.5rem',
-                    paddingRight: '1rem',
-                    // border: '1px solid',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    gap: '1.5rem'
-                }}>
+            {comment.userEmail == auth.currentUser?.email && (
+                <div className={styles['clickableContainer']}>
                     <div
                         className={styles['clickable']}
                         onClick={handleEdit}>

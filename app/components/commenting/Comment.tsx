@@ -6,7 +6,7 @@ export default function CommentComponent({ comment }: {
     return (
         <>
             <div className={styles['commentBody']}>
-                <div style={{ whiteSpace: 'pre-wrap' }}>
+                <div>
                     {comment.body}
                 </div>
             </div>

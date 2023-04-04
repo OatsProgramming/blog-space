@@ -20,19 +20,19 @@ export default function SignInPageAnimation() {
   }, [signedIn])
 
   return (
-    <>
+    <div className={styles['pg']}>
       {createAccount && (
-        <div className={styles['pg']}>
-          <WelcomeBack />     {/* .signInPage40 */}
-          <CreateAccount />   {/* .signInPage60 */}
-        </div>
+        <>
+          <WelcomeBack />     {/* .pg40 */}
+          <CreateAccount />   {/* .pg60 */}
+        </>
       )}
       {!createAccount && (
-        <div className={styles['pg']}>
-          <Login />           {/* .signInPage60 */}
-          <NewHere />         {/* .signInPage40 */}
-        </div>
+        <>
+          <Login />           {/* .pg60 */}
+          <NewHere />         {/* .pg40 */}
+        </>
       )}
-    </>
+    </div>
   )
 }
