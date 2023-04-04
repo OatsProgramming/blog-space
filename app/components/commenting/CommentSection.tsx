@@ -6,11 +6,14 @@ import quickSortByTime from "@/app/lib/quickSort"
 import { url } from "@/app/lib/tempURL"
 import useSWR from "swr"
 import LoadingCircle from "../loading/LoadingCircle"
+import { comments } from "@/toyData/commentData"
 
 export default function CommentsSection({ postId }: {
     postId: string
 }) {
-    const { data: comments, error, isLoading, mutate } = useSWR(`${url}/api/comments?postId=${postId}`, getComments) 
+    // const { data: comments, error, isLoading, mutate } = useSWR(`${url}/api/comments?postId=${postId}`, getComments)
+    const [isLoading, error] = [false, false]
+    const mutate = () => console.log('hello')
     let commentsSection: JSX.Element;
     if (isLoading) {
         commentsSection = <LoadingCircle />
