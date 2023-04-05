@@ -12,9 +12,8 @@ const containerVariant = {
             y: {
                 delay: 3,
                 type: 'tween',
-                duration: 2,
+                duration: 1.5,
                 ease: 'easeInOut',
-                staggerChildren: 0.2,
             },
             scaleX: {
                 duration: 1.5,
