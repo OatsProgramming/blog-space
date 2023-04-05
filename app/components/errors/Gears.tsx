@@ -1,13 +1,13 @@
 import { BsFillGearFill, BsGearWideConnected } from 'react-icons/bs'
 import { LazyMotion, m, useTime, useTransform } from 'framer-motion'
-import styles from './css/gears.module.css'
+import styles from '../css/gears.module.css'
 
 export default function Gears({ size, x, y }: {
     size?: number,
     x?: number,
     y?: number,
 }) {
-    const loadFeatures = () => import('../lib/animation/domAnimation').then((mod) => mod.default)
+    const loadFeatures = () => import('../../lib/animation/domAnimation').then((mod) => mod.default)
     const time = useTime()
     const clockWise = useTransform(
         time,

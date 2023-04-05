@@ -1,8 +1,9 @@
+import NotFoundAnim from "./components/errors/NotFoundAnim";
+
 export default function NotFound() {
+    const message = "The page you're looking for doesn't exist here..."
+
     return (
-        <>
-            <h2>User not Found</h2>
-            <p>Could not find requested resource</p>
-        </>
+        <NotFoundAnim message={message} />
     );
 }

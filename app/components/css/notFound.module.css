@@ -1,0 +1,25 @@
+.container {
+    border: 1px solid;
+    border-right: none;
+    border-left: none;
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.messageContainer {
+    position: relative;
+    top: 50vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    place-items: center;
+    gap: 2rem;
+}
+
+.messageContainer div {
+    font-size: x-large;
+    padding: 1rem;
+    text-align: center;
+}

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import Gears from './components/Gears';
+import Gears from './components/errors/Gears';
 import { auth } from './config/firebase-config';
 import { useAuth } from './lib/stateManagement/authState';
 import styles from './components/css/error.module.css'
@@ -21,8 +21,8 @@ export default function Error({
   const router = useRouter()
   const { logOut } = useAuth()
 
-  function handleClick(){
-    if (auth.currentUser){
+  function handleClick() {
+    if (auth.currentUser) {
       logOut()
     }
     router.push('/')
