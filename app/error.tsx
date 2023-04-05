@@ -2,8 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Gears from './components/Gears';
 import { auth } from './config/firebase-config';
 import { useAuth } from './lib/stateManagement/authState';
+import styles from './components/css/error.module.css'
 
 export default function Error({
   error,
@@ -27,42 +29,32 @@ export default function Error({
   }
 
   return (
-    <div style={{
-      // border: '1px solid red',
-      width: '100vw',
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-      <div style={{
-        // border: '1px solid blue',
-        padding: '2rem',
-        display: 'flex',
-        gap: '1rem',
-        flexDirection: 'column',
-      }}>
-        <h1>Something went wrong:</h1>
-        <div>{error.message}</div>
-        <div style={{
-          // border: '1px solid green',
-          display: 'flex',
-          gap: '1rem',
-        }}>
-          <button
-            onClick={
-              () => reset()
-            }
-          >
-            Try again?
-          </button>
-          <button
-            onClick={handleClick}
-          >
-            Return to sign in?
-          </button>
+    <>
+      <Gears />
+      <div className={styles['main']}>
+        <div className={styles['message']}>
+          <h1>
+            Something went wrong...
+          </h1>
+          <div style={{ opacity: 0.9 }}>
+            {error.message}
+          </div>
+          <div className={styles['btnContainer']}>
+            <button
+              onClick={
+                () => reset()
+              }
+            >
+              Try again?
+            </button>
+            <button
+              onClick={handleClick}
+            >
+              Return to sign in?
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -21,44 +21,6 @@ export default function SignIn() {
   return (
     <div>
       {/* <SignInPageAnimation /> */}
-      <Gears />
-      <div style={{
-        // border: '1px solid red',
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-        <div style={{
-          // border: '1px solid blue',
-          padding: '2rem',
-          display: 'flex',
-          gap: '1rem',
-          flexDirection: 'column',
-        }}>
-          <h1>Something went wrong:</h1>
-          <div>{error.message}</div>
-          <div style={{
-            // border: '1px solid green',
-            display: 'flex',
-            gap: '1rem',
-          }}>
-            <button
-              onClick={
-                () => reset()
-              }
-            >
-              Try again?
-            </button>
-            <button
-              onClick={handleClick}
-            >
-              Return to sign in?
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
