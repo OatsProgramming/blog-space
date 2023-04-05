@@ -36,7 +36,7 @@ export default function Error({
           <h1>
             Something went wrong...
           </h1>
-          <div style={{ opacity: 0.9 }}>
+          <div style={{ opacity: 0.7 }}>
             {error.message}
           </div>
           <div className={styles['btnContainer']}>

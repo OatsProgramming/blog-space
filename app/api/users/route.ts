@@ -21,7 +21,7 @@ export async function GET(request: Request){
     } catch (err) {
         const error = err as Error
         // On client error
-        if (error instanceof NotFound) return failedResponse(error, badRequest)
+        if (error instanceof NotFound) return failedResponse(error,  notFoundRequest)
         // On network error
         return failedResponse(error, fetchFail)
     }
