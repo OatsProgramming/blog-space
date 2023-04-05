@@ -2,14 +2,22 @@
 
 import PostComponent from "@/app/components/posting/Post";
 import { getPostContext } from "@/app/components/posting/PostProvider";
-import dynamic from "next/dynamic";
+import { useAuth } from "@/app/lib/stateManagement/authState";
+import { useRouter } from "next/navigation";
 
 export default function UserPage({ params: { userId } }: Params) {
   const { userPosts } = getPostContext()
+  const { logOut } = useAuth()
+  const router = useRouter()
 
-  const LogOut = dynamic(() => 
-    import("./LogOut")
-  )
+  function handleLogOut() {
+    logOut()
+    router.push('/')
+  }
+
+  // const LogOut = dynamic(() => 
+  //   import("./LogOut")
+  // )
 
   return (
     <div>
@@ -18,8 +26,9 @@ export default function UserPage({ params: { userId } }: Params) {
             <PostComponent key={post.id} userId={userId} post={post}/>
           ))}
         </div>
-      {/* Temporary */}
-      <LogOut />
+      <div>
+        <button onClick={handleLogOut}>Log out</button>
+      </div>
     </div>
   )
 }
