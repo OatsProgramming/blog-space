@@ -4,18 +4,16 @@ import EditComment from "@/app/components/commenting/EditComment"
 import { getComments } from "@/app/lib/CRUD-ops/commentCRUD"
 import quickSortByTime from "@/app/lib/quickSort"
 import { url } from "@/app/lib/tempURL"
+import dynamic from "next/dynamic"
 import useSWR from "swr"
-import LoadingCircle from "../loading/LoadingCircle"
-import { comments } from "@/toyData/commentData"
 
 export default function CommentsSection({ postId }: {
     postId: string
 }) {
     const { data: comments, error, isLoading, mutate } = useSWR(`${url}/api/comments?postId=${postId}`, getComments)
-    // const [isLoading, error] = [false, false]
-    // const mutate = () => console.log('hello')
     let commentsSection: JSX.Element;
     if (isLoading) {
+        const LoadingCircle = dynamic(() => import('../loading/LoadingCircle'))
         commentsSection = <LoadingCircle />
     }
     else if (error) {

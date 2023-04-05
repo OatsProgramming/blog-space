@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic"
-import EditPost from "./EditPost"
 import styles from '@/app/components/css/post.module.css'
 
 export default function PostComponent({ post, userId, inComment } : {
@@ -9,6 +8,10 @@ export default function PostComponent({ post, userId, inComment } : {
 }) {
     const FollowBtn = dynamic(() => 
         import("./FollowBtn")
+    )
+
+    const EditPost = dynamic(() =>
+        import("./EditPost")
     )
 
     return (
