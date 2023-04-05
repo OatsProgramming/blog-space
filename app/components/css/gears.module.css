@@ -1,0 +1,39 @@
+/* Heights are off by 2px when with sizing icons */
+.one {
+    width: 84.4px;
+    height: 168px;
+    position: absolute;
+    top: -10px;
+    right: 55px;
+    transform-origin: center;
+    max-width: 225px;
+    max-height: 225px;
+}
+
+.two {
+    width: 112px;
+    height: 224px;
+    position: absolute;
+    top: 50px;
+    right: 90px;
+    transform-origin: center;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.three {
+    width: 101px;
+    height: 201px;
+    position: absolute;
+    top: 10px;
+    right: 185px;
+    transform-origin: center;
+    max-width: 270px;
+    max-height: 270px;
+}
+
+.icon {
+    width: 100%;
+    height: 100%;
+}
+
