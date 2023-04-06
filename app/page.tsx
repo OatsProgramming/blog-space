@@ -5,6 +5,7 @@ import PostComponent from './components/posting/Post'
 import { userId } from '@/toyData/userData'
 import { useAuth } from './lib/stateManagement/authState'
 import { useRouter } from 'next/navigation'
+import Empty from './components/Empty'
 
 export default function SignIn() {
   const { logOut } = useAuth()
@@ -17,21 +18,29 @@ export default function SignIn() {
 
   return (
     <div>
-      {/* <SignInPageAnimation /> */}
-      <div>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '1rem',
-        }}>
-          {userPosts.map(post => (
-            <PostComponent key={post.id} userId={userId} post={post} />
-          ))}
-        </div>
+      <SignInPageAnimation />
+      {/* <div >
+        {userPosts.length > 0 ? (
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '1rem',
+            justifyContent: 'center',
+            padding: '2rem',
+            // border: '1px solid red',
+          }}>
+            {userPosts.map(post => (
+              <PostComponent key={post.id} userId={userId} post={post} />
+            ))}
+          </div>
+        ) : (
+          <Empty inUserPage />
+        )}
         <div>
-          <button onClick={handleLogOut}>Log out</button>
+          <button onClick={() => console.log()}>Log out</button>
         </div>
-      </div>
+      </div> */}
+
     </div>
   )
 }

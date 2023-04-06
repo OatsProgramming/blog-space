@@ -21,5 +21,8 @@
 
 .btnContainer {
     display: 'flex';
-    gap: 1rem;
+}
+
+.btnContainer button{
+    margin-right: 1rem;
 }

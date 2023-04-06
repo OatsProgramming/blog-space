@@ -29,8 +29,8 @@ export default async function Layout({
   params: {
     userId: string
   }
-}) {
-
+  }) {
+  
   const allPostsPromise = getAllPosts(userId)
   const subscribedToPromise = getSubscribedList(userId)
   const userPostsPromise = getUserPosts(userId)

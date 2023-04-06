@@ -25,5 +25,6 @@ export async function getComments(url: string): Promise<CommentObj[]> {
         console.log(err)
         throw new Error(err.message, { cause: err.cause })
     }
+
     return res.json()
 }

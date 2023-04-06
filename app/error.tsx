@@ -50,7 +50,7 @@ export default function Error({
             <button
               onClick={handleClick}
             >
-              Return to sign in?
+              Login Page
             </button>
           </div>
         </div>

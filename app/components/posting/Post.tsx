@@ -10,12 +10,8 @@ export default function PostComponent({ post, userId, inComment } : {
         import("./FollowBtn")
     )
 
-    const EditPost = dynamic(() =>
-        import("./EditPost")
-    )
-
     return (
-        <EditPost post={post} currentUser={post.userId === userId}>
+        <>
             {!inComment ? (
                 <div className={styles['postCard']}>
                     <h1>{`${post.title.slice(0, 50) } ...`}</h1>
@@ -38,6 +34,6 @@ export default function PostComponent({ post, userId, inComment } : {
                     </div>
                 </>
             )}
-        </EditPost>
+        </>
     )
 }

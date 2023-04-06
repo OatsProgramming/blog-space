@@ -1,11 +1,10 @@
 import { auth } from "@/app/config/firebase-config"
 import { mutateComment } from "@/app/lib/CRUD-ops/commentCRUD"
-import { comments } from "@/toyData/commentData"
 import { useState } from "react"
 import { KeyedMutator } from "swr/_internal"
 import styles from '@/app/components/css/comment.module.css'
 
-export default function EditComment({ children, comment, mutate }: {
+export default function EditComment({ children, comment, mutate, comments }: {
     children: React.ReactNode,
     comment: CommentObj,
     mutate: KeyedMutator<CommentObj[]>,

@@ -47,7 +47,7 @@ export async function GET(request: Request){
     } else if (postId) {
         // Don't use 'where' query for documentId; just 'doc' path
         const postRef = doc(collectionRef, postId)
-        let postData
+        let postData;
         try {
             // console.log(postRef.path)
             // console.log(postId)
