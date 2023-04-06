@@ -6,12 +6,15 @@ import PostComponent from "@/app/components/posting/Post"
 import slideShow from "@/app/lib/animation/slider"
 import StaticModal from "../modal/StaticModal"
 import styles from '@/app/components/css/slider.module.css'
+import Empty from "../Empty"
 
 export default function Slider({ posts, userId }: {
     posts: PostObj[],
     userId: string,
 }) {
-    const [postId, setPostId] = useState(posts[0].id!)
+    if (posts.length === 0) return <Empty />
+    
+    const [postId, setPostId] = useState(posts[0]?.id!)
     const [[page, direction], setPage] = useState([0, 0])
 
     const swipeThreshold = 10_000
