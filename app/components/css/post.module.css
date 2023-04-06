@@ -4,7 +4,10 @@
     border-radius: 1.5rem;
     box-shadow: 0px 2px 5px;
     transition: all 200ms ease;
-    width: 20rem;
+    width: 15rem;
+    height: 20rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .postCard h1 {
@@ -31,4 +34,23 @@
     padding: 2rem;
     margin-bottom: 1.5rem;
     cursor: grab;
+}
+
+@media (max-width: 640px) {
+    .postCard {
+        width: 10rem;
+        height: 15rem;
+    }
+
+    .postCard h1 {
+        font-size: 1.2rem;
+    }
+
+    .postCard p {
+        display: none;
+    }
+
+    .postCard i {
+        font-size: 0.8rem;
+    }
 }

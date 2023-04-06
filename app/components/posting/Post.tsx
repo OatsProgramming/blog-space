@@ -18,7 +18,7 @@ export default function PostComponent({ post, userId, inComment } : {
         <EditPost post={post} currentUser={post.userId === userId}>
             {!inComment ? (
                 <div className={styles['postCard']}>
-                    <h1>{post.title}</h1>
+                    <h1>{`${post.title.slice(0, 50) } ...`}</h1>
                     <p>{`${post.body.slice(0, 50) }...`}</p>
                     <i>{post.userEmail}</i><br />
                     <i>{new Date(post.dateMS).toLocaleDateString()}</i>
