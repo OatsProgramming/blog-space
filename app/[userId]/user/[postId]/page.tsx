@@ -14,7 +14,7 @@ export default function PostPage({ params: { userId, postId } }: Params) {
    
     const { data: post, isLoading, error, mutate } = useSWR(`${url}/api/posts?postId=${postId}`, fetcher)
     const LoadingSquare = dynamic(() =>
-        import('@/app/components/loading/LoadingSquare').then((mod) => mod.default)
+        import('@/app/components/loading/LoadingSquare')
     )
 
     if (isLoading) return <LoadingSquare />

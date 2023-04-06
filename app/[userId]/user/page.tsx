@@ -1,10 +1,10 @@
 'use client'
 
-import Empty from "@/app/components/Empty";
 import PostComponent from "@/app/components/posting/Post";
 import { getPostContext } from "@/app/components/posting/PostProvider";
 import quickSortByTime from "@/app/lib/quickSort";
 import { useAuth } from "@/app/lib/stateManagement/authState";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
@@ -17,6 +17,10 @@ export default function UserPage({ params: { userId } }: Params) {
 
   const { logOut } = useAuth()
   const router = useRouter()
+
+  const Empty = dynamic(() => 
+    import("@/app/components/Empty")
+  )
 
   function handleLogOut() {
     logOut()
