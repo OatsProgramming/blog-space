@@ -1,7 +1,7 @@
 import { auth } from "@/app/config/firebase-config"
 import { updateProfile, updateEmail, updatePassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
-import { useState, MouseEvent } from "react"
+import { useState, MouseEvent, useMemo } from "react"
 import styles from '@/app/components/css/signIn.module.css'
 import dynamic from "next/dynamic"
 import { url } from "@/app/lib/tempURL"
@@ -15,6 +15,7 @@ type NewInfo = {
 export default function EditProfile() {
     const router = useRouter()
     const [newInfo, setNewInfo] = useState({} as NewInfo)
+    const currentEmail = auth.currentUser?.email
 
     // Toast related items for errors
     const ToastContainer = dynamic(() =>
@@ -38,9 +39,30 @@ export default function EditProfile() {
     async function handleUpdate(e: MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
         if (!newInfo.userName && !newInfo.email && !newInfo.password) return
-        // Note to self: cant use Promise.all() here; will cause errors
-        
+        // Note to self: cant use Promise.all() with auth fns; will cause errors
+
         try {
+            await Promise.all([
+                // To update all user's posts with new data
+                fetch(`${url}/api/allPosts?userId=${auth.currentUser?.uid}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    // Ideally, want to do this with displayName ( change this later )
+                    body: JSON.stringify({ email: newInfo.email })
+                }),
+                // To update all user's comments to new email ( Change it to displayName when possible )
+                fetch(`${url}/api/comments?userEmail=${currentEmail}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    // Ideally, want to do this with displayName ( change this later )
+                    body: JSON.stringify({ email: newInfo.email })
+                })
+            ])
+
             if (newInfo.userName) {
                 await updateProfile(auth.currentUser!, {
                     displayName: newInfo.userName
@@ -53,15 +75,6 @@ export default function EditProfile() {
                 await updatePassword(auth.currentUser!, newInfo.password)
             }
             
-            // To update all user posts with new data
-            await fetch(`${url}/api/allPosts?userId=${auth.currentUser?.uid}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                // Ideally, want to do this with displayName ( change this later )
-                body: JSON.stringify({ email: newInfo.email })
-            })
             router.back()
         } catch (err) {
             console.log(err)

@@ -52,24 +52,57 @@ export async function POST(request: Request){
     return new Response(JSON.stringify(comment), creationSuccess)
 }
 
-export async function PATCH(request: Request){
-    const comment = await ValidateRequest(request, 'PATCH')
-    if (comment instanceof Error) return failedResponse(comment, badRequest)
+export async function PATCH(request: Request) {
+    const { searchParams } = new URL(request.url)
+    // Temp ( change to displayName later )
+    const targetEmail = searchParams.get('userEmail')
+    console.log(targetEmail)
 
-    try {
-        // Identify which comment it is in comment collection
-        const commentDoc = doc(db, 'comments', comment.id!)
-        // Only update body ( all other properties: off limits )
-        await updateDoc(commentDoc, {
-            body: comment.body,
-            dateMS: comment.dateMS
-        })
-    } catch (err) {
-        // On network error
-        const error = err as Error
-        return failedResponse(error, fetchFail)
+    // Mass update
+    if (targetEmail) {
+        const { email: newEmail} = await request.json() 
+        console.log(newEmail)
+        const q = query(collectionRef, where('userEmail', '==', targetEmail))
+        let documentData;
+        try {
+            documentData = await getDocs(q)
+            const batch = writeBatch(db)
+
+            documentData.forEach((doc) => {
+                const docRef = doc.ref;
+                batch.update(docRef, {
+                    // Change to displayName later
+                    userEmail: newEmail
+                })
+            });
+            await batch.commit()
+            return new Response(JSON.stringify("Comment(s) updated to new email"), responseSuccess)
+        } catch (err) {
+            console.log(err)
+            const error = err as Error
+            return failedResponse(error, fetchFail)
+        }
+    } else {
+        // Specific update
+        const comment = await ValidateRequest(request, 'PATCH')
+        if (comment instanceof Error) return failedResponse(comment, badRequest)
+    
+        try {
+            // Identify which comment it is in comment collection
+            const commentDoc = doc(db, 'comments', comment.id!)
+            // Only update body ( all other properties: off limits )
+            await updateDoc(commentDoc, {
+                body: comment.body,
+                dateMS: comment.dateMS
+            })
+        } catch (err) {
+            // On network error
+            const error = err as Error
+            return failedResponse(error, fetchFail)
+        }
+        return new Response(JSON.stringify(comment), responseSuccess)
     }
-    return new Response(JSON.stringify(comment), responseSuccess)
+
 }
 
 export async function DELETE(request: Request) {
