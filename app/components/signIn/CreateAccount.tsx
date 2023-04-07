@@ -79,12 +79,6 @@ export default function CreateAccount() {
         or use your email for registration:
         <form className={styles['form']}>
           <div className={styles['textField']}>
-            <input type="text" id="userName" name='userName' placeholder=" " required
-              onChange={(e) => useAuth.setState((state) => ({ createInfo: { ...state.createInfo, userName: e.target.value } }))}
-            />
-            <label htmlFor="userName">Username</label>
-          </div>
-          <div className={styles['textField']}>
             <input type="email" id="email" name='password' placeholder=" " required
               onChange={(e) => useAuth.setState((state) => ({ createInfo: { ...state.createInfo, email: e.target.value } }))}
             />

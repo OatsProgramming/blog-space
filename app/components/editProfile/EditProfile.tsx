@@ -15,6 +15,7 @@ type NewInfo = {
 export default function EditProfile() {
     const router = useRouter()
     const [newInfo, setNewInfo] = useState({} as NewInfo)
+    // Used for updating
     const currentEmail = auth.currentUser?.email
 
     // Toast related items for errors
@@ -54,6 +55,35 @@ export default function EditProfile() {
                 await updatePassword(auth.currentUser!, newInfo.password)
             }
 
+            await Promise.all([
+                // Update user posts
+                fetch(`${url}/api/allPosts?userId=${auth.currentUser?.uid}`, {
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email: auth.currentUser?.email })
+                }),
+                // Update user comments
+                fetch(`${url}/api/comments?userEmail=${currentEmail}`, {
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email: auth.currentUser?.email })
+                }),
+                // Update user data from db
+                fetch(`${url}/api/users`, {
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        userEmail: auth.currentUser?.email,
+                        id: auth.currentUser?.uid
+                    })
+                }),
+            ])
             router.back()
         } catch (err) {
             console.log(err)
@@ -80,7 +110,7 @@ export default function EditProfile() {
                     headers: {
                         "Content-Type" : "application/json"
                     },
-                    body: JSON.stringify(auth.currentUser?.uid)
+                    body: JSON.stringify({ id: auth.currentUser?.uid })
                 })
             ])
             // Then delete user ( might be the first one to execute; best for it to be last )
@@ -97,22 +127,16 @@ export default function EditProfile() {
         <div>
             <form className={styles['form']}>
                 <div className={styles['textField']}>
-                    <input type="text" id="userName" name='userName' placeholder=" "
-                        onChange={(e) => setNewInfo({ ...newInfo, userName: e.target.value.trim() })}
-                    />
-                    <label htmlFor="userName">Username</label>
-                </div>
-                <div className={styles['textField']}>
                     <input type="email" id="email" name='password' placeholder=" "
                         onChange={(e) => setNewInfo({ ...newInfo, email: e.target.value.trim() })}
                     />
-                    <label htmlFor="email">New Email</label>
+                    <label htmlFor="email">New Email?</label>
                 </div>
                 <div className={styles['textField']}>
                     <input type="password" id="password" name='password' placeholder=" "
                         onChange={(e) => setNewInfo({ ...newInfo, password: e.target.value.trim() })}
                     />
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">New Password?</label>
                 </div>
             </form>
             <div>

@@ -20,6 +20,7 @@ export async function GET(request: Request){
         
     } catch (err) {
         const error = err as Error
+        console.log(error.message)
         // Client error
         if (error instanceof NotFound) return failedResponse(error, badRequest)
         // Server error
@@ -46,6 +47,7 @@ export async function PATCH(request: Request) {
         }
     } catch (err) {
         const error = err as Error
+        console.log(error.message)
         return failedResponse(error, fetchFail)
     }
     return new Response(JSON.stringify(user), responseSuccess)

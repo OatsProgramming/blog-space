@@ -28,6 +28,7 @@ export async function GET(request: Request){
             // On client error
             if (err instanceof NotFound) return new Response(JSON.stringify([]), responseSuccess)
             const error = err as Error
+            console.log(error.message)
             // On network error
             return failedResponse(error, fetchFail)
         }
@@ -101,6 +102,7 @@ export async function PATCH(request: Request){
     } catch (err) {
         // On network error
         const error = err as Error
+        console.log(error.message)
         return failedResponse(error, fetchFail)
     }
     return new Response(JSON.stringify(post), responseSuccess)
@@ -119,6 +121,7 @@ export async function DELETE(request: Request) {
     } catch (err) {
         // On network error
         const error = err as Error
+        console.log(error.message)
         return failedResponse(error, fetchFail)
     }
     return new Response(JSON.stringify(post), responseSuccess)

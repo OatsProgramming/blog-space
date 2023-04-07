@@ -22,6 +22,7 @@ export async function GET(request: Request){
         documentData = await getDocs(q)
     } catch (err) {
         const error = err as Error
+        console.log(error.message)
         // On server error
         return failedResponse(error, fetchFail)
     }
@@ -47,6 +48,7 @@ export async function POST(request: Request){
     } catch (err) {
         // On network error
         const error = err as Error
+        console.log(error.message)
         return failedResponse(error, fetchFail)
     }
     return new Response(JSON.stringify(comment), creationSuccess)
@@ -54,14 +56,11 @@ export async function POST(request: Request){
 
 export async function PATCH(request: Request) {
     const { searchParams } = new URL(request.url)
-    // Temp ( change to displayName later )
     const targetEmail = searchParams.get('userEmail')
-    console.log(targetEmail)
 
     // Mass update
     if (targetEmail) {
         const { email: newEmail} = await request.json() 
-        console.log(newEmail)
         const q = query(collectionRef, where('userEmail', '==', targetEmail))
         let documentData;
         try {
@@ -78,8 +77,8 @@ export async function PATCH(request: Request) {
             await batch.commit()
             return new Response(JSON.stringify("Comment(s) updated to new email"), responseSuccess)
         } catch (err) {
-            console.log(err)
             const error = err as Error
+            console.log(error.message)
             return failedResponse(error, fetchFail)
         }
     } else {
@@ -98,6 +97,7 @@ export async function PATCH(request: Request) {
         } catch (err) {
             // On network error
             const error = err as Error
+            console.log(error.message)
             return failedResponse(error, fetchFail)
         }
         return new Response(JSON.stringify(comment), responseSuccess)
@@ -130,6 +130,7 @@ export async function DELETE(request: Request) {
             console.log(err)
             // On network error
             const error = err as Error
+            console.log(error.message)
             return failedResponse(error, fetchFail)
         }
         return new Response(JSON.stringify(comment), responseSuccess)

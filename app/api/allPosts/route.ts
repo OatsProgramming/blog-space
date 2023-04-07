@@ -93,12 +93,11 @@ export async function DELETE(request: Request) {
             batch.delete(docRef)
         });
 
-        const responses = await Promise.all(promises)
+        await Promise.all(promises)
         await batch.commit()
-        responses.forEach(async (res) => console.log(await res.json()))
     } catch (err) {
-        console.log(err)
         const error = err as Error
+        console.log(error.message)
         return failedResponse(error, fetchFail)
     }
     return new Response(JSON.stringify(`All posts related to ${userId} has been deleted`), responseSuccess)

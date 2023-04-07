@@ -21,6 +21,7 @@ export async function GET(request: Request){
     } catch (err) {
         const error = err as Error
         // On client error
+        console.log(error.message)
         if (error instanceof NotFound) return failedResponse(error,  notFoundRequest)
         // On network error
         return failedResponse(error, fetchFail)
@@ -53,14 +54,13 @@ export async function POST(request: Request){
     } catch (err: unknown) {
         // On network error
         const error = err as Error
+        console.log(error.message)
         return failedResponse(error, fetchFail)
     }
     return new Response(JSON.stringify(user), creationSuccess)
 }
 
-// On PATCH, determine what to update: subscription list or userEmail
-// if subscription list, request must have userId and otherUserId (check api/subscriptions)
-// if userEmail, request must userId and userEmail
+// Just the userEmail being updated
 export async function PATCH(request: Request){
     const user = await ValidateRequest(request, 'PATCH')
     // On bad request
@@ -74,6 +74,7 @@ export async function PATCH(request: Request){
     } catch (err) {
         // On network error
         const error = err as Error
+        console.log(error.message)
         return failedResponse(error, fetchFail)
     }
     return new Response(JSON.stringify(user), responseSuccess) 
@@ -90,6 +91,7 @@ export async function DELETE(request: Request){
     } catch (err) {
         // On network error
         const error = err as Error
+        console.log(error.message)
         return failedResponse(error, fetchFail)
     }
     return new Response(JSON.stringify(user), responseSuccess)
@@ -122,6 +124,7 @@ async function ValidateRequest(req: Request, HTTP: HTTP){
                 break;
             }
             case 'DELETE': {
+                console.log('delete')
                 if (!user.id) {
                     throw new Error(`\nInvalid 'user' request body:
                         id?             ${user.id ? 'OK' : 'MISSING'}
@@ -134,6 +137,7 @@ async function ValidateRequest(req: Request, HTTP: HTTP){
             }
         }
     } catch (err: unknown) {
+        console.log(err)
         // Will return if any missing properties
         return err as Error
     }
