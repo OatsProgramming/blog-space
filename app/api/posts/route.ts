@@ -106,7 +106,7 @@ export async function PATCH(request: Request){
     return new Response(JSON.stringify(post), responseSuccess)
 }
 
-export async function DELETE(request: Request){
+export async function DELETE(request: Request) {
     const post = await ValidateRequest(request, 'DELETE')
     if (post instanceof Error) return failedResponse(post, badRequest)
     try {
