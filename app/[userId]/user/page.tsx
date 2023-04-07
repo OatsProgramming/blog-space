@@ -27,17 +27,18 @@ export default function UserPage({ params: { userId } }: Params) {
     router.push('/')
   }
 
+  // Temp
+  function handleEdit() {
+    router.push(`/${userId}/user/edit`)
+  }
+
   useEffect(() => {
     router.refresh()
   }, [])
 
-  // const LogOut = dynamic(() => 
-  //   import("./LogOut")
-  // )
-
   return (
     <div >
-      {userPosts.length > 0 ? (
+      {sortedPosts.length > 0 ? (
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -57,6 +58,7 @@ export default function UserPage({ params: { userId } }: Params) {
       )}
       <div>
         <button onClick={handleLogOut}>Log out</button>
+        <button onClick={handleEdit}>Edit Profile</button>
       </div>
     </div>
   )

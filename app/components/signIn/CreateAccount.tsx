@@ -98,7 +98,6 @@ export default function CreateAccount() {
           </div>
           <button onClick={registerHandler}>SIGN UP</button>
         </form>
-
       </m.div>
       <ToastContainer
         position="bottom-right"
