@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import { useState, MouseEvent } from "react"
 import styles from '@/app/components/css/signIn.module.css'
 import dynamic from "next/dynamic"
+import { url } from "@/app/lib/tempURL"
 
 type NewInfo = {
     userName: string,
@@ -49,7 +50,13 @@ export default function EditProfile() {
             if (newInfo.password) {
                 await updatePassword(auth.currentUser!, newInfo.password)
             }
-
+            await fetch(`${url}/api/allPosts?userId=${auth.currentUser?.uid}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({email: newInfo.email})
+            })
             router.back()
         } catch (err) {
             const error = err as Error
