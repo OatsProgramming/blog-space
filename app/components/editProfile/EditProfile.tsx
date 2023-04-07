@@ -39,30 +39,9 @@ export default function EditProfile() {
     async function handleUpdate(e: MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
         if (!newInfo.userName && !newInfo.email && !newInfo.password) return
-        // Note to self: cant use Promise.all() with auth fns; will cause errors
-
+        // Note to self: cant use Promise.all() here; will cause errors
+        
         try {
-            await Promise.all([
-                // To update all user's posts with new data
-                fetch(`${url}/api/allPosts?userId=${auth.currentUser?.uid}`, {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    // Ideally, want to do this with displayName ( change this later )
-                    body: JSON.stringify({ email: newInfo.email })
-                }),
-                // To update all user's comments to new email ( Change it to displayName when possible )
-                fetch(`${url}/api/comments?userEmail=${currentEmail}`, {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    // Ideally, want to do this with displayName ( change this later )
-                    body: JSON.stringify({ email: newInfo.email })
-                })
-            ])
-
             if (newInfo.userName) {
                 await updateProfile(auth.currentUser!, {
                     displayName: newInfo.userName
@@ -74,7 +53,7 @@ export default function EditProfile() {
             if (newInfo.password) {
                 await updatePassword(auth.currentUser!, newInfo.password)
             }
-            
+
             router.back()
         } catch (err) {
             console.log(err)
@@ -94,8 +73,15 @@ export default function EditProfile() {
                 // Delete user comments
                 fetch(`${url}/api/comments?userEmail=${auth.currentUser?.email}`, {
                     method: "DELETE",
+                }),
+                // Delete user data from db
+                fetch(`${url}/api/users`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type" : "application/json"
+                    },
+                    body: JSON.stringify(auth.currentUser?.uid)
                 })
-
             ])
             // Then delete user ( might be the first one to execute; best for it to be last )
             await auth.currentUser?.delete()
