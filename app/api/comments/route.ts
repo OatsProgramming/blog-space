@@ -1,5 +1,5 @@
 import { db } from "@/app/config/firebase-config";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "@firebase/firestore/lite";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where, writeBatch } from "@firebase/firestore/lite";
 import { badRequest, creationSuccess, failedResponse, fetchFail, responseSuccess } from "../requestStatus";
 
 // export const config = {
@@ -72,22 +72,74 @@ export async function PATCH(request: Request){
     return new Response(JSON.stringify(comment), responseSuccess)
 }
 
-export async function DELETE(request: Request){
-    const comment = await ValidateRequest(request, 'DELETE')
-    if (comment instanceof Error) return failedResponse(comment, badRequest)
+export async function DELETE(request: Request) {
+    const { searchParams } = new URL(request.url)
+    // Ideally, want to get displayName ( aka userName )
+    // Change later
+    const userEmail = searchParams.get('userEmail')
+    const postId = searchParams.get('postId')
 
+    // Mass deletion ( cascade )
+    if (userEmail) return deleteViaEmail(userEmail)
+    else if (postId) return deleteViaPostId(postId)
+    
+    // Specific deletion
+    else {
+        const comment = await ValidateRequest(request, 'DELETE')
+        if (comment instanceof Error) return failedResponse(comment, badRequest)
+    
+        try {
+            // Identify which comment 
+            const commentDoc = doc(db, 'comments', comment.id!)
+            // Delete desired comment 
+            await deleteDoc(commentDoc)
+        } catch (err) {
+            console.log(err)
+            // On network error
+            const error = err as Error
+            return failedResponse(error, fetchFail)
+        }
+        return new Response(JSON.stringify(comment), responseSuccess)
+    }
+}
+
+async function deleteViaEmail(userEmail: string) {
+    const q = query(collectionRef, where('userEmail', '==', userEmail))
+    let documentData;
     try {
-        // Identify which comment 
-        const commentDoc = doc(db, 'comments', comment.id!)
-        // Delete desired comment 
-        await deleteDoc(commentDoc)
+        documentData = await getDocs(q)
+        const batch = writeBatch(db)
+
+        documentData.forEach((doc) => {
+            const docRef = doc.ref;
+            batch.delete(docRef)
+        });
+        await batch.commit()
+        return new Response(JSON.stringify(`All comments related to ${userEmail} has been deleted`), responseSuccess)
     } catch (err) {
         console.log(err)
-        // On network error
         const error = err as Error
         return failedResponse(error, fetchFail)
     }
-    return new Response(JSON.stringify(comment), responseSuccess)
+}
+
+async function deleteViaPostId(postId: string) {
+    const q = query(collectionRef, where('postId', '==', postId))
+    let documentData;
+    try {
+        documentData = await getDocs(q)
+        const batch = writeBatch(db)
+
+        documentData.forEach((doc) => {
+            const docRef = doc.ref;
+            batch.delete(docRef)
+        });
+        await batch.commit()
+        return new Response(JSON.stringify(`All comments related to ${postId} has been deleted`), responseSuccess)
+    } catch (err) {
+        const error = err as Error
+        return failedResponse(error, fetchFail)
+    }
 }
 
 async function ValidateRequest(request: Request, HTTP: HTTP){
