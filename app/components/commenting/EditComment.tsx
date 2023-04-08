@@ -17,7 +17,6 @@ export default function EditComment({ children, comment, mutate, comments }: {
     async function handleEdit() {
         if (isEditing && newContent !== '') {
             await mutateComment(
-                comment.postId,
                 'PATCH',
                 {
                     body: newContent,
@@ -37,7 +36,6 @@ export default function EditComment({ children, comment, mutate, comments }: {
 
     async function handleDelete() {
         await mutateComment(
-            comment.postId,
             'DELETE',
             {
                 id: comment.id

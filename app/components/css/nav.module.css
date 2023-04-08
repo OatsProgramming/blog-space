@@ -20,5 +20,11 @@
 
 .item:hover {
     transform: scale(0.95);
+    cursor: pointer;
 }
 
+@media (prefers-color-scheme: light){
+    .item {
+        background: transparent;
+    }
+}

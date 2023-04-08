@@ -1,0 +1,23 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 2rem;
+    gap: 1.5rem;
+    transition: all 200ms ease;
+}
+
+@media (min-width: 700px) {
+    .container {
+        font-size: larger;
+        padding-left: 2.5rem;
+    }
+}
+@media (min-width: 1024px) {
+    .container {
+        font-size: x-large;
+        padding-left: 3rem;
+    }
+}

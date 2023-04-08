@@ -1,7 +1,7 @@
 import { auth } from "@/app/config/firebase-config"
 import { updateProfile, updateEmail, updatePassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
-import { useState, MouseEvent, useMemo } from "react"
+import { useState, MouseEvent } from "react"
 import styles from '@/app/components/css/signIn.module.css'
 import dynamic from "next/dynamic"
 import { url } from "@/app/lib/tempURL"
@@ -124,7 +124,10 @@ export default function EditProfile() {
     }
 
     return (
-        <div>
+        <div style={{
+            position: 'relative',
+            top: '15rem'
+        }}>
             <form className={styles['form']}>
                 <div className={styles['textField']}>
                     <input type="email" id="email" name='password' placeholder=" "
@@ -139,10 +142,16 @@ export default function EditProfile() {
                     <label htmlFor="password">New Password?</label>
                 </div>
             </form>
-            <div>
+            <div style={{
+                width: '100%',
+                display: 'flex',
+                padding: '0 1rem',
+                gap: '1rem',
+                justifyContent: 'space-evenly'
+            }}>
+                <button onClick={handleDelete}>Delete Account</button>
                 <button onClick={handleUpdate}>Update</button>
                 <button onClick={router.back}>Cancel</button>
-                <button onClick={handleDelete}>Delete Account</button>
             </div>
             <ToastContainer
                 position="bottom-right"

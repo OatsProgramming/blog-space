@@ -1,9 +1,9 @@
 import { url } from "../tempURL"
 
 // Singular
-export async function mutateComment(postId: string, method: HTTP, content: {}) {
-    const res = await fetch(`${url}/api/comments?postId=${postId}`, {
-        method: method,
+export async function mutateComment(method: HTTP, content: {}) {
+    const res = await fetch(`${url}/api/comments`, {
+        method,
         headers: {
             "Content-Type": "application/json"
         },

@@ -13,20 +13,21 @@
 
 .dialog {
     width: clamp(450px, 80%, 1000px);
-    color: black;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    box-shadow: 0 0 0 100vh hsla(0, 0%, 0%, 0.87);
+    border-radius: 20px;
     margin-bottom: 5rem;
+    padding: 1rem;
 }
 
 .body {
-    padding: 0.75rem;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
     gap: 0.5rem;
+    border-radius: 20px;
+    box-shadow: 0 0 0 100vh hsla(0, 0%, 0%, 0.87);
+    padding: 2rem 0;
+    background-color: hsl(0, 100%, 99%);
 }
 
 .button {
@@ -83,6 +84,13 @@
     .body {
         color: hsl(0, 0%, 100%);
         background-color: hsl(0, 0%, 5%);
+        padding: 2rem 0.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .close {
+        right: 1.5rem
     }
 }
 /* Dialog Modal (posts) - END */

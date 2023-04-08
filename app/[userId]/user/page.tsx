@@ -45,7 +45,6 @@ export default function UserPage({ params: { userId } }: Params) {
           gap: '1rem',
           justifyContent: 'center',
           padding: '2rem',
-          // border: '1px solid red',
         }}>
           {sortedPosts.map(post => (
             <Link href={`/${userId}/user/${post.id}`}>
@@ -56,7 +55,16 @@ export default function UserPage({ params: { userId } }: Params) {
       ) : (
           <Empty inUserPage />
       )}
-      <div>
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '1rem',
+        justifyContent: 'center',
+        position: 'fixed',
+        // border: '1px solid',
+        width: '100%',
+        bottom: '10vh'
+      }}>
         <button onClick={handleLogOut}>Log out</button>
         <button onClick={handleEdit}>Edit Profile</button>
       </div>

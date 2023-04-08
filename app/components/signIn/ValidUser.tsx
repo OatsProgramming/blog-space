@@ -9,14 +9,10 @@ export default function ValidUser({ children, userId }: {
     children: React.ReactNode, 
     userId: string
  }) {
-
     const { signedIn } = useAuth()
     
-    const Link = dynamic(() => 
-        import('next/link').then((mod) => mod.default)
-    )
-    const RefreshPage = dynamic(() => 
-        import('../RefreshPage').then((mod) => mod.default)
+    const NotSignedIn = dynamic(() => 
+        import('./NotSignedIn')
     )
 
     useEffect(() => {
@@ -26,20 +22,7 @@ export default function ValidUser({ children, userId }: {
         })
     }, [])
 
-    if (!signedIn) return (
-        <>
-            <div>
-                <h1>Trying to sign in?</h1>
-                <p>
-                    Please log in <Link href={'/'}><i>here</i></Link>
-                </p>
-                <p>
-                    Or try refreshing the page
-                </p>
-                <RefreshPage />
-            </div>
-        </>
-    )
+    if (!signedIn) return <NotSignedIn />
 
     return (
         <>

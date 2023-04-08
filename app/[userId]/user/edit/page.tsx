@@ -68,7 +68,10 @@ export default function Edit() {
             {isAuth ? (
                 <EditProfile />
             ) : (
-                <div>
+                <div style={{
+                        position: 'relative',
+                        top: '25vh',
+                }}>
                     <form className={styles['form']}>
                         <div className={styles['textField']}>
                             <input type="email" id="email" name='password' placeholder=" "
@@ -84,10 +87,12 @@ export default function Edit() {
                         </div>
                     </form>
                     <div style={{
-                        display: 'flex'
+                            display: 'flex',
+                            justifyContent: 'center',
+                            gap: '1rem'
                     }}>
-                        <button onClick={handleAuth}>Verify</button>
                         <button onClick={router.back}>Cancel</button>
+                        <button onClick={handleAuth}>Verify</button>
                     </div>
                     <ToastContainer
                         position="bottom-right"
