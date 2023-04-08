@@ -1,12 +1,8 @@
 'use client'
-import dynamic from "next/dynamic"
 import { useState } from "react"
 
 // Testing for chunkLoad
-// import AddPostModal from "./AddPostModal"
-const AddPostModal = dynamic(() => 
-    import('./AddPostModal')
-)
+import AddPostModal from "./AddPostModal"
 
 export default function AddPost() {
     const [isCreating, setIsCreating] = useState(false)

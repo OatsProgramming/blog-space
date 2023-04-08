@@ -5,16 +5,12 @@ import { useAuth } from "../../lib/stateManagement/authState"
 import 'react-toastify/dist/ReactToastify.css';
 import { createUser } from "@/app/lib/CRUD-ops/userCRUD";
 import { auth } from "@/app/config/firebase-config";
-// import dynamic from "next/dynamic";
 import styles from '@/app/components/css/signIn.module.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { lazy } from "react";
 import dynamic from "next/dynamic";
 
-// import { ToastContainer } from "react-toastify";
-const ToastContainer = dynamic(() =>
-  import('../../lib/toast/ToastContainer')
-) 
+import { ToastContainer } from "react-toastify";
 
 export default function CreateAccount() {
   const { registerAccount, signInPop, createInfo } = useAuth()

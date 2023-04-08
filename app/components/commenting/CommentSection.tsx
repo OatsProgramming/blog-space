@@ -1,23 +1,18 @@
 import AddComment from "@/app/components/commenting/AddComment"
 import { getComments } from "@/app/lib/CRUD-ops/commentCRUD"
 import quickSortByTime from "@/app/lib/quickSort"
-import dynamic from "next/dynamic"
-// import { lazy } from "react"
 import useSWR from "swr"
 
 // Testing for chunkLoad
-// import CommentComponent from "@/app/components/commenting/Comment"
-// import EditComment from "@/app/components/commenting/EditComment"
-// import LoadingCircle from "../loading/LoadingCircle"
-const LoadingCircle = dynamic(() => import('../loading/LoadingCircle'))
-const EditComment = dynamic(() => import("@/app/components/commenting/EditComment"))
-const CommentComponent = dynamic(() => import("@/app/components/commenting/Comment"))
+import CommentComponent from "@/app/components/commenting/Comment"
+import EditComment from "@/app/components/commenting/EditComment"
+import LoadingCircle from "../loading/LoadingCircle"
 
 export default function CommentsSection({ postId }: {
     postId: string
 }) {
     const { data: comments, error, isLoading, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/comments?postId=${postId}`, getComments)
-
+    
     let commentsSection: JSX.Element;
     if (isLoading) {
         commentsSection = <LoadingCircle />
