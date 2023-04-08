@@ -6,10 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import dynamic from 'next/dynamic';
 import styles from '@/app/components/css/signIn.module.css'
 import 'react-toastify/dist/ReactToastify.css'
+import ToastContainer from '../../lib/toast/ToastContainer'
 
-const ToastContainer = dynamic(() =>
-  import('../../lib/toast/ToastContainer')
-)
 export default function Login() {
 
   // Lazy load animation

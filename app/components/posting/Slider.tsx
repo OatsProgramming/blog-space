@@ -1,6 +1,6 @@
 import { LazyMotion, AnimatePresence, m } from "framer-motion"
 import { wrap } from "popmotion"
-import { lazy, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import CommentsSection from "../commenting/CommentSection"
 import PostComponent from "@/app/components/posting/Post"
 import slideShow from "@/app/lib/animation/slider"

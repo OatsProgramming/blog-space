@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from 'app/components/css/modal.module.css'
-import dynamic from "next/dynamic";
 
 // Testing for chunkLoad
 import DynamicModal from "./DynamicModal";

@@ -4,16 +4,10 @@ import PostComponent from "@/app/components/posting/Post";
 import { getPostContext } from "@/app/components/posting/PostProvider";
 import quickSortByTime from "@/app/lib/quickSort";
 import { useAuth } from "@/app/lib/stateManagement/authState";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
-
-// Testing for chunkLoad
-// import Empty from "@/app/components/Empty";
-const Empty = dynamic(() => 
-  import("@/app/components/Empty")
-)
+import Empty from "@/app/components/Empty";
 
 export default function UserPage({ params: { userId } }: Params) {
   const { userPosts } = getPostContext()

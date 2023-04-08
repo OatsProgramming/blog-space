@@ -7,8 +7,6 @@ import { createUser } from "@/app/lib/CRUD-ops/userCRUD";
 import { auth } from "@/app/config/firebase-config";
 import styles from '@/app/components/css/signIn.module.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { lazy } from "react";
-import dynamic from "next/dynamic";
 
 import { ToastContainer } from "react-toastify";
 

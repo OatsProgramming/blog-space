@@ -3,18 +3,13 @@ import { updateProfile, updateEmail, updatePassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { useState, MouseEvent } from "react"
 import styles from '@/app/components/css/signIn.module.css'
-import dynamic from "next/dynamic"
+// import dynamic from "next/dynamic"
 
 type NewInfo = {
     userName: string,
     email: string,
     password: string,
 }
-
-// Toast related items for errors
-const ToastContainer = dynamic(() =>
-    import('@/app/lib/toast/ToastContainer')
-) 
 
 export default function EditProfile() {
     const router = useRouter()

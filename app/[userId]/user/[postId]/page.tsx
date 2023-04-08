@@ -5,13 +5,7 @@ import CommentsSection from "@/app/components/commenting/CommentSection"
 import useSWR from 'swr'
 import { notFound } from "next/navigation"
 import EditPost from "@/app/components/posting/EditPost"
-import dynamic from "next/dynamic"
-
-// Testing for chunkLoad
-// import LoadingSquare from "@/app/components/loading/LoadingSquare"
-const LoadingSquare = dynamic(() =>
-    import('@/app/components/loading/LoadingSquare')
-)
+import LoadingSquare from "@/app/components/loading/LoadingSquare"
 
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
