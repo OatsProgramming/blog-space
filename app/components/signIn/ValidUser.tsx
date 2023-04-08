@@ -2,12 +2,11 @@
 import { auth } from '@/app/config/firebase-config'
 import { useAuth } from '@/app/lib/stateManagement/authState'
 import { onAuthStateChanged } from 'firebase/auth'
-import dynamic from 'next/dynamic'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, lazy } from 'react'
 
 // Testing for chunkLoad
 // import NotSignedIn from './NotSignedIn'
-const NotSignedIn = dynamic(() => 
+const NotSignedIn = lazy(() => 
     import('./NotSignedIn')
 )
 
@@ -26,7 +25,7 @@ export default function ValidUser({ children, userId }: {
     }, [])
 
     if (!signedIn) return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<></>}>
             <NotSignedIn />
         </Suspense>
     )

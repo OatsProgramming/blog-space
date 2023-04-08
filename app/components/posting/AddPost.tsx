@@ -1,10 +1,9 @@
 'use client'
-import dynamic from "next/dynamic"
-import { useState } from "react"
+import { lazy, Suspense, useState } from "react"
 
 // Testing for chunkLoad
 // import AddPostModal from "./AddPostModal"
-const AddPostModal = dynamic(() => 
+const AddPostModal = lazy(() => 
     import('./AddPostModal')
 )
 
@@ -14,7 +13,9 @@ export default function AddPost() {
     return (
         <div>
             {isCreating && (
-                <AddPostModal isCreating={isCreating} setIsCreating={setIsCreating} />
+                <Suspense fallback={<></>}>
+                    <AddPostModal isCreating={isCreating} setIsCreating={setIsCreating} />
+                </Suspense>
             )}
             <button onClick={() => setIsCreating(true)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="icon" viewBox="0 0 16 16">

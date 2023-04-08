@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import styles from 'app/components/css/modal.module.css'
-import dynamic from "next/dynamic";
 
 // Testing for chunkLoad
 // import DynamicModal from "./DynamicModal";
-const DynamicModal = dynamic(() =>
+const DynamicModal = lazy(() =>
     import('./DynamicModal')
 )
 
@@ -31,7 +30,11 @@ export default function StaticModal({ posts, userId, changePost }: {
                     <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                 </svg>
             </span>
-            {isOpen && (<DynamicModal posts={posts} userId={userId} onClose={handleClose} changePost={changePost} />)}
+            {isOpen && (
+                <Suspense fallback={<></>}>
+                    <DynamicModal posts={posts} userId={userId} onClose={handleClose} changePost={changePost} />
+                </Suspense>
+            )}
         </div>
     );
 }
