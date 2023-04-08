@@ -8,6 +8,7 @@ import { auth } from "@/app/config/firebase-config";
 import { url } from "@/app/lib/tempURL";
 import dynamic from "next/dynamic";
 import styles from '@/app/components/css/signIn.module.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function CreateAccount() {
   const { registerAccount, signInPop, createInfo } = useAuth()

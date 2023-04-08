@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react'
 import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 import dynamic from 'next/dynamic';
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Edit() {
     const router = useRouter()
