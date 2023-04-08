@@ -6,15 +6,18 @@ import PostComponent from "@/app/components/posting/Post"
 import slideShow from "@/app/lib/animation/slider"
 import StaticModal from "../modal/StaticModal"
 import styles from '@/app/components/css/slider.module.css'
-import dynamic from "next/dynamic"
+// import dynamic from "next/dynamic"
+
+// Testing for chunkLoad
+import Empty from "../Empty"
 
 export default function Slider({ posts, userId }: {
     posts: PostObj[],
     userId: string,
 }) {
-    const Empty = dynamic(() => 
-        import('../Empty')
-    )
+    // const Empty = dynamic(() => 
+    //     import('../Empty')
+    // )
 
     if (posts.length === 0) return <Empty />
     

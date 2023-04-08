@@ -3,7 +3,10 @@ import { updateProfile, updateEmail, updatePassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { useState, MouseEvent } from "react"
 import styles from '@/app/components/css/signIn.module.css'
-import dynamic from "next/dynamic"
+// import dynamic from "next/dynamic"
+
+// Testing for chunkLoad
+import { ToastContainer } from "react-toastify"
 
 type NewInfo = {
     userName: string,
@@ -18,9 +21,9 @@ export default function EditProfile() {
     const currentEmail = auth.currentUser?.email
 
     // Toast related items for errors
-    const ToastContainer = dynamic(() =>
-        import('@/app/lib/toast/ToastContainer')
-    ) as React.ForwardRefExoticComponent<any>
+    // const ToastContainer = dynamic(() =>
+    //     import('@/app/lib/toast/ToastContainer')
+    // ) as React.ForwardRefExoticComponent<any>
 
     const notify = async (message: string) => {
         const toast = await import('@/app/lib/toast/toastNotification').then((mod) => mod.default)

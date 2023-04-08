@@ -2,8 +2,11 @@
 import { auth } from '@/app/config/firebase-config'
 import { useAuth } from '@/app/lib/stateManagement/authState'
 import { onAuthStateChanged } from 'firebase/auth'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
+
+// Testing for chunkLoad
+import NotSignedIn from './NotSignedIn'
 
 export default function ValidUser({ children, userId }: { 
     children: React.ReactNode, 
@@ -11,9 +14,9 @@ export default function ValidUser({ children, userId }: {
  }) {
     const { signedIn } = useAuth()
     
-    const NotSignedIn = dynamic(() => 
-        import('./NotSignedIn')
-    )
+    // const NotSignedIn = dynamic(() => 
+    //     import('./NotSignedIn')
+    // )
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
