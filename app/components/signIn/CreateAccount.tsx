@@ -7,8 +7,7 @@ import { createUser } from "@/app/lib/CRUD-ops/userCRUD";
 import { auth } from "@/app/config/firebase-config";
 import styles from '@/app/components/css/signIn.module.css'
 import 'react-toastify/dist/ReactToastify.css'
-
-import { ToastContainer } from "react-toastify";
+import ToastContainer from '../../lib/toast/ToastContainer'
 
 export default function CreateAccount() {
   const { registerAccount, signInPop, createInfo } = useAuth()
