@@ -1,9 +1,8 @@
-import { url } from "../tempURL"
 
 // Singular 
 export async function mutatePost(method: HTTP, content: {}): Promise<void> {
     if (method === 'GET') return 
-    const res = await fetch(`${url}/api/posts`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`, {
         method: method,
         headers: {
             "Content-Type": "application/json"
@@ -16,7 +15,7 @@ export async function mutatePost(method: HTTP, content: {}): Promise<void> {
 }
 
 export async function getPost(postId: string) {
-    const res = await fetch(`${url}/api/posts?postId=${postId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URLrl}/api/posts?postId=${postId}`, {
         next: { revalidate: 0 }
     })
     if (!res.ok) {
@@ -31,7 +30,7 @@ export async function getPost(postId: string) {
 
 // Multiple 
 export async function getUserPosts(userId: string): Promise<PostObj[]> {
-    const res = await fetch(`${url}/api/posts?userId=${userId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?userId=${userId}`, {
         next: { revalidate: 0 }
     })
     if (!res.ok) {
@@ -43,7 +42,7 @@ export async function getUserPosts(userId: string): Promise<PostObj[]> {
 }
 
 export async function getAllPosts(userId: string): Promise<PostObj[]> {
-    const res = await fetch(`${url}/api/allPosts?userId=${userId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/allPosts?userId=${userId}`, {
         next: {revalidate: 0}
     })
     if (!res.ok) {

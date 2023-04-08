@@ -5,7 +5,6 @@ import { useAuth } from "../../lib/stateManagement/authState"
 import 'react-toastify/dist/ReactToastify.css';
 import { createUser } from "@/app/lib/CRUD-ops/userCRUD";
 import { auth } from "@/app/config/firebase-config";
-import { url } from "@/app/lib/tempURL";
 import dynamic from "next/dynamic";
 import styles from '@/app/components/css/signIn.module.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -41,7 +40,7 @@ export default function CreateAccount() {
       return notify(result.message)
     } else {
       // Only interested if it exists
-      const res = await fetch(`${url}/api/users?userId=${auth.currentUser?.uid}`)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users?userId=${auth.currentUser?.uid}`)
       if (!res.ok) {
         createUser({
           id: auth.currentUser?.uid!,

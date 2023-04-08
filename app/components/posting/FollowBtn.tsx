@@ -1,5 +1,4 @@
 import { mutateSubscribeList } from "@/app/lib/CRUD-ops/subscribeCRUD"
-import { url } from "@/app/lib/tempURL"
 import { useEffect, useState } from "react"
 import useSWR from 'swr'
 
@@ -9,7 +8,7 @@ export default function FollowBtn({ userId, otherUserId }: {
     userId: string,
     otherUserId: string,
 }) {
-    const { data: subscribedTo, error, isLoading, mutate } = useSWR(`${url}/api/subscriptions?userId=${userId}`, fetcher)
+    const { data: subscribedTo, error, isLoading, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/subscriptions?userId=${userId}`, fetcher)
     const [isFollowing, setIsFollowing] = useState(false)
     
     let content = (

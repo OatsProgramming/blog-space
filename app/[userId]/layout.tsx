@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ValidUser from "../components/signIn/ValidUser";
-import { url } from "../lib/tempURL";
 import AddPost from "../components/posting/AddPost";
 import { PostProvider } from "../components/posting/PostProvider";
 import { getAllPosts, getUserPosts } from "../lib/CRUD-ops/postCRUD";
@@ -8,7 +7,18 @@ import { getSubscribedList } from "../lib/CRUD-ops/subscribeCRUD";
 import styles from '@/app/components/css/nav.module.css'
 import BgImg from "../components/BgImg";
 import RefreshPage from "../components/RefreshPage";
-// import { notFound } from "next/navigation";
+import { notFound } from "next/navigation";
+
+export async function generateMetadata({ params: { userId } }: Params) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users?userId=${userId}`)
+  if (!res.ok && res.status === 404) notFound()
+
+  const user = await res.json() as UserObj
+  return ({
+    title: `${user.userEmail}'s Page`,
+
+  })
+}
 
 export default async function Layout({
   children,

@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation"
 import { useState, MouseEvent } from "react"
 import styles from '@/app/components/css/signIn.module.css'
 import dynamic from "next/dynamic"
-import { url } from "@/app/lib/tempURL"
 
 type NewInfo = {
     userName: string,
@@ -57,7 +56,7 @@ export default function EditProfile() {
 
             await Promise.all([
                 // Update user posts
-                fetch(`${url}/api/allPosts?userId=${auth.currentUser?.uid}`, {
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/allPosts?userId=${auth.currentUser?.uid}`, {
                     method: 'PATCH',
                     headers: {
                         "Content-Type": "application/json"
@@ -65,7 +64,7 @@ export default function EditProfile() {
                     body: JSON.stringify({ email: auth.currentUser?.email })
                 }),
                 // Update user comments
-                fetch(`${url}/api/comments?userEmail=${currentEmail}`, {
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments?userEmail=${currentEmail}`, {
                     method: 'PATCH',
                     headers: {
                         "Content-Type": "application/json"
@@ -73,7 +72,7 @@ export default function EditProfile() {
                     body: JSON.stringify({ email: auth.currentUser?.email })
                 }),
                 // Update user data from db
-                fetch(`${url}/api/users`, {
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
                     method: 'PATCH',
                     headers: {
                         "Content-Type": "application/json"
@@ -97,15 +96,15 @@ export default function EditProfile() {
         try {
             await Promise.all([
                 // Delete user posts
-                fetch(`${url}/api/allPosts?userId=${auth.currentUser?.uid}`, {
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/allPosts?userId=${auth.currentUser?.uid}`, {
                     method: "DELETE",
                 }),
                 // Delete user comments
-                fetch(`${url}/api/comments?userEmail=${auth.currentUser?.email}`, {
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments?userEmail=${auth.currentUser?.email}`, {
                     method: "DELETE",
                 }),
                 // Delete user data from db
-                fetch(`${url}/api/users`, {
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
                     method: 'DELETE',
                     headers: {
                         "Content-Type" : "application/json"

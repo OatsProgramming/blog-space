@@ -1,7 +1,5 @@
-import { url } from "../tempURL";
-
 export async function getSubscribedList(userId: string): Promise<string[]> {
-    const res = await fetch(`${url}/api/subscriptions?userId=${userId}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/subscriptions?userId=${userId}`)
     // if (!res.ok) {
     //     const err = await res.json()
     //     console.log(err)
@@ -14,7 +12,7 @@ export async function mutateSubscribeList(content: {
     PATCHMethod: UserReqObj['PATCHMethod'],
     otherUserId: UserReqObj['otherUserId']
 }): Promise<void> {
-    const res = await fetch(`${url}/api/subscriptions`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/subscriptions`, {
         method: 'PATCH',
         headers: {
             "Content-Type" : "application/json"

@@ -1,15 +1,13 @@
-import { url } from "../tempURL";
-
 // Only interested if it doesnt exists
 export async function getUser(userId: string) {
-    const res = await fetch(`${url}/api/users?userId=${userId}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users?userId=${userId}`)
     if (!res.ok) {
         return res
     }
 }
 
 export async function createUser(content: UserObj) {
-    const res = await fetch(`${url}/api/users`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"

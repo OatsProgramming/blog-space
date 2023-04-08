@@ -1,8 +1,6 @@
-import { url } from "../tempURL"
-
 // Singular
 export async function mutateComment(method: HTTP, content: {}) {
-    const res = await fetch(`${url}/api/comments`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments`, {
         method,
         headers: {
             "Content-Type": "application/json"

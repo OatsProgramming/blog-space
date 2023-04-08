@@ -1,5 +1,4 @@
 import { db } from "@/app/config/firebase-config";
-import { url } from "@/app/lib/tempURL";
 import { collection, getDocs, query, where, writeBatch } from "@firebase/firestore/lite";
 import { badRequest, failedResponse, fetchFail, responseSuccess } from "../requestStatus";
 
@@ -86,7 +85,7 @@ export async function DELETE(request: Request) {
             const docRef = doc.ref;
             // ...while also deleting the comments
             promises.push(
-                fetch(`${url}/api/comments?postId=${doc.id}`, {
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments?postId=${doc.id}`, {
                     method: 'DELETE'
                 })
             )
