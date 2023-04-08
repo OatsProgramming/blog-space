@@ -8,18 +8,7 @@ import { getSubscribedList } from "../lib/CRUD-ops/subscribeCRUD";
 import styles from '@/app/components/css/nav.module.css'
 import BgImg from "../components/BgImg";
 import RefreshPage from "../components/RefreshPage";
-import { notFound } from "next/navigation";
-
-export async function generateMetadata({ params: { userId } }: Params) {
-  const res = await fetch(`${url}/api/users?userId=${userId}`)
-  if (!res.ok && res.status === 404) notFound()
-  
-  const user = await res.json() as UserObj
-  return ({
-    title: `${user.userEmail}'s Page`,
-    description: `Insert something here`
-  })
-}
+// import { notFound } from "next/navigation";
 
 export default async function Layout({
   children,
