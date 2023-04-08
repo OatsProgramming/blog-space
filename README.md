@@ -1,38 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a social media ( CRUD ) project where you can have your own space to blog about anything.
 
 ## Getting Started
 
-First, run the development server:
+Open [https://blog-space-eta.vercel.app](https://blog-space-eta.vercel.app) to get on BlogSpace.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+You can either create an account or sign in with these credentials: 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Email:        dummy@email.com
+- Password:     dummy123
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+( Please keep it PG-13 when posting comments and blogs )
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Besides The Main Content
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+If you'd like to see what could happen on possible errors:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [https://blog-space-eta.vercel.app/sampleError](https://blog-space-eta.vercel.app/sampleError) - For an error page
+-[https://blog-space-eta.vercel.app/sample404](https://blog-space-eta.vercel.app/sample404) - For a 404 page ( or anything in the url e.g /sample/404/error )
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Typescript        
+- Next JS           
+- React             
+- Firebase          ( Authentication && Database )
+- Framer Motion     ( Animation )
+- Toastify          ( Notifications )
+- Zustand           ( Global state management )
