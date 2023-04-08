@@ -20,6 +20,7 @@ It uses color-scheme css property to toggle light and dark mode; turn on / off d
 If you'd like to see what could happen on possible errors:
 
 - [https://blog-space-eta.vercel.app/sampleError](https://blog-space-eta.vercel.app/sampleError) - For an error page
+
 - [https://blog-space-eta.vercel.app/sample404](https://blog-space-eta.vercel.app/sample404) - For a 404 page ( or anything in the url e.g /sample/404/error )
 
 
