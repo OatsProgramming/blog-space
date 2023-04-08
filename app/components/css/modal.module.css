@@ -92,5 +92,9 @@
     .close {
         right: 1.5rem
     }
+
+    .close:hover {
+        right: 1.7rem;
+    }
 }
 /* Dialog Modal (posts) - END */
