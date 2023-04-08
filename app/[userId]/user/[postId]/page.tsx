@@ -5,11 +5,11 @@ import CommentsSection from "@/app/components/commenting/CommentSection"
 import useSWR from 'swr'
 import { notFound } from "next/navigation"
 import EditPost from "@/app/components/posting/EditPost"
-import { lazy, Suspense } from "react"
+import dynamic from "next/dynamic"
 
 // Testing for chunkLoad
 // import LoadingSquare from "@/app/components/loading/LoadingSquare"
-const LoadingSquare = lazy(() =>
+const LoadingSquare = dynamic(() =>
     import('@/app/components/loading/LoadingSquare')
 )
 
@@ -19,11 +19,7 @@ export default function PostPage({ params: { userId, postId } }: Params) {
    
     const { data: post, isLoading, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?postId=${postId}`, fetcher)
 
-    if (isLoading) return (
-        <Suspense fallback={<></>}>
-            <LoadingSquare />
-        </Suspense>
-    )
+    if (isLoading) return <LoadingSquare />
     else if (error) notFound()
 
     return (

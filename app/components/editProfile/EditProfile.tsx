@@ -3,6 +3,8 @@ import { updateProfile, updateEmail, updatePassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { useState, MouseEvent, lazy, Suspense } from "react"
 import styles from '@/app/components/css/signIn.module.css'
+import dynamic from "next/dynamic"
+
 // Testing for chunkLoad
 // import { ToastContainer } from "react-toastify"
 
@@ -13,7 +15,7 @@ type NewInfo = {
 }
 
 // Toast related items for errors
-const ToastContainer = lazy(() =>
+const ToastContainer = dynamic(() =>
     import('@/app/lib/toast/ToastContainer')
 ) 
 
@@ -153,21 +155,19 @@ export default function EditProfile() {
                 <button onClick={handleUpdate}>Update</button>
                 <button onClick={router.back}>Cancel</button>
             </div>
-            <Suspense fallback={<></>}>
-                <ToastContainer
-                    position="bottom-right"
-                    autoClose={3000}
-                    limit={3}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="dark"
-                />
-            </Suspense>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={3000}
+                limit={3}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </div>
     )
 }

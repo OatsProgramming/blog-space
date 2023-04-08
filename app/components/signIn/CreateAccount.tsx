@@ -5,12 +5,14 @@ import { useAuth } from "../../lib/stateManagement/authState"
 import 'react-toastify/dist/ReactToastify.css';
 import { createUser } from "@/app/lib/CRUD-ops/userCRUD";
 import { auth } from "@/app/config/firebase-config";
+// import dynamic from "next/dynamic";
 import styles from '@/app/components/css/signIn.module.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
+import dynamic from "next/dynamic";
 
 // import { ToastContainer } from "react-toastify";
-const ToastContainer = lazy(() =>
+const ToastContainer = dynamic(() =>
   import('../../lib/toast/ToastContainer')
 ) 
 
@@ -93,21 +95,19 @@ export default function CreateAccount() {
           <button onClick={registerHandler}>SIGN UP</button>
         </form>
       </m.div>
-      <Suspense fallback={<></>}>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={3000}
-          limit={3}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
-      </Suspense>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        limit={3}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </LazyMotion>
   )
 }

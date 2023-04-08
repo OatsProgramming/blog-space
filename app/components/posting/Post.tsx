@@ -1,9 +1,9 @@
 import styles from '@/app/components/css/post.module.css'
-import { lazy, Suspense} from 'react'
+import dynamic from 'next/dynamic'
 
 // Testing for chunkLoad
 // import FollowBtn from './FollowBtn'
-const FollowBtn = lazy(() => 
+const FollowBtn = dynamic(() => 
     import("./FollowBtn")
 )
 
@@ -25,9 +25,7 @@ export default function PostComponent({ post, userId, inComment } : {
             ) : (
                 <>
                     {post.userId !== userId && (
-                        <Suspense fallback={<></>}>
-                            <FollowBtn userId={userId} otherUserId={post.userId} />
-                        </Suspense>
+                        <FollowBtn userId={userId} otherUserId={post.userId} />
                     )}
                     <div className={styles['reg']}>
                         <h1>{post.title}</h1>
