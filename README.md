@@ -11,6 +11,10 @@ You can either create an account or sign in with these credentials:
 
 ( Please keep it PG-13 when posting comments and blogs )
 
+## Dark Mode
+
+It uses color-scheme css property to toggle light and dark mode; turn on / off dark mode by going to your browser settings ( or your system if the browser is set to automatically change )
+
 ## Besides The Main Content
 
 If you'd like to see what could happen on possible errors:
