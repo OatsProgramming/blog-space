@@ -1,12 +1,9 @@
 import { auth } from "@/app/config/firebase-config"
 import { updateProfile, updateEmail, updatePassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
-import { useState, MouseEvent, lazy, Suspense } from "react"
+import { useState, MouseEvent } from "react"
 import styles from '@/app/components/css/signIn.module.css'
 import dynamic from "next/dynamic"
-
-// Testing for chunkLoad
-// import { ToastContainer } from "react-toastify"
 
 type NewInfo = {
     userName: string,
