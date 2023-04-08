@@ -11,24 +11,33 @@ export default function EditPost({ children, currentUser, post, mutate }: {
     post: PostObj,
     mutate: KeyedMutator<PostObj>,
 }) {
+    // Data streams downward
+    // Don't have to worry about resetting the state everytime
+    // It will refresh with new data once data cycles back up
     const router = useRouter()
     const [isEditing, setIsEditing] = useState(false)
-    const [newContent, setNewContent] = useState<PostObj>({} as PostObj)
+    const [newContent, setNewContent] = useState<PostObj>(post)
 
     async function handleEdit() {
-        if (isEditing && newContent.title && newContent.body) {
+        // Make sure there is at least one change
+        // That way users can't just spam requests
+        if (isEditing 
+            && (newContent.title
+            && newContent.title !== post.title
+            || newContent.body 
+            && newContent.body !== post.body)
+        ) {
+            // Trim content after
+            // That way can add spaces
             await mutatePost(
                 "PATCH",
                 {
                     ...newContent,
-                    id: post.id
+                    title: newContent.title.trim(),
+                    body: newContent.body.trim(),
                 }
             )
-            setNewContent({} as PostObj)
-            mutate({
-                ...newContent,
-                id: post.id,
-            })
+            mutate(newContent)
         }
         setIsEditing(!isEditing)
     }
@@ -50,11 +59,14 @@ export default function EditPost({ children, currentUser, post, mutate }: {
             {isEditing ? (
                 <div className={styles["editContainer"]}>
                     <div className="textFieldContainer">
-                        <input className="textFieldItem" placeholder={post.title} onChange={(e) => setNewContent({ ...newContent, title: e.target.value.trim() })} />
+                        <input className="textFieldItem" onChange={(e) => setNewContent({ ...newContent, title: e.target.value })}
+                            value={newContent.title}
+                        />
                     </div>
                     <div className="textFieldContainer">
-                        <textarea className="textFieldItem" onChange={(e) => setNewContent({ ...newContent, body: e.target.value.trim() })}
-                            cols={90} rows={30} minLength={10} maxLength={1000} placeholder={post.body}
+                        <textarea className="textFieldItem" onChange={(e) => setNewContent({ ...newContent, body: e.target.value })}
+                            cols={90} rows={30} minLength={10} maxLength={1000}
+                            value={newContent.body}
                         />
                     </div>
                 </div>

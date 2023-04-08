@@ -10,26 +10,34 @@ export default function EditComment({ children, comment, mutate, comments }: {
     mutate: KeyedMutator<CommentObj[]>,
     comments: CommentObj[],
 }) {
-
+    // Data streams downward
+    // Don't have to worry about resetting the state everytime
+    // It will refresh with new data once data cycles back up
     const [isEditing, setIsEditing] = useState(false)
-    const [newContent, setNewContent] = useState('')
+    const [newContent, setNewContent] = useState(comment)
 
     async function handleEdit() {
-        if (isEditing && newContent !== '') {
+        // Make sure users don't accidentally spam requests
+        if (isEditing
+            && newContent !== comment
+        ) {
+            console.log(newContent.body)
+            // Trim content after
+            // That way can add spaces
             await mutateComment(
                 'PATCH',
                 {
-                    body: newContent,
-                    dateMS: Date.now(),
-                    id: comment.id,
+                    ...newContent,
+                    body: newContent.body.trim(),
+                    dateMS: Date.now()
                 }
             )
-            setNewContent('')
-            mutate([...comments, {
-                ...comment,
-                body: newContent,
-                dateMS: Date.now(),
-            }])
+            // Remove og comment
+            // Then replace it with new content
+            mutate([
+                ...comments.filter(c => c.id != comment.id),
+                newContent
+            ])
         }
         setIsEditing(!isEditing)
     }
@@ -54,7 +62,8 @@ export default function EditComment({ children, comment, mutate, comments }: {
                         className="textFieldItem"
                         autoFocus
                         placeholder={comment.body}
-                        onChange={(e) => setNewContent(e.target.value)}
+                        onChange={(e) => setNewContent({ ...newContent, body: e.target.value })}
+                        value={newContent.body}
                     />
                 </div>
             ) : (
