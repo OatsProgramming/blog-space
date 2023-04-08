@@ -1,9 +1,9 @@
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import styles from 'app/components/css/modal.module.css'
 
 // Testing for chunkLoad
-import DynamicModal from "./DynamicModal";
+// import DynamicModal from "./DynamicModal";
 
 export default function StaticModal({ posts, userId, changePost }: {
     posts: PostObj[],
@@ -20,9 +20,9 @@ export default function StaticModal({ posts, userId, changePost }: {
         setIsOpen(false);
     }
 
-    // const DynamicModal = dynamic(() =>
-    //     import('./DynamicModal').then((mod) => mod.default)
-    // )
+    const DynamicModal = dynamic(() =>
+        import('./DynamicModal')
+    )
 
     return (
         <div>

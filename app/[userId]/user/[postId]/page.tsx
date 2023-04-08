@@ -4,20 +4,20 @@ import PostComponent from "@/app/components/posting/Post"
 import CommentsSection from "@/app/components/commenting/CommentSection"
 import useSWR from 'swr'
 import { notFound } from "next/navigation"
-// import dynamic from "next/dynamic"
+import dynamic from "next/dynamic"
 import EditPost from "@/app/components/posting/EditPost"
 
 // Testing for chunkLoad
-import LoadingSquare from "@/app/components/loading/LoadingSquare"
+// import LoadingSquare from "@/app/components/loading/LoadingSquare"
 
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 export default function PostPage({ params: { userId, postId } }: Params) {
    
     const { data: post, isLoading, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?postId=${postId}`, fetcher)
-    // const LoadingSquare = dynamic(() =>
-    //     import('@/app/components/loading/LoadingSquare')
-    // )
+    const LoadingSquare = dynamic(() =>
+        import('@/app/components/loading/LoadingSquare')
+    )
 
     if (isLoading) return <LoadingSquare />
     else if (error) notFound()

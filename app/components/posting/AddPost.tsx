@@ -3,13 +3,13 @@ import dynamic from "next/dynamic"
 import { useState } from "react"
 
 // Testing for chunkLoad
-import AddPostModal from "./AddPostModal"
+// import AddPostModal from "./AddPostModal"
 
 export default function AddPost() {
     const [isCreating, setIsCreating] = useState(false)
-    // const AddPostModal = dynamic(() => 
-    //     import('./AddPostModal')
-    // )
+    const AddPostModal = dynamic(() => 
+        import('./AddPostModal')
+    )
 
     return (
         <div>
