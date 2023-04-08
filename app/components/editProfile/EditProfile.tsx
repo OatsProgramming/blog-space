@@ -1,7 +1,7 @@
 import { auth } from "@/app/config/firebase-config"
 import { updateProfile, updateEmail, updatePassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
-import { useState, MouseEvent } from "react"
+import { useState, MouseEvent, lazy, Suspense } from "react"
 import styles from '@/app/components/css/signIn.module.css'
 import dynamic from "next/dynamic"
 
@@ -14,16 +14,16 @@ type NewInfo = {
     password: string,
 }
 
+// Toast related items for errors
+const ToastContainer = dynamic(() =>
+    import('@/app/lib/toast/ToastContainer')
+) 
+
 export default function EditProfile() {
     const router = useRouter()
     const [newInfo, setNewInfo] = useState({} as NewInfo)
     // Used for updating
     const currentEmail = auth.currentUser?.email
-
-    // Toast related items for errors
-    const ToastContainer = dynamic(() =>
-        import('@/app/lib/toast/ToastContainer')
-    ) as React.ForwardRefExoticComponent<any>
 
     const notify = async (message: string) => {
         const toast = await import('@/app/lib/toast/toastNotification').then((mod) => mod.default)

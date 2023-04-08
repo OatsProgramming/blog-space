@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import { lazy } from 'react'
 import { useAuth } from '../../lib/stateManagement/authState'
 import { LazyMotion, m } from "framer-motion"
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,12 +10,12 @@ import 'react-toastify/dist/ReactToastify.css'
 
 // Testing for chunkLoad
 // import { ToastContainer } from 'react-toastify';
+const ToastContainer = dynamic(() =>
+  import('../../lib/toast/ToastContainer')
+) 
 
 export default function Login() {
 
-  const ToastContainer = dynamic(() =>
-    import('../../lib/toast/ToastContainer')
-  ) as React.ForwardRefExoticComponent<any>
 
   // Lazy load animation
   const loadFeatures = () => import('../../lib/animation/domMax').then((mod) => mod.default)

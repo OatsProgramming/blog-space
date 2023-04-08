@@ -1,6 +1,6 @@
 import { LazyMotion, AnimatePresence, m } from "framer-motion"
 import { wrap } from "popmotion"
-import { useEffect, useState } from "react"
+import { lazy, useEffect, useState } from "react"
 import CommentsSection from "../commenting/CommentSection"
 import PostComponent from "@/app/components/posting/Post"
 import slideShow from "@/app/lib/animation/slider"
@@ -10,14 +10,14 @@ import dynamic from "next/dynamic"
 
 // Testing for chunkLoad
 // import Empty from "../Empty"
+const Empty = dynamic(() => 
+    import('../Empty')
+)
 
 export default function Slider({ posts, userId }: {
     posts: PostObj[],
     userId: string,
 }) {
-    const Empty = dynamic(() => 
-        import('../Empty')
-    )
 
     if (posts.length === 0) return <Empty />
     

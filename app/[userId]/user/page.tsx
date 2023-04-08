@@ -11,6 +11,9 @@ import { useEffect, useMemo } from "react";
 
 // Testing for chunkLoad
 // import Empty from "@/app/components/Empty";
+const Empty = dynamic(() => 
+  import("@/app/components/Empty")
+)
 
 export default function UserPage({ params: { userId } }: Params) {
   const { userPosts } = getPostContext()
@@ -21,9 +24,6 @@ export default function UserPage({ params: { userId } }: Params) {
   const { logOut } = useAuth()
   const router = useRouter()
 
-  const Empty = dynamic(() => 
-    import("@/app/components/Empty")
-  )
 
   function handleLogOut() {
     logOut()

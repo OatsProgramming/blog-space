@@ -1,17 +1,17 @@
-import dynamic from "next/dynamic"
 import styles from '@/app/components/css/post.module.css'
+import dynamic from 'next/dynamic'
 
 // Testing for chunkLoad
 // import FollowBtn from './FollowBtn'
+const FollowBtn = dynamic(() => 
+    import("./FollowBtn")
+)
 
 export default function PostComponent({ post, userId, inComment } : {
     post: PostObj,
     userId: string,
     inComment?: boolean,
 }) {
-    const FollowBtn = dynamic(() => 
-        import("./FollowBtn")
-    )
 
     return (
         <>
