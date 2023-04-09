@@ -1,0 +1,35 @@
+.postsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.btnContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0vh;
+    background: linear-gradient(0deg, hsl(0, 0%, 0%) 0%, hsla(0, 0%, 0%, 0.9) 100%);
+    padding: 1.5rem;
+    box-shadow: 0px -18px 57px 11px black;
+}
+
+.btnContainer button {
+    color: white
+}
+
+@media (prefers-color-scheme: light) {
+    .btnContainer {
+        background: linear-gradient(0deg, hsl(0, 0%, 100%) 0%, hsla(0, 0%, 100%, 0.9) 100%);
+        box-shadow: 0px -18px 57px 11px white;
+    }
+
+    .btnContainer button {
+        color: black;
+    }
+}

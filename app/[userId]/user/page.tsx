@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 import Empty from "@/app/components/Empty";
+import styles from './editUserPage.module.css'
 
 export default function UserPage({ params: { userId } }: Params) {
   const { userPosts } = getPostContext()
@@ -34,15 +35,9 @@ export default function UserPage({ params: { userId } }: Params) {
   }, [])
 
   return (
-    <div >
+    <div>
       {sortedPosts.length > 0 ? (
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '1rem',
-          justifyContent: 'center',
-          padding: '2rem',
-        }}>
+        <div className={styles['postsContainer']}>
           {sortedPosts.map(post => (
             <Link href={`/${userId}/user/${post.id}`}>
               <PostComponent key={post.id} userId={userId} post={post} />
@@ -52,16 +47,7 @@ export default function UserPage({ params: { userId } }: Params) {
       ) : (
           <Empty inUserPage />
       )}
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '1rem',
-        justifyContent: 'center',
-        position: 'fixed',
-        // border: '1px solid',
-        width: '100%',
-        bottom: '10vh'
-      }}>
+      <div className={styles['btnContainer']}>
         <button onClick={handleLogOut}>Log out</button>
         <button onClick={handleEdit}>Edit Profile</button>
       </div>
