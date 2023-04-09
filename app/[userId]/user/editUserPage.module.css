@@ -20,7 +20,11 @@
 }
 
 .btnContainer button {
-    color: white
+    color: white;
+}
+
+.btnContainer button:hover {
+    color: black;
 }
 
 @media (prefers-color-scheme: light) {
@@ -31,5 +35,9 @@
 
     .btnContainer button {
         color: black;
+    }
+
+    .btnContainer button:hover {
+        color: white;
     }
 }
